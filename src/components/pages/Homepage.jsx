@@ -6,7 +6,12 @@ import './Homepage.css'
 const Homepage = () => {
   return (
     <div className="container">
-        <Navbar/>
+        <div className="header">
+            <Navbar/>
+        </div>
+        <div className="body">
+            
+        </div>
     </div>
   )
 }

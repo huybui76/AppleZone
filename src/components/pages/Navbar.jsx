@@ -19,7 +19,10 @@ const Navbar = () => {
           <div className="menu-component">Phụ kiện</div>
         </div>
         <div className="nav-input">
-          <input type="text" className="input-box" placeholder='Tìm kiếm sản phẩm'/>
+          <form action='' class='search-bar'>
+            <input type="text" placeholder='Tìm kiếm sản phẩm'/>
+            <button type='submit'><img src={search_icon} alt="search icon" className='search-icon'/></button>
+          </form>
         </div>
         <div className="shopping-icon">
           <img src={shopping_icon} alt="" className='nav-icon'/>

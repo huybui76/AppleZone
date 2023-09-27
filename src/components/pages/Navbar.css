@@ -39,25 +39,45 @@
     color: #eeeeee;
 }
 
-
-.input-box{
-    width: 300px;
+.search-bar{
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    align-items: center;
     border-radius: 5px;
-    border: 0px;
-    height: 50px;
+    backdrop-filter: blur(4px) saturate(180%);
     background-color: #eeeeee;
-    padding-top: 10px;
-    padding-left: 20px;
 }
 
-.input-box:focus {
-    outline: none; /* Loại bỏ đường viền mặc định khi click chuột vào*/
+.search-bar input{
+    background: transparent;
+    flex: 1;
+    border: 0;
+    background-color: #eeeeee;
+    padding: 20px;
+    font-size: 18px;
+    outline: none;
+    border-radius: 5px;
 }
 
-.nav-input{
+.search-bar button img{
+     width: 20px;
+}
+
+.search-bar button{
+    border: 0;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background: #eeeeee;
+    cursor: pointer
+}
+
+.nav-input{ 
     justify-content: center;
-    padding-left: 100px;
-    padding-top: 8px;
+    align-items: center;
+    display: flex;
+    padding: 10px;
 }
 
 .nav-icon{
