@@ -1,0 +1,78 @@
+.container{
+    overflow: auto;
+}
+
+.navbar{
+    display: flex;
+    justify-content: center;
+}
+
+.nav-pagename{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    padding-top: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    cursor: pointer;
+}
+
+.nav-menu{
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.menu-component{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: auto;
+    padding-top: 30px;
+    padding-bottom: 38px;
+    padding-right: 40px;
+    padding-left: 40px;
+    transition: color 0.3s ease;
+    transition: background-color 0.5s ease;
+}
+
+.menu-component:hover{
+    background-color:#141414;
+    color: #eeeeee;
+}
+
+
+.input-box{
+    width: 300px;
+    border-radius: 5px;
+    border: 0px;
+    height: 50px;
+    background-color: #eeeeee;
+    padding-top: 10px;
+    padding-left: 20px;
+}
+
+.input-box:focus {
+    outline: none; /* Loại bỏ đường viền mặc định khi click chuột vào*/
+}
+
+.nav-input{
+    justify-content: center;
+    padding-left: 100px;
+    padding-top: 8px;
+}
+
+.nav-icon{
+    width: 40px; 
+    height: 40px;
+    padding-top: 20px;
+    cursor: pointer;
+}
+
+.shopping-icon{
+    padding-left: 40px;
+    padding-right: 5px;
+}
+
+.user-icon{
+    padding-left: 5px;
+    padding-right: 40px;
+}
