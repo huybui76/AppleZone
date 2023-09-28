@@ -24,11 +24,13 @@ const Navbar = () => {
             <button type='submit'><img src={search_icon} alt="search icon" className='search-icon'/></button>
           </form>
         </div>
-        <div className="shopping-icon">
-          <img src={shopping_icon} alt="" className='nav-icon'/>
-        </div>
-        <div className="user-icon">
-          <img src={user_icon} alt="" className='nav-icon'/>
+        <div className="nav-icon">
+          <div className="shopping-icon">
+            <img src={shopping_icon} alt="" className='icon'/>
+          </div>
+          <div className="user-icon">
+            <img src={user_icon} alt="" className='icon'/>
+          </div>
         </div>
       </div>
     </div>
