@@ -1,4 +1,5 @@
 import React from 'react'
+import Flashsales from './page components/Flashsales'
 
 import Navbar from './page components/Navbar'
 import './Homepage.css'
@@ -10,6 +11,8 @@ const Homepage = () => {
             <Navbar/>
         </div>
         <div className="body">
+          <Flashsales/>
+          
             
         </div>
     </div>
