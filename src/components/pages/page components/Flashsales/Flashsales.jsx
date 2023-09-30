@@ -3,7 +3,7 @@ import React from 'react'
 import './Flashsales.css'
 import CountdownTimer from '../CountdownTimer/CountdownTimer'
 import '../Flashsales/Flashsales'
-import Menu from '../Menu/Menu'
+import Menu from '../SalesMenu/SalesMenu'
 
 
 const Flashsales = () => {
