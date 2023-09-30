@@ -1,4 +1,4 @@
-.container{
+.navbar-container{
     overflow: auto;
 }
 
@@ -8,28 +8,32 @@
 }
 
 .nav-pagename{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 800;
-    padding-top: 10px;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
     cursor: pointer;
 }
 
 .nav-menu{
     display: flex;
-    justify-content: center;
     cursor: pointer;
 }
 
 .menu-component{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    width: 80px;
-    padding-top: 30px;
-    padding-bottom: 38px;
-    padding-left: 26px;
-    padding-right: 26px;
+    font-size: 14px;
+    width: 62px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 8px;
     transition: color 0.3s ease;
     transition: background-color 0.5s ease;
 }
@@ -49,31 +53,37 @@
     background-color: #eeeeee;
 }
 
+.input-box{
+    height: 10px;
+}
+
 .search-bar input{
     background: transparent;
-    flex: 1;
+    display: flex;
     border: 0;
     background-color: #eeeeee;
     padding: 20px;
-    font-size: 18px;
+    font-size: 14px;
     outline: none;
     border-radius: 5px;
 }
 
 .search-bar button img{
-     width: 20px;
+     width: 14px;
 }
 
 .search-bar button{
     border: 0;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    background: #eeeeee;
+    width: 40px;
+    height: 40px;
+    background-color: #eeeeee;
     cursor: pointer
 }
 
 .nav-input{ 
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     display: flex;
