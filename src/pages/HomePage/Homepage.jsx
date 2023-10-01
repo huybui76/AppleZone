@@ -7,9 +7,6 @@ import './Homepage.css'
 const Homepage = () => {
   return (
     <div className="container">
-        <div className="header">
-            <Navbar/>
-        </div>
         <div className="body">
           <Flashsales/>
         </div>

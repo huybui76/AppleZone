@@ -1,7 +1,8 @@
-import { Button } from "antd"
 import "./App.css"
+import React, {Fragment} from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import Homepage from "./pages/HomePage/Homepage"
+import Navbar from "./components/NavBar/Navbar"
+import Main from "./components/Main/Main"
 import { routes } from "./routes"
 function App() {
     return (
@@ -10,7 +11,18 @@ function App() {
                 <Routes>
                     {routes.map((route) => {
                         const Page = route.page
-                        return <Route path={route.path} element={<Page />} />
+                        const MainPage = route.isNavbar ? Main : Fragment
+                        return (
+                            <Route
+                                key={route.path}
+                                path={route.path}
+                                element={
+                                    <MainPage>
+                                        <Page />
+                                    </MainPage>
+                                }
+                            />
+                        )
                     })}
                 </Routes>
             </Router>
