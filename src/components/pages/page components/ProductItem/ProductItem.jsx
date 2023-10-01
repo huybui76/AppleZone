@@ -1,13 +1,15 @@
 import React from 'react';
 import './ProductItem.css';
 
+
 function ProductItem({ product }) {
+  // const iphone15 = '../SalesMenu/images/black__efg76fuz5hm6_large.jpg';
   return (
     <div className='product-container'>
       <div className="img-container">
         <div className="sales-percentage">{product.sales_percentage}</div>
         <div className="product-img">
-          <img src={product.image} alt={product.name} />
+          <img src={product.img} alt={product.name} />
         </div>
       </div>
       <div className='product-name'>{product.name} </div>
