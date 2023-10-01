@@ -12,8 +12,6 @@ const Homepage = () => {
         </div>
         <div className="body">
           <Flashsales/>
-          
-            
         </div>
     </div>
   )
