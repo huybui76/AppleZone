@@ -1,5 +1,5 @@
 import React from 'react'
-import CountdownTimer from './CountdownTimer'
+import CountdownTimer from '../CountdownTimer/CountdownTimer'
 import './Flashsales.css'
 
 const Flashsales = () => {

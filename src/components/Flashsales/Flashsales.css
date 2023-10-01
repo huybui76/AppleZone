@@ -51,7 +51,7 @@
     width: 50px;
     border-radius: 50px;
     border: 0px;
-    background-image: url('../../assets/right-arrow.png');
+    background-image: url('../assets/right-arrow.png');
     background-size: 20px;
     background-repeat: no-repeat;
     background-position: center;
@@ -65,7 +65,7 @@
     width: 50px;
     border-radius: 50px;
     border: 0px;
-    background-image: url('../../assets/right-arrow.png');
+    background-image: url('../assets/right-arrow.png');
     background-size: 20px;
     background-repeat: no-repeat;
     background-position: center;

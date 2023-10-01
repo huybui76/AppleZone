@@ -1,9 +1,9 @@
 import React from 'react'
 
 import './Navbar.css'
-import search_icon from '../../assets/search-interface-symbol.png'
-import shopping_icon from '../../assets/shopping-cart.png'
-import user_icon from '../../assets/user.png'
+import search_icon from '../assets/search-interface-symbol.png'
+import shopping_icon from '../assets/shopping-cart.png'
+import user_icon from '../assets/user.png'
 
 const Navbar = () => {
   return (

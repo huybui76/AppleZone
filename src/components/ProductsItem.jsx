@@ -10,4 +10,4 @@ function ProductsSItem({ product }) {
     );
   }
 
-export default ProductsSales
+export default ProductsSItem
