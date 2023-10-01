@@ -1,7 +1,6 @@
 import React from 'react'
-
-import Flashsales from './page components/Flashsales/Flashsales'
-import Navbar from './page components/Navbar/Navbar'
+import Flashsales from '../../components/Flashsales/Flashsales'
+import Navbar from '../../components/Navbar/Navbar'
 import './Homepage.css'
 
 const Homepage = () => {

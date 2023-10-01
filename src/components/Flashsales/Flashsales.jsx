@@ -2,7 +2,7 @@ import React from 'react'
 
 import './Flashsales.css'
 import CountdownTimer from '../CountdownTimer/CountdownTimer'
-import '../Flashsales/Flashsales'
+import './Flashsales'
 import Menu from '../SalesMenu/SalesMenu'
 
 
