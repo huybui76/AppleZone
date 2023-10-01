@@ -35,13 +35,41 @@
     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 8px;
-    transition: color 0.3s ease;
-    transition: background-color 0.5s ease;
+
+    /* effect */
+    z-index: 1;
+    position: relative;
+    color: black;
+    outline: none;
+    /* border: 1px solid #ff3e00; */
+    background-color: transparent;
+    overflow: hidden;
+    transition: color 0.4s ease-in-out;
+}
+
+.menu-component::before{
+    content: '';
+    z-index: -1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: black;
+    transform-origin: center;
+    transform: translate3d(-50%, -50%, 0) scale3d(0, 0, 0);
+    transition: transform 0.45s ease-in-out;
 }
 
 .menu-component:hover{
-    background-color:#141414;
-    color: #eeeeee;
+    cursor: pointer;
+    color: #fff;
+}
+
+.menu-component:hover::before {
+    transform: translate3d(50%, -50%, 0) scale3d(15, 15, 15);
+
 }
 
 .search-bar{
