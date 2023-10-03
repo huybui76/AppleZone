@@ -29,5 +29,15 @@ const productData = [
         timeLeft: 30,
         totalSales: 1000,
     },
+    {
+        id: 4,
+        name: "iPhone 14",
+        image: "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_300x300/https://cdn.tgdd.vn/Products/Images/42/245545/s16/iphone-14-plus-gold-thumbtz-650x650.png",
+        productType: "phone",
+        price: 21900,
+        rating: 7,
+        timeLeft: 30,
+        totalSales: 1000,
+    },
 ]
 export default productData

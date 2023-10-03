@@ -2,9 +2,3 @@
     /* write some here! */
 }
 /* Sắp xếp các sản phẩm biểu thị theo grid */
-.ProductList{
-    display: grid;
-    grid-template-columns: 350px 350px 350px;
-    gap: 70px;
-    justify-content: center;
-}
