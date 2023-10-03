@@ -1,10 +1,14 @@
 import React from 'react'
-import CountdownTimer from '../CountdownTimer/CountdownTimer'
+
 import './Flashsales.css'
+import CountdownTimer from '../CountdownTimer/CountdownTimer'
+import './Flashsales'
+import Menu from '../SalesMenu/SalesMenu'
+
 
 const Flashsales = () => {
   return (
-    <div className='container'>
+    <div className='flashsales-container'>
         <div className="header">
             <div className='square'></div>
             <div className="header-text">Hôm nay</div>
@@ -20,6 +24,7 @@ const Flashsales = () => {
                     <button className="right-button"></button>
                 </div>
             </div>
+            <Menu/>
         </div>
         
     </div>

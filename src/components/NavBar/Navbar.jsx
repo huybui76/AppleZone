@@ -7,7 +7,7 @@ import user_icon from '../../assets/user.png'
 
 const Navbar = () => {
   return (
-    <div className="container">
+    <div className="navbar-container">
       <div className="navbar">
         <div className="nav-pagename">Apple Zone</div>
         <div className="nav-menu">
@@ -20,7 +20,7 @@ const Navbar = () => {
         </div>
         <div className="nav-input">
           <form action='' class='search-bar'>
-            <input type="text" placeholder='Tìm kiếm sản phẩm'/>
+            <input type="text" placeholder='Tìm kiếm sản phẩm' className='input-box'/>
             <button type='submit'><img src={search_icon} alt="search icon" className='search-icon'/></button>
           </form>
         </div>
