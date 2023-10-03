@@ -1,7 +1,6 @@
 import React from "react"
 import Flashsales from "../../components/Flashsales/Flashsales"
 import SlideAnimate from "../../components/SlideAnimate/SlideAnimate"
-import Navbar from "../../components/NavBar/Navbar"
 import "./Homepage.css"
 import slide1 from "../../assets/animate1.webp"
 import slide2 from "../../assets/animate2.webp"
