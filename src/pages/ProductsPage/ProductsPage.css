@@ -1,0 +1,22 @@
+.attached{
+  padding: 50px;
+}
+.product-slide{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  vertical-align: bottom;
+}
+.product-slide:hover{
+  cursor: pointer;
+}
+.product-slide-image{
+  width: 200px;
+}
+.product-slide-title{
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  gap: 20px;
+}

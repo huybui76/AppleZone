@@ -1,20 +1,17 @@
-.productList{
-  display: flex;
-  justify-content: space-evenly;
-  /* margin: 5rem; */
-  vertical-align: top;
-  align-items: center;
-}
+
+
 .productCard{
+  display: flex;
   position: relative;
-  background-color: var(--color-grey-primary);
-  margin: 1rem;
-  margin-left: 30px;
-  flex: 1 0 25rem;
+  flex-direction: column;
+  margin: 20px;
+  padding: 10px;
+  vertical-align: top;
   border-radius: 20px;
-  max-width: 30rem;
-  max-height: 50rem;
-  transition: 0.2s;
+  width: 270px;
+  height: 500px;
+  background-color: rgb(236, 236, 236);
+  text-decoration: none;
 }
 .productCard:hover{
   transform: translateY(-0.5rem);
@@ -22,61 +19,35 @@
   cursor: pointer;
 }
 .productImage{
-  margin-top: 2rem;
+  margin-left: 20px;
+  margin-top: 50px;
   width: 90%;
-  height: auto;
 }
-.productCard_cart{
-  position: absolute;
-  right: 0;
-  margin: 1rem;
-  font-size:2rem;
-  transition: 0.2s;
-  cursor: pointer;
+.title{
+  font-size: 20px;
+  text-align: center;
 }
-.productCard_wishList{
-  position: absolute;
-  right: 3rem;
-  margin: 1rem;
-  font-size: 2rem;
-  transition: 0.2s;
-  cursor: pointer;
-}
-
-.productCard_fastSelling{
-  position: absolute;
-  font-size: 2rem;
-  left: 0;
-  margin: 1rem;
-  fill: var(--color-orange-primary);
-}
-
-.productCard_content{
-  margin: 2rem;
-}
-
-.productName{
-  font-size: 1.5rem;
-}
-
-.displayStack_1,
-.displayStack_2{
-  margin: 2rem 0;
+.bottom{
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: row;
+  justify-content:space-evenly;
+  vertical-align: bottom;
+  padding-left: 20px;
+  padding-right: 20px;
+  
 }
-.productPrice{
-  font-size: 1.5rem;
+.discount{
+  font-size: 20px;
   font-weight: bold;
 }
-
-.productSales,
-.productTime{
-  font-size: 1.1rem;
+.price{
+  text-decoration: line-through;
+  vertical-align: bottom;
+  margin-top: 20px;
+  font-size: 17px;
 }
-
-
+.percent{
+}
 
 
 
