@@ -3,7 +3,7 @@ const productData = [
     id: 1,
     name: "iPhone 15 Pro 128GB",
     image:
-      "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_300x300/https://cdn.tgdd.vn/Products/Images/42/299033/s16/iphone-15-pro-thumbtz-650x650.png",
+      "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/305658/s16/iphone-15-pro-max-white-thumbtz-650x650.png",
     price: 27900000,
     discount: 20,
     ssd: [128, 256, 512],
