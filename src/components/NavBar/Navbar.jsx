@@ -1,16 +1,23 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import './Navbar.css'
 import search_icon from '../../assets/search-interface-symbol.png'
 import shopping_icon from '../../assets/shopping-cart.png'
 import user_icon from '../../assets/user.png'
+import { Link, NavLink } from 'react-router-dom'
 
 const Navbar = () => {
-  return (
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const handleDropdownOpen = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  return (  
     <div className="navbar-container">
       <div className="navbar">
-        <div className="nav-pagename">Apple Zone</div>
-        <div className="nav-menu">
+        <NavLink className="nav-pagename" to="/">Apple Zone</NavLink>
+        <div className="nav-menu">  
           <div className="menu-component">Iphone</div>
           <div className="menu-component">Mac</div>
           <div className="menu-component">Ipad</div>
@@ -29,8 +36,14 @@ const Navbar = () => {
             <img src={shopping_icon} alt="" className='icon'/>
           </div>
           <div className="user-icon">
-            <img src={user_icon} alt="" className='icon'/>
+            <img src={user_icon} alt="" className='icon'  onClick={handleDropdownOpen}/>
           </div>
+          {dropdownOpen && (
+              <div className="dropdown-menu">
+                <NavLink to="/SignIn" >Đăng nhập</NavLink>
+                <NavLink to="/SignUp">Đăng ký</NavLink>
+              </div>
+            )}
         </div>
       </div>
     </div>

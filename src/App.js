@@ -1,17 +1,18 @@
 
 import "./App.css"
-import React, { Fragment } from "react"
+import React, {Fragment} from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Navbar from "./components/NavBar/Navbar"
+import Footer from "./components/Footer/Footer"
 import { routes } from "./routes"
-const Main = ({ children }) => {
+const Main = ({children}) => {
     return (
-        <div>
-            <Navbar />
-            {children}
-        </div>
+      <div>
+        <Navbar />
+        {children}
+      </div>
     )
-}
+  }
 function App() {
     return (
         <div>
@@ -27,6 +28,7 @@ function App() {
                                 element={
                                     <MainPage>
                                         <Page />
+                                        <Footer />
                                     </MainPage>
                                 }
                             />

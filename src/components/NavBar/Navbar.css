@@ -1,132 +1,145 @@
-.navbar-container{
-    overflow: auto;
+.navbar-container {
+  overflow: auto;
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  right: 0;
+  left: 0;
 }
 
-.navbar{
-    display: flex;
-    width: 100%;
+.navbar {
+  display: flex;
+  width: 100%;
+  background-color: #fff;
 }
 
-.nav-pagename{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
-    font-weight: 800;
-    padding-left: 30px;
-    padding-right: 30px;
-    cursor: pointer;
-}
-
-.nav-menu{
-    text-align: center;
-    display: flex;
-    cursor: pointer;
-}
-
-.menu-component{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 14px;
-    width: 62px;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-bottom: 8px;
-
-    /* effect */
-    z-index: 1;
-    position: relative;
+.nav-pagename {
+    text-decoration: none;
     color: black;
-    outline: none;
-    /* border: 1px solid #ff3e00; */
-    background-color: transparent;
-    overflow: hidden;
-    transition: color 0.4s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  padding-left: 30px;
+  padding-right: 30px;
+  cursor: pointer;
 }
 
-.menu-component::before{
-    content: '';
-    z-index: -1;
-    position: absolute;
-    inset: 0;
-    background-color: black;
-    transform-origin: center bottom;
-    transform: scaleY(0);
-    transition: transform 0.25s ease-in-out;
+.nav-menu {
+  text-align: center;
+  display: flex;
+  cursor: pointer;
 }
 
-.menu-component:hover{
-    cursor: pointer;
-    color: #fff;
+.menu-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  width: 62px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 8px;
+
+  /* effect */
+  z-index: 1;
+  position: relative;
+  color: black;
+  outline: none;
+  /* border: 1px solid #ff3e00; */
+  background-color: transparent;
+  overflow: hidden;
+  transition: color 0.4s ease-in-out;
+}
+
+.menu-component::before {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+  background-color: black;
+  transform-origin: center bottom;
+  transform: scaleY(0);
+  transition: transform 0.25s ease-in-out;
+}
+
+.menu-component:hover {
+  cursor: pointer;
+  color: #fff;
 }
 
 .menu-component:hover::before {
-    transform-origin: center top;
-    transform: scaleY(1);
-
+  transform-origin: center top;
+  transform: scaleY(1);
 }
 
-.search-bar{
-    width: 100%;
-    max-width: 700px;
-    display: flex;
-    align-items: center;
-    border-radius: 5px;
-    backdrop-filter: blur(4px) saturate(180%);
-    background-color: #eeeeee;
+.search-bar {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  backdrop-filter: blur(4px) saturate(180%);
+  background-color: #eeeeee;
 }
 
-.input-box{
-    height: 10px;
+.input-box {
+  height: 10px;
 }
 
-.search-bar input{
-    background: transparent;
-    display: flex;
-    border: 0;
-    background-color: #eeeeee;
-    padding: 20px;
-    font-size: 14px;
-    outline: none;
-    border-radius: 5px;
+.search-bar input {
+  background: transparent;
+  display: flex;
+  border: 0;
+  background-color: #eeeeee;
+  padding: 20px;
+  font-size: 14px;
+  outline: none;
+  border-radius: 5px;
 }
 
-.search-bar button img{
-     width: 14px;
+.search-bar button img {
+  width: 14px;
 }
 
-.search-bar button{
-    border: 0;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    background-color: #eeeeee;
-    cursor: pointer
+.search-bar button {
+  border: 0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: #eeeeee;
+  cursor: pointer;
 }
 
-.nav-input{ 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    padding: 10px;
+.nav-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding: 10px;
 }
 
-.nav-icon{
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    gap: 20px;
-    padding-left: 60px;
+.nav-icon {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 20px;
+  padding-left: 60px;
 }
 
-.icon{
-    width: 40px; 
-    height: 40px;
-    cursor: pointer;
+.icon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
 }
-
+.user-icon {
+  position: relative;
+}
+.dropdown-menu {
+  position: absolute;
+  bottom: 0px;
+}
