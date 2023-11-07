@@ -1,12 +1,9 @@
-
-import "./App.css"
-import React, { Fragment, useEffect } from "react"
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import Navbar from "./components/NavBar/Navbar"
-import Footer from "./components/Footer/Footer"
-import { routes } from "./routes"
-import axios from 'axios';
-import { useQuery } from '@tanstack/react-query'
+import "./App.css";
+import React, { Fragment } from "react";
+import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom"; // Import Outlet để render route con
+import Navbar from "./components/NavBar/Navbar";
+import Footer from "./components/Footer/Footer";
+import { routes } from "./routes";
 
 const Main = ({ children }) => {
     return (
@@ -14,17 +11,18 @@ const Main = ({ children }) => {
             <Navbar />
             {children}
         </div>
-    )
+    );
 }
-function App() {
 
+function App() {
     return (
         <div>
             <Router>
                 <Routes>
                     {routes.map((route) => {
-                        const Page = route.page
-                        const MainPage = route.isNavbar ? Main : Fragment
+                        const Page = route.page;
+                        const MainPage = route.isNavbar ? Main : Fragment;
+                        const hasFooter = route.isFooter;
                         return (
                             <Route
                                 key={route.path}
@@ -32,16 +30,17 @@ function App() {
                                 element={
                                     <MainPage>
                                         <Page />
-                                        <Footer />
+                                        {hasFooter && <Footer />}
+                                        <Outlet /> {/* Sử dụng Outlet để render route con */}
                                     </MainPage>
                                 }
                             />
-                        )
+                        );
                     })}
                 </Routes>
             </Router>
         </div>
-    )
+    );
 }
 
-export default App
+export default App;
