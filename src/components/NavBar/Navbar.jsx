@@ -5,12 +5,20 @@ import search_icon from '../../assets/search-interface-symbol.png'
 import shopping_icon from '../../assets/shopping-cart.png'
 import user_icon from '../../assets/user.png'
 import { Link, NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+
+
 
 const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleDropdownOpen = () => {
     setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleCartIconClick = () => {
+    navigate('/Cart');
   };
 
   return (  
@@ -33,7 +41,7 @@ const Navbar = () => {
         </div>
         <div className="nav-icon">
           <div className="shopping-icon">
-            <img src={shopping_icon} alt="" className='icon'/>
+            <img src={shopping_icon} alt="" className='icon' onClick={handleCartIconClick}/>
           </div>
           <div className="user-icon">
             <img src={user_icon} alt="" className='icon'  onClick={handleDropdownOpen}/>

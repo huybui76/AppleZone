@@ -1,7 +1,7 @@
 const products = [
     { 
         id: 1, 
-        name: 'Tôiđiệnthoại 15', 
+        name: 'Iphone 15', 
         description: 'Mô tả sản phẩm 1' , 
         img: "images/sales-img/black__efg76fuz5hm6_large.jpg" , 
         original_price: 20000000, 

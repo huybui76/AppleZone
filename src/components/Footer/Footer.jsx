@@ -204,12 +204,12 @@ function Footer() {
 
                     <div className="footer_content">
                         <div className='quick-links' id=''>Newsroom</div>                                                   
-                        <div className='quick-links' id=''></div>                                                   
-                        <div className='quick-links' id=''></div>                                                   
-                        <div className='quick-links' id=''></div>                                                   
-                        <div className='quick-links' id=''></div>                                                   
-                        <div className='quick-links' id=''></div>                                                   
-                        <div className='quick-links' id=''></div>                                                   
+                        <div className='quick-links' id=''>Apple Leadership</div>                                                   
+                        <div className='quick-links' id=''>Career Opportunities</div>                                                   
+                        <div className='quick-links' id=''>Investors</div>                                                   
+                        <div className='quick-links' id=''>Ethics & Compliance</div>                                                   
+                        <div className='quick-links' id=''>Events</div>                                                   
+                        <div className='quick-links' id=''>Contact Apple</div>                                                   
                     </div>
 
                 </div>

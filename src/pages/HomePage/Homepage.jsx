@@ -1,6 +1,7 @@
 import React from "react"
 import Flashsales from "../../components/Flashsales/Flashsales"
 import SlideAnimate from "../../components/SlideAnimate/SlideAnimate"
+import Footer from "../../components/Footer/Footer"
 import "./Homepage.css"
 import slide1 from "../../assets/animate1.webp"
 import slide2 from "../../assets/animate2.webp"
@@ -21,6 +22,7 @@ const Homepage = () => {
                 </div>
                 <Flashsales />
                 <BoxSlides />
+                <Footer />
             </div>
         </div>
     )

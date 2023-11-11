@@ -1,0 +1,19 @@
+.payment-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 6rem;
+    padding: 20px;
+    color: #000000;
+    background-color: rgb(240, 240, 240);
+}
+
+.voucher {
+    display: flex;
+    margin-left: 70rem;
+}
+
+.payment {
+    display: flex;
+    margin-left: 20px;
+}

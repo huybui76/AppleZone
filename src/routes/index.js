@@ -4,6 +4,7 @@ import ProductsPage from "../pages/ProductsPage/ProductsPage";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import SignInPage from "../pages/SignInPage/SignInPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
+import Cart from "../pages/Cart/Cart";
 export const routes = [
   {
     path: '/',
@@ -33,5 +34,10 @@ export const routes = [
   {
     path: '*',
     page: NotFoundPage
+  },
+  {
+    path: '/Cart',
+    page: Cart,
+    isNavbar: false
   }
 ]
