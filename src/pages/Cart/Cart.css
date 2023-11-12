@@ -73,6 +73,7 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
+    padding: 3rem;
 }
 
 .shopping-icon {
@@ -83,4 +84,26 @@
     display: flex;
     justify-content: center;
     
+}
+
+.info {
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+}
+
+.Item {
+    margin-left: 3rem;
+}
+
+.Price {
+    margin-left: 33.5rem;
+}
+
+.Quantity {
+    margin-left: 7rem;
+}
+
+.Total {
+    margin-left: 6.5rem;
 }

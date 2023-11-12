@@ -43,18 +43,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid #000000;
+    border: 1px solid #000000;
     border-radius: 0.5rem;
     
 }
 
 .quantity {
-    width: 5rem;
+    width: 2rem;
     height: 1.5rem;
     font-size: 1rem;
     border: none;
-    border-left: 2px solid #000000;
-    border-right: 2px solid #000000;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
     text-align: center;
     outline: none;
 }
@@ -64,7 +64,7 @@
     align-items: center;
     justify-content: center;
     background-color: transparent;
-    width: 3rem;
+    width: 2rem;
     height: 1.5rem;
     border: none;
     font-size: 3rem;
@@ -73,11 +73,11 @@
 }
 
 .minus-icon{
-    width: 1rem;
+    width: 0.8rem;
 }
 
 .plus-icon{
-    width: 1rem;
+    width: 0.8rem;
 }
 
 .plus {
@@ -85,7 +85,7 @@
     align-items: center;
     justify-content: center;
     background-color: transparent;
-    width: 3rem;
+    width: 2rem;
     height: 1.5rem;
     border: none;
     font-size: 3rem;

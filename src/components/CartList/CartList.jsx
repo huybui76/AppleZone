@@ -12,8 +12,12 @@ function CartList() {
 
         {item_list.map((item) => (
 
-
-          <CartItem key={item.id} item={item} />  
+          <div className="">
+            <CartItem key={item.id} item={item} />  
+            <hr />
+          </div>
+          
+          
           
         
         ))}

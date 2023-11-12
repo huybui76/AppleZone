@@ -39,6 +39,13 @@ function Cart() {
 
         <div className="body--cart-content">
           <div className="products-list">
+            <div className="info">
+              <div className="Item">Item</div>
+              <div className="Price">Price</div>
+              <div className="Quantity">Quantity</div>
+              <div className="Total">Total</div>
+            </div>
+            <hr className="hr-cart"/>
             <CartList/>
           </div>
         </div>
