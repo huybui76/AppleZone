@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useQuery } from '@tanstack/react-query';
-import { useDebounce } from '../../hooks/useDebounce';
-import * as ProductService from '../../services/ProductService';
-import Flashsales from '../../components/Flashsales/Flashsales';
-import SlideAnimate from '../../components/SlideAnimate/SlideAnimate';
-import BoxSlides from '../../components/BoxSlides/BoxSlides';
-import Loading from '../../components/LoadingComponent/Loading';
-import './Homepage.css';
+import React from "react"
+import Flashsales from "../../components/Flashsales/Flashsales"
+import SlideAnimate from "../../components/SlideAnimate/SlideAnimate"
+import Footer from "../../components/Footer/Footer"
+import "./Homepage.css"
+import slide1 from "../../assets/animate1.webp"
+import slide2 from "../../assets/animate2.webp"
+import slide3 from "../../assets/animate3.webp"
+import slide4 from "../../assets/animate4.webp"
 
 import slide1 from '../../assets/animate1.webp';
 import slide2 from '../../assets/animate2.webp';
@@ -68,6 +67,7 @@ const Homepage = () => {
                 </div>
                 <Flashsales />
                 <BoxSlides />
+                <Footer />
             </div>
         </div>
         //</Loading>

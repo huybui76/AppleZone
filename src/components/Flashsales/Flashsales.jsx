@@ -24,7 +24,11 @@ const Flashsales = () => {
                     <button className="right-button"></button>
                 </div>
             </div>
+
+
             <Menu/>
+        
+        
         </div>
         
     </div>

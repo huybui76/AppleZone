@@ -4,10 +4,7 @@ import ProductsPage from "../pages/ProductsPage/ProductsPage";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import SignInPage from "../pages/SignInPage/SignInPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
-import Dashboard from "../pages/DashBoard/DashBoardPage.jsx";
-import ProductType from "../pages/DashBoard/ProductType/ProductTypePage";
-import Product from "../pages/DashBoard/Product/ProductPage";
-import User from "../pages/DashBoard/User/UserPage";
+import Cart from "../pages/Cart/Cart";
 export const routes = [
   {
     path: '/',
@@ -69,5 +66,10 @@ export const routes = [
   {
     path: '*',
     page: NotFoundPage
+  },
+  {
+    path: '/Cart',
+    page: Cart,
+    isNavbar: false
   }
 ]
