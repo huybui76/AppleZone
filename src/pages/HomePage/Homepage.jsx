@@ -8,10 +8,10 @@ import slide2 from "../../assets/animate2.webp"
 import slide3 from "../../assets/animate3.webp"
 import slide4 from "../../assets/animate4.webp"
 
-import slide1 from '../../assets/animate1.webp';
-import slide2 from '../../assets/animate2.webp';
-import slide3 from '../../assets/animate3.webp';
-import slide4 from '../../assets/animate4.webp';
+// import slide1 from '../../assets/animate1.webp';
+// import slide2 from '../../assets/animate2.webp';
+// import slide3 from '../../assets/animate3.webp';
+// import slide4 from '../../assets/animate4.webp';
 
 const Homepage = () => {
     const searchProduct = useSelector((state) => state?.product?.search);

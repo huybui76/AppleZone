@@ -5,12 +5,12 @@ import Navbar from "./components/NavBar/Navbar";
 import Footer from "./components/Footer/Footer";
 import { routes } from "./routes";
 
-import "./App.css"
-import React, { Fragment } from "react"
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import Navbar from "./components/Navbar/Navbar"
-import Footer from "./components/Footer/Footer"
-import { routes } from "./routes"
+// import "./App.css"
+// import React, { Fragment } from "react"
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+// import Navbar from "./components/Navbar/Navbar"
+// import Footer from "./components/Footer/Footer"
+// import { routes } from "./routes"
 const Main = ({ children }) => {
     return (
         <div>
