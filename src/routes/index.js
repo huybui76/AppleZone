@@ -5,6 +5,7 @@ import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import SignInPage from "../pages/SignInPage/SignInPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import Cart from "../pages/Cart/Cart";
+import Dashboard from "../pages/DashBoard/DashBoardPage";
 export const routes = [
   {
     path: '/',
@@ -42,26 +43,8 @@ export const routes = [
     path: '/dashboard',
     page: Dashboard,
     isNavbar: true,
-    children: [
-      {
-        path: 'product-type',
-        page: ProductType,
-        isNavbar: true,
-        isFooter: true,
-      },
-      {
-        path: 'product',
-        page: Product,
-        isNavbar: true,
-        isFooter: true,
-      },
-      {
-        path: 'user',
-        page: User,
-        isNavbar: true,
-        isFooter: true,
-      },
-    ],
+
+
   },
   {
     path: '*',
