@@ -30,17 +30,7 @@ const Homepage = () => {
         }
     };
 
-    const fetchAllTypeProduct = async () => {
-        try {
-            const res = await ProductService.getAllTypeProduct();
-            if (res?.status === 'OK') {
-                setTypeProducts(res?.data);
-                console.log('producttype', res?.data)
-            }
-        } catch (error) {
-            console.error('Lỗi khi thực hiện yêu cầu Axios: ', error);
-        }
-    };
+
 
 
     // const { isLoading, data: products, isPreviousData } = useQuery(
@@ -49,9 +39,7 @@ const Homepage = () => {
     //     { retry: 3, retryDelay: 1000, keepPreviousData: true }
     // );
 
-    useEffect(() => {
-        fetchAllTypeProduct();
-    }, []);
+
 
     return (
         //<Loading isLoading={isLoading || loading}>

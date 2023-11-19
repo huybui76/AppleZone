@@ -4,12 +4,13 @@
     background-color: #fff;
     display: flex;
     flex-direction: row;
-    margin-top: 70px;
+    
 }
 
 .container_dashboard-menu {
     width: 15%;
     background-color: aliceblue;
+   
 }
 
 .container_dashboard-menu a {

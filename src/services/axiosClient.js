@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const axiosClient = axios.create({
-    baseURL: 'https://topzone.onrender.com/api/',
-    withCredentials: true,
+    baseURL: 'http://localhost:3001/api/',
+    withCredentials: false,
     headers: {
         'Content-type': 'application/json',
     },
