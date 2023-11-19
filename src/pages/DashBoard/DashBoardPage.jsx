@@ -24,38 +24,37 @@ const Dashboard = () => {
 
     const [keySelected, setKeySelected] = useState('');
 
-    const getAllProducts = async () => {
-        const res = await ProductService.getAllProduct();
-        console.log('res1', res);
-        return { data: res?.data, key: 'products' };
-    };
+    // const getAllProducts = async () => {
+    //     const res = await ProductService.getAllProduct();
+    //     return { data: res?.data, key: 'products' };
+    // };
 
-    const getAllUsers = async () => {
-        const res = await UserService.getAllUser(user?.access_token);
-        console.log('res', res);
-        return { data: res?.data, key: 'users' };
-    };
+    // const getAllUsers = async () => {
+    //     const res = await UserService.getAllUsers(user?.access_token);
+    //     console.log('res', res);
+    //     return { data: res?.data, key: 'users' };
+    // };
 
-    const queries = useQueries({
-        queries: [
-            { queryKey: ['products'], queryFn: getAllProducts, staleTime: 1000 * 60 },
-            { queryKey: ['users'], queryFn: getAllUsers, staleTime: 1000 * 60 },
-        ]
-    });
+    // const queries = useQueries({
+    //     queries: [
+    //         { queryKey: ['products'], queryFn: getAllProducts, staleTime: 1000 * 60 },
+    //         { queryKey: ['users'], queryFn: getAllUsers, staleTime: 1000 * 60 },
+    //     ]
+    // });
 
-    const memoCount = useMemo(() => {
-        const result = {};
-        try {
-            if (queries) {
-                queries.forEach((query) => {
-                    result[query?.data?.key] = query?.data?.data?.length;
-                });
-            }
-            return result;
-        } catch (error) {
-            return result;
-        }
-    }, [queries]);
+    // const memoCount = useMemo(() => {
+    //     const result = {};
+    //     try {
+    //         if (queries) {
+    //             queries.forEach((query) => {
+    //                 result[query?.data?.key] = query?.data?.data?.length;
+    //             });
+    //         }
+    //         return result;
+    //     } catch (error) {
+    //         return result;
+    //     }
+    // }, [queries]);
 
     const renderPage = (key) => {
         switch (key) {
@@ -74,7 +73,7 @@ const Dashboard = () => {
         setKeySelected(key);
     };
 
-    console.log('memoCount', memoCount);
+
 
     return (
         <>

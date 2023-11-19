@@ -1,19 +1,429 @@
-import React, { Component } from 'react'
-import { NavLink, useLocation, useParams, Switch, Route, Outlet } from 'react-router-dom';
-import './index.css'
-const Product = () => {
-    return (
-        <div className="container_dashboard">
-            <div className="container_dashboard-menu">
-                <ul>
-                    dfsf
-                </ul>
-            </div>
-            <div className='container_dashboard-tab'>
-                <Outlet />
-            </div>
-        </div>
-    )
-}
+import React, { useState, useEffect } from 'react';
+import { Button, Form, Modal, Select, InputNumber } from 'antd';
+import { DeleteTwoTone, EditOutlined } from '@ant-design/icons';
+import axiosClient from '../../../services/axiosClient';
+import ModalComponent from '../../../components/ModalComponent/ModalComponent';
+import { useQuery } from '@tanstack/react-query';
+import InputComponent from '../../../components/InputComponent/InputComponent';
+import { WrapperUploadFile } from './style';
+import { getBase64 } from '../../../utils';
+import TableComponent from '../../../components/TableComponent/TableComponent';
 
-export default Product
+import './index.css';
+import * as ProductService from '../../../services/ProductService';
+import * as ProductTypeService from '../../../services/ProductTypeService';
+import { useMutationHooks } from '../../../hooks/useMutationHooks';
+
+const INITIAL_STATE = {
+    name: '',
+    image: '',
+    type: '',  // New field
+    price: '',  // New field
+    countInStock: '',  // New field
+    rating: '',  // New field
+    discount: '',  // New field
+};
+
+const Product = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [editingProductId, setEditingProductId] = useState(null);
+    const [rowSelected, setRowSelected] = useState('')
+    const [form] = Form.useForm();
+    const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+    const [deletingProductId, setDeletingProductId] = useState(null);
+    const [productTypes, setProductTypes] = useState([]);
+
+    const mutation = useMutationHooks(async (data) => {
+        const { name, image, type, price, countInStock, rating, discount } = data;
+
+        if (editingProductId) {
+
+            const res = await ProductService.updateProduct(editingProductId, {
+                name,
+                image,
+                type,
+                price,
+                countInStock,
+                rating,
+                discount,
+            });
+            return res;
+        } else {
+            // If creating, create a new product
+            const res = await ProductService.createProduct({
+                name,
+                image,
+                type,
+                price,
+                countInStock,
+                rating,
+                discount,
+            });
+            return res;
+        }
+
+    });
+
+    const queryProduct = useQuery({
+        queryKey: ['product'],
+        queryFn: ProductService.getAllProduct,
+    });
+    const { data: products } = queryProduct;
+
+    const showDeleteConfirmation = (productId) => {
+        setDeletingProductId(productId);
+        setIsDeleteModalVisible(true);
+    };
+
+    const deleteProduct = async (productId) => {
+        setDeletingProductId(productId);
+        setIsDeleteModalVisible(true);
+    };
+
+    const handleDeleteConfirmed = async () => {
+        await axiosClient.delete(`product/deleteProduct/${deletingProductId}`, { _id: deletingProductId });
+
+        queryProduct.refetch();
+        setIsDeleteModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+        setEditingProductId(null);
+        form.resetFields();
+    };
+
+    const onFinish = async (values) => {
+        const isNameExists = products?.data?.some(
+            (item) => item.name.toLowerCase() === values.name.toLowerCase() && item._id !== editingProductId
+        );
+
+        if (isNameExists) {
+            alert('Sản phẩm này đã tồn tại!');
+            return;
+        }
+
+        try {
+            const data = await mutation.mutateAsync(values);
+
+            if (data?.status === 'OK' && data?.message === 'Product created successfully') {
+                handleCancel();
+                alert('Thêm sản phẩm thành công');
+                // Update the query to refetch data after mutation
+                queryProduct.refetch();
+            }
+
+            if (data?.status === 'OK' && data?.message === 'UPDATE PRODUCT SUCCESS') {
+                handleCancel();
+                alert('Sửa sản phẩm thành công');
+                // Update the query to refetch data after mutation
+                queryProduct.refetch();
+            }
+        } catch (error) {
+            console.error('Error creating Product:', error);
+        }
+    };
+
+    const handleOnchangeAvatar = async ({ fileList }) => {
+        const file = fileList[0];
+        if (!file.url && !file.preview) {
+            file.preview = await getBase64(file.originFileObj);
+        }
+        form.setFieldsValue({
+            image: file.preview,
+        });
+    };
+
+    const editProduct = (productId) => {
+        const selectedProduct = products.data.find((item) => item._id === productId);
+        if (selectedProduct) {
+            setIsModalOpen(true);
+            setEditingProductId(productId);
+            form.setFieldsValue({
+                name: selectedProduct.name,
+                image: selectedProduct.image,
+                type: selectedProduct.type, // Set the product type
+                price: selectedProduct.price, // Set the product type
+                countInStock: selectedProduct.countInStock, // Set the product type
+                rating: selectedProduct.rating, // Set the product type
+                discount: selectedProduct.discount, // Set the product type
+            });
+        }
+    };
+
+    const mutationDeletedMany = useMutationHooks(
+        (data) => {
+            const { token, ...ids
+            } = data
+            const res = ProductService.deleteManyProduct(
+                ids,
+                token)
+            return res
+        },
+    )
+    const handleDeleteManyProducts = (ids) => {
+        mutationDeletedMany.mutate({ ids: ids }, {
+            onSettled: () => {
+                queryProduct.refetch()
+            }
+        })
+    }
+    useEffect(() => {
+        const fetchProductTypes = async () => {
+            try {
+                const response = await ProductTypeService.getAllProductType();
+                setProductTypes(response.data);
+                // Set initial form values, including product type
+                form.setFieldsValue({
+                    type: response.data.length > 0 ? response.data[0]._id : null,
+                });
+            } catch (error) {
+                console.error('Error fetching product types:', error);
+            }
+        };
+
+        fetchProductTypes();
+    }, [form]);
+
+
+
+
+    const columns = [
+        {
+            title: 'STT',
+            dataIndex: 'index',
+            key: 'index',
+            render: (_, __, index) => index + 1,
+        },
+
+        {
+            title: 'Tên',
+            dataIndex: 'name',
+            key: 'name',
+
+        },
+        {
+            title: 'Hình Ảnh',
+            dataIndex: 'image',
+            key: 'image',
+            render: (image) => <img src={image} alt="product" style={{ width: '100px', height: '100px' }} />,
+        },
+        {
+            title: 'Loại sản phẩm',
+            dataIndex: 'type',
+            key: 'type',
+            render: (type) => {
+                const productType = productTypes.find((pt) => pt._id === type);
+                return productType ? productType.name : 'N/A';
+            },
+
+
+        },
+
+        {
+            title: 'Giá',
+            dataIndex: 'price',
+            key: 'price',
+        },
+        {
+            title: 'Số lượng',
+            dataIndex: 'countInStock',
+            key: 'countInStock',
+        },
+        {
+            title: 'Rating',
+            dataIndex: 'rating',
+            key: 'rating',
+        },
+        {
+            title: 'Giảm giá',
+            dataIndex: 'discount',
+            key: 'discount',
+        },
+
+
+        {
+            title: 'Hành động',
+            key: 'action',
+            render: (text, record) => (
+                <span className="action-icons-container">
+                    <EditOutlined className="edit_icon" onClick={() => editProduct(record._id)} />
+                    <DeleteTwoTone className="delete_icon" onClick={() => showDeleteConfirmation(record._id)} />
+                </span>
+            ),
+        },
+
+
+
+    ];
+
+    const handleChangeSelect = (value) => {
+        form.setFieldsValue({
+            type: value,
+        });
+    };
+
+
+    const isLoadingProducts = queryProduct.isLoading;
+
+    const dataTable = products?.data?.map((product) => ({
+        key: product._id,
+        _id: product._id,
+        name: product.name,
+        image: product.image,
+        type: product.type,
+        price: product.price,
+        countInStock: product.countInStock,
+        rating: product.rating,
+        discount: product.discount,
+    })).reverse();
+
+
+    return (
+        <div className="dashboard_category">
+            <div className="dashboard_category-add">
+                <button onClick={() => setIsModalOpen(true)}>Thêm mới</button>
+            </div>
+            <ModalComponent forceRender title="Tạo sản phẩm" open={isModalOpen} onCancel={handleCancel} footer={null}>
+                <Form
+                    name="basic"
+                    labelCol={{ span: 9 }}
+                    wrapperCol={{ span: 14 }}
+                    onFinish={onFinish}
+                    autoComplete="on"
+                    form={form}
+                >
+                    <Form.Item
+                        label="Tên sản phẩm"
+                        name="name"
+                        rules={[{ required: true, message: 'Tên sản phẩm!' }]}
+                    >
+                        <InputComponent />
+                    </Form.Item>
+                    <Form.Item label="Hình ảnh" name="image" rules={[{ required: true, message: 'Chọn hình ảnh!' }]}>
+                        <WrapperUploadFile onChange={handleOnchangeAvatar} maxCount={1}>
+                            <Button>Select File</Button>
+                            {form.getFieldValue('image') && (
+                                <img
+                                    src={form.getFieldValue('image')}
+                                    style={{
+                                        height: '60px',
+                                        width: '60px',
+                                        borderRadius: '50%',
+                                        objectFit: 'cover',
+                                        marginLeft: '10px',
+                                    }}
+                                    alt="avatar"
+                                />
+                            )}
+                        </WrapperUploadFile>
+                    </Form.Item>
+                    <Form.Item
+                        label="Type"
+                        name="type"
+                        rules={[{ required: true, message: 'Please select a product type!' }]}
+                    >
+                        <Select placeholder="Select a product type" onChange={handleChangeSelect}>
+                            {productTypes.map((type) => (
+                                <Select.Option key={type._id} value={type._id}>
+                                    {type.name}
+                                </Select.Option>
+                            ))}
+                        </Select>
+                    </Form.Item>
+
+
+
+
+
+                    <Form.Item
+                        label="Giá"
+                        name="price"
+                        rules={[
+                            { required: true, message: 'Nhập giá sản phẩm!' },
+
+
+                        ]}
+                    >
+                        <InputNumber min={0} />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Số lượng"
+                        name="countInStock"
+                        rules={[
+                            { required: true, message: 'Nhập Số lượng!' },
+
+
+                        ]}
+                    >
+                        <InputNumber min={0} />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Sao"
+                        name="rating"
+                        rules={[
+                            { required: true, message: 'Nhập số đánh giá!' },
+
+
+                        ]}
+                    >
+                        <InputNumber min={0} max={5} />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Giảm giá"
+                        name="discount"
+                        rules={[
+                            { required: true, message: 'Nhập Giảm giá!' },
+
+
+                        ]}
+                    >
+                        <InputNumber min={0} max={100} />
+                    </Form.Item>
+
+                    <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
+                        <Button type="primary" htmlType="submit">
+                            Submit
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </ModalComponent>
+            <h2 className="dashboard_category-title">Danh sách tất cả sản phẩm</h2>
+            <div className="dashboard_category-show">
+                {products && products.data ? (
+                    <div style={{ marginTop: '20px' }}>
+                        <TableComponent
+                            handleDeleteMany={handleDeleteManyProducts}
+                            columns={columns}
+                            isLoading={isLoadingProducts}
+                            data={dataTable}
+                            onRow={(record, rowIndex) => {
+                                return {
+                                    onClick: (event) => {
+                                        setRowSelected(record._id);
+                                    },
+                                };
+                            }}
+                        />
+                    </div>
+                ) : (
+                    <p>Loading...</p>
+                )}
+            </div>
+            {/* Delete Confirmation Modal */}
+            <Modal
+                title="Xác nhận xoá"
+                visible={isDeleteModalVisible}
+                onOk={handleDeleteConfirmed}
+                onCancel={() => setIsDeleteModalVisible(false)}
+            >
+                <p>Bạn có chắc chắn muốn xoá sản phẩm này?</p>
+            </Modal>
+        </div>
+    );
+};
+
+export default Product;

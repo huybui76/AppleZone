@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { DeleteTwoTone, EditOutlined } from '@ant-design/icons';
-import { Button, Form } from 'antd';
+import { Button, Form, Modal } from 'antd';
 import axiosClient from '../../../services/axiosClient';
 import ModalComponent from '../../../components/ModalComponent/ModalComponent';
 import { useQuery } from '@tanstack/react-query';
@@ -22,6 +22,9 @@ const ProductType = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingProductTypeId, setEditingProductTypeId] = useState(null);
     const [form] = Form.useForm();
+    const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+    const [deletingCategoryId, setDeletingCategoryId] = useState(null);
+
     const mutation = useMutationHooks(async (data) => {
         const { name, image } = data;
         if (editingProductTypeId) {
@@ -34,37 +37,39 @@ const ProductType = () => {
             return res;
         }
     });
-    const editCategory = (productTypeId) => {
-        const selectedProductType = productTypes.data.find((item) => item._id === productTypeId);
-        if (selectedProductType) {
-            setIsModalOpen(true);
-            setEditingProductTypeId(productTypeId);
-            form.setFieldsValue({
-                name: selectedProductType.name,
-                image: selectedProductType.image,
-            });
-        }
-    };
+
     const queryProductType = useQuery({
         queryKey: ['productType'],
         queryFn: ProductTypeService.getAllProductType,
     });
     const { data: productTypes } = queryProductType;
 
+    const showDeleteConfirmation = (categoryId) => {
+        setDeletingCategoryId(categoryId);
+        setIsDeleteModalVisible(true);
+    };
+
     const deleteCategory = async (_id) => {
-        await axiosClient.delete(`productType/deleteProductType/${_id}`, { _id });
-        alert('Xoá thành công danh mục');
+        setDeletingCategoryId(_id);
+        setIsDeleteModalVisible(true);
+    };
+
+    const handleDeleteConfirmed = async () => {
+        await axiosClient.delete(`productType/deleteProductType/${deletingCategoryId}`, { _id: deletingCategoryId });
+
         queryProductType.refetch();
+        setIsDeleteModalVisible(false);
     };
 
     const handleCancel = () => {
         setIsModalOpen(false);
+        setEditingProductTypeId(null);
         form.resetFields();
     };
 
     const onFinish = async (values) => {
         const isNameExists = productTypes?.data?.some(
-            (item) => item.name.toLowerCase() === values.name.toLowerCase()
+            (item) => item.name.toLowerCase() === values.name.toLowerCase() && item._id !== editingProductTypeId
         );
 
         if (isNameExists) {
@@ -75,9 +80,16 @@ const ProductType = () => {
         try {
             const data = await mutation.mutateAsync(values);
 
-            if (data?.status === 'OK') {
+            if (data?.status === 'OK' && data?.message === 'ProductType created successfully') {
                 handleCancel();
                 alert('Thêm danh mục thành công');
+                // Update the query to refetch data after mutation
+                queryProductType.refetch();
+            }
+
+            if (data?.status === 'OK' && data?.message === 'UPDATE PRODUCT TYPE SUCCESS') {
+                handleCancel();
+                alert('Sửa danh mục thành công');
                 // Update the query to refetch data after mutation
                 queryProductType.refetch();
             }
@@ -94,6 +106,17 @@ const ProductType = () => {
         form.setFieldsValue({
             image: file.preview,
         });
+    };
+    const editCategory = (productTypeId) => {
+        const selectedProductType = productTypes.data.find((item) => item._id === productTypeId);
+        if (selectedProductType) {
+            setIsModalOpen(true);
+            setEditingProductTypeId(productTypeId);
+            form.setFieldsValue({
+                name: selectedProductType.name,
+                image: selectedProductType.image,
+            });
+        }
     };
 
     return (
@@ -161,15 +184,23 @@ const ProductType = () => {
                             <h3>{productTypeData.name}</h3>
                             <div className="button-container">
                                 <EditOutlined className="edit_icon" onClick={() => editCategory(productTypeData._id)} />
-                                <DeleteTwoTone className="delete_icon" onClick={() => deleteCategory(productTypeData._id)} />
+                                <DeleteTwoTone className="delete_icon" onClick={() => showDeleteConfirmation(productTypeData._id)} />
                             </div>
                         </div>
-
                     ))
                 ) : (
                     <p>Loading...</p>
                 )}
             </div>
+            {/* Delete Confirmation Modal */}
+            <Modal
+                title="Xác nhận xoá"
+                visible={isDeleteModalVisible}
+                onOk={handleDeleteConfirmed}
+                onCancel={() => setIsDeleteModalVisible(false)}
+            >
+                <p>Bạn có chắc chắn muốn xoá danh mục này?</p>
+            </Modal>
         </div>
     );
 };

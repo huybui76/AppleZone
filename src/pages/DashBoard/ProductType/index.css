@@ -36,7 +36,7 @@
 .dashboard_category-add {
     display: flex;
     justify-content: flex-end;
-    padding: 10px 20px 0 20px;
+    padding: 10px 80px 0 20px;
 }
 
 .dashboard_category-add button {
