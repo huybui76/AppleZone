@@ -2,23 +2,25 @@
     width: 1200px;
     margin: 0 auto;
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    flex-direction: row;/* Updated to space between items */
     padding: 20px;
     gap: 15px;
-    flex-wrap: wrap;
+    
 }
 
 .dashboard_category-show--content {
     position: relative;
     width: 180px;
     height: 220px;
-    background-color: #333;
+    background-color: #838181;
     border-radius: 24px;
     padding: 20px;
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .dashboard_category-show--content img {
@@ -34,11 +36,11 @@
 .dashboard_category-add {
     display: flex;
     justify-content: flex-end;
-    padding: 50px 80px 0 20px;
+    padding: 10px 20px 0 20px;
 }
 
 .dashboard_category-add button {
-    background-color: #3d3d3d;
+    background-color: #696666;
     color: #fff;
     font-weight: 500;
     padding: 10px 20px;
@@ -46,6 +48,12 @@
     border: none;
     cursor: pointer;
 }
+
+.dashboard_category-show--content .button-container {
+    display: flex;
+    gap: 10px;
+}
+
 
 .dashboard_category-form {
     margin-top: 50px;
@@ -108,7 +116,19 @@
     top: 10px;
     width: 35px;
     height: 35px;
-    background-color: #2d2d2d;
+    background-color: rgb(170, 158, 158);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+.edit_icon {
+    position: absolute;
+    right: 60px;
+    top: 10px;
+    width: 35px;
+    height: 35px;
+    background-color: rgb(170, 158, 158);
     display: flex;
     justify-content: center;
     align-items: center;

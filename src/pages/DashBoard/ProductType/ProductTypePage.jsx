@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { DeleteTwoTone, EditOutlined } from '@ant-design/icons';
 import { Button, Form } from 'antd';
@@ -19,94 +19,71 @@ const INITIAL_STATE = {
 };
 
 const ProductType = () => {
-    const [category, setCategory] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [stateProduct, setStateProduct] = useState(INITIAL_STATE);
+    const [editingProductTypeId, setEditingProductTypeId] = useState(null);
     const [form] = Form.useForm();
-    const mutation = useMutationHooks((data) => {
+    const mutation = useMutationHooks(async (data) => {
         const { name, image } = data;
-        const res = ProductTypeService.createProductType({ name, image });
-        return res;
+        if (editingProductTypeId) {
+            // If editing, update the existing product type
+            const res = await ProductTypeService.updateProductType(editingProductTypeId, { name, image });
+            return res;
+        } else {
+            // If creating, create a new product type
+            const res = await ProductTypeService.createProductType({ name, image });
+            return res;
+        }
     });
-
-    // Move getAllProductType below the useMutationHooks
-    const getAllProductType = async () => {
-        const res = await ProductTypeService.getAllProductType();
-        return res;
-    };
-
-    const mutationUpdate = useMutationHooks((data) => {
-        const { id, token, ...rests } = data;
-        const res = ProductTypeService.updateProductType(id, token, { ...rests });
-        return res;
-    });
-
-    const queryProduct = useQuery({
-        queryKey: ['productType'],
-        queryFn: getAllProductType,
-    });
-
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    const fetchData = async () => {
-        try {
-            const response = await axiosClient.get('productType/getAllProductsType');
-            setCategory(response.data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
+    const editCategory = (productTypeId) => {
+        const selectedProductType = productTypes.data.find((item) => item._id === productTypeId);
+        if (selectedProductType) {
+            setIsModalOpen(true);
+            setEditingProductTypeId(productTypeId);
+            form.setFieldsValue({
+                name: selectedProductType.name,
+                image: selectedProductType.image,
+            });
         }
     };
+    const queryProductType = useQuery({
+        queryKey: ['productType'],
+        queryFn: ProductTypeService.getAllProductType,
+    });
+    const { data: productTypes } = queryProductType;
 
     const deleteCategory = async (_id) => {
         await axiosClient.delete(`productType/deleteProductType/${_id}`, { _id });
-        const newCategoryList = category.filter((cat) => cat._id !== _id);
-        setCategory(newCategoryList);
+        alert('Xoá thành công danh mục');
+        queryProductType.refetch();
     };
 
     const handleCancel = () => {
         setIsModalOpen(false);
-        setStateProduct(INITIAL_STATE);
         form.resetFields();
     };
 
-    const onFinish = async () => {
-        const params = {
-            name: stateProduct.name,
-            image: stateProduct.image,
-        };
-
-        // Check if the product type name already exists
-        const isNameExists = category.some((item) => item.name.toLowerCase() === stateProduct.name.toLowerCase());
+    const onFinish = async (values) => {
+        const isNameExists = productTypes?.data?.some(
+            (item) => item.name.toLowerCase() === values.name.toLowerCase()
+        );
 
         if (isNameExists) {
-            // Display an error message or handle the duplication in a way that fits your application
             alert('Danh mục này đã tồn tại!');
             return;
         }
 
-        // Continue with the mutation if the name is unique
-        mutation.mutate(params, {
-            onSuccess: (data) => {
-                if (data?.status === 'OK') {
-                    handleCancel();
-                    alert('ProductType created successfully');
-                    queryProduct.refetch();
-                }
-            },
-            onError: (error) => {
-                console.error('Error creating ProductType:', error);
-            },
-        });
-    };
+        try {
+            const data = await mutation.mutateAsync(values);
 
-
-    const handleOnchange = (e) => {
-        setStateProduct({
-            ...stateProduct,
-            [e.target.name]: e.target.value,
-        });
+            if (data?.status === 'OK') {
+                handleCancel();
+                alert('Thêm danh mục thành công');
+                // Update the query to refetch data after mutation
+                queryProductType.refetch();
+            }
+        } catch (error) {
+            console.error('Error creating ProductType:', error);
+        }
     };
 
     const handleOnchangeAvatar = async ({ fileList }) => {
@@ -114,13 +91,10 @@ const ProductType = () => {
         if (!file.url && !file.preview) {
             file.preview = await getBase64(file.originFileObj);
         }
-        setStateProduct({
-            ...stateProduct,
+        form.setFieldsValue({
             image: file.preview,
         });
     };
-
-
 
     return (
         <div className="dashboard_category">
@@ -147,7 +121,7 @@ const ProductType = () => {
                         name="name"
                         rules={[{ required: true, message: 'Tên loại sản phẩm!' }]}
                     >
-                        <InputComponent value={stateProduct['name']} onChange={handleOnchange} name="name" />
+                        <InputComponent />
                     </Form.Item>
                     <Form.Item
                         label="Hình ảnh"
@@ -156,9 +130,9 @@ const ProductType = () => {
                     >
                         <WrapperUploadFile onChange={handleOnchangeAvatar} maxCount={1}>
                             <Button>Select File</Button>
-                            {stateProduct?.image && (
+                            {form.getFieldValue('image') && (
                                 <img
-                                    src={stateProduct?.image}
+                                    src={form.getFieldValue('image')}
                                     style={{
                                         height: '60px',
                                         width: '60px',
@@ -180,17 +154,21 @@ const ProductType = () => {
             </ModalComponent>
             <h2 className="dashboard_category-title">Danh sách tất cả danh mục</h2>
             <div className="dashboard_category-show">
-                {category &&
-                    category.map((cate) => (
-                        <div key={cate._id} className="dashboard_category-show--content">
-                            <img src={cate.image} alt="" />
-                            <h3>{cate.name}</h3>
-                            <NavLink to={`/dashboard/category/${cate._id}`}>
-                                <EditOutlined />
-                            </NavLink>
-                            <DeleteTwoTone className="delete_icon" onClick={() => deleteCategory(cate._id)} />
+                {productTypes && productTypes.data ? (
+                    productTypes.data.map((productTypeData) => (
+                        <div key={productTypeData._id} className="dashboard_category-show--content">
+                            <img src={productTypeData.image} alt="" />
+                            <h3>{productTypeData.name}</h3>
+                            <div className="button-container">
+                                <EditOutlined className="edit_icon" onClick={() => editCategory(productTypeData._id)} />
+                                <DeleteTwoTone className="delete_icon" onClick={() => deleteCategory(productTypeData._id)} />
+                            </div>
                         </div>
-                    ))}
+
+                    ))
+                ) : (
+                    <p>Loading...</p>
+                )}
             </div>
         </div>
     );
