@@ -31,8 +31,10 @@ const User = () => {
 
     const alertMessages = {
         userCreated: 'Thêm người dùng thành công',
-        userUpdated: 'Sửa người dùng thành công',
+        userUpdated: 'Cập nhật thông tin người dùng thành công',
         userExists: 'Người dùng này đã tồn tại!',
+        emailExists: 'Email này đã được sử dụng trước đó!',
+        passLength: 'Mật khẩu phải dài hơn 6 kí tự!',
     };
 
     const mutation = useMutationHooks(async (data) => {
@@ -90,11 +92,11 @@ const User = () => {
         );
 
         if (isEmailExists) {
-            alert('Email này đã được sử dụng trước đó!');
+            alert(alertMessages.emailExists);
             return;
         }
         if (values.password.length < 6) {
-            alert('Mật khẩu phải dài hơn 6 kí tự!');
+            alert(alertMessages.passLength);
             return;
         }
 
@@ -103,13 +105,13 @@ const User = () => {
 
             if (data?.status === 'OK' && data?.message === 'CREATE USER SUCCESS') {
                 handleCancel();
-                alert('Thêm người dùng thành công');
+                alert(alertMessages.userCreated);
                 queryUsers.refetch();
             }
 
             if (data?.status === 'OK' && data?.message === 'UPDATE USER SUCCESS') {
                 handleCancel();
-                alert('Sửa người dùng thành công');
+                alert(alertMessages.userUpdated);
                 queryUsers.refetch();
             }
         } catch (error) {
@@ -191,7 +193,7 @@ const User = () => {
             key: 'email',
         },
         {
-            title: 'Admin',
+            title: 'Quản trị viên',
             dataIndex: 'isAdmin',
             key: 'isAdmin',
             render: (isAdmin) => (isAdmin ? 'Có' : 'Không'),
@@ -206,7 +208,7 @@ const User = () => {
             title: 'Thao tác',
             key: 'action',
             render: (_, record) => (
-                <Space className="action-icons-container" size="middle">
+                <Space className="action-icons-container-user" size="middle">
                     <a onClick={() => editUser(record._id)}>Chỉnh sửa</a>
                     <a onClick={() => showDeleteConfirmation(record._id)}>Xoá</a>
                 </Space>
@@ -243,11 +245,11 @@ const User = () => {
                         <InputComponent type="email" />
                     </Form.Item>
                     <Form.Item
-                        label="Admin"
+                        label="Quản trị viên"
                         name="isAdmin"
-                        rules={[{ required: true, message: 'Chọn quyền admin!' }]}
+                        rules={[{ required: true, message: 'Vui lòng chọn quyền admin!' }]}
                     >
-                        <Select placeholder="Chọn quyền admin" onChange={handleChangeSelect}>
+                        <Select placeholder="Bạn có phải là quản trị viên" onChange={handleChangeSelect}>
                             <Select.Option value={true}>Có</Select.Option>
                             <Select.Option value={false}>Không</Select.Option>
                         </Select>
@@ -277,7 +279,7 @@ const User = () => {
                 </Form>
             </ModalComponent>
             <h2 className="dashboard_category-title">Danh sách tất cả người dùng</h2>
-            <div className="dashboard_category-show">
+            <div className="dashboard_category-show-user">
                 {users && users.data ? (
                     <div style={{ marginTop: '20px' }}>
                         <TableComponent

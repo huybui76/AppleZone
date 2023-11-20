@@ -3,12 +3,9 @@ import React, { useState } from 'react'
 import { useMemo } from 'react';
 
 const TableComponent = (props) => {
-    const { selectionType = 'checkbox', data: dataSource = [], isLoading = false, columns = [], handleDeleteMany } = props
+    const { selectionType = 'checkbox', data: dataSource = [], columns = [], handleDeleteMany } = props
     const [rowSelectedKeys, setRowSelectedKeys] = useState([])
-    const newColumnExport = useMemo(() => {
-        const arr = columns?.filter((col) => col.dataIndex !== 'action')
-        return arr
-    }, [columns])
+
 
     const rowSelection = {
         onChange: (selectedRowKeys, selectedRows) => {

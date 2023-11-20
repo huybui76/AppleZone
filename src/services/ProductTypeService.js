@@ -20,6 +20,7 @@ export const getDetailsProductType = async (id) => {
     return res.data
 }
 
+
 export const updateProductType = async (id, data) => {
     const res = await axiosJWT.put(`${process.env.REACT_APP_API_URL}/productType/updateProductType/${id}`, data, {
 

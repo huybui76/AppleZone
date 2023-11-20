@@ -6,6 +6,13 @@
     flex-direction: row;
     margin-top: 70px;
 }
+.dashboard_category-show-user {
+    width: 80%;
+    height: auto;
+    background-color: #fff;
+    margin-left: 100px;
+    margin-right: 100px;
+}
 
 .container_dashboard-menu {
     width: 15%;
@@ -98,4 +105,8 @@
     width: 100px;
     height: 100px;
     object-fit: cover;
+}
+.action-icons-container-user{
+    justify-content: center;
+    align-items: center;
 }

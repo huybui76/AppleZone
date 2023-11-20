@@ -11,7 +11,10 @@ export const getAllProduct = async (search, limit) => {
     return res.data
 }
 
-
+export const getProductByType = async (id) => {
+    const res = await axios.get(`${process.env.REACT_APP_API_URL}/product/getProductByType/${id}`)
+    return res.data
+}
 
 export const createProduct = async (data) => {
     const res = await axios.post(`${process.env.REACT_APP_API_URL}/product/createProduct`, data)

@@ -427,7 +427,7 @@ const Product = () => {
                 </Form>
             </ModalComponent>
             <h2 className="dashboard_category-title">Danh sách tất cả sản phẩm</h2>
-            <div className="dashboard_category-show">
+            <div className="dashboard_category-show-product">
                 {products && products.data ? (
                     <div style={{ marginTop: '20px' }}>
                         <TableComponent

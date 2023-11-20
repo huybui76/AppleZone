@@ -3,58 +3,28 @@ import { useSelector } from 'react-redux';
 import { useQueries } from '@tanstack/react-query';
 import { Menu } from 'antd';
 import { getItem } from '../../utils';
-import { UserOutlined, AppstoreOutlined, FileAddOutlined } from '@ant-design/icons';
+import { UserOutlined, AppstoreOutlined, FileAddOutlined, DashboardOutlined } from '@ant-design/icons';
 
 import ProductPage from '../../pages/DashBoard/Product/ProductPage';
 import ProductTypePage from '../../pages/DashBoard/ProductType/ProductTypePage';
 import UserPage from '../../pages/DashBoard/User/UserPage';
+import DashboardSummary from '../../pages/DashBoard/DashboardSummary/DashboardSummary';
 
-import * as ProductService from '../../services/ProductService';
-import * as UserService from '../../services/UserService';
 
 const Dashboard = () => {
     const user = useSelector((state) => state?.user);
-
+    const [keySelected, setKeySelected] = useState('dashboard');
 
     const items = [
+        getItem('Tổng quan', 'dashboard', <DashboardOutlined />),
         getItem('Loại sản phẩm', 'productTypes', <FileAddOutlined />),
         getItem('Sản phẩm', 'products', <AppstoreOutlined />),
         getItem('Người dùng', 'users', <UserOutlined />),
     ];
 
-    const [keySelected, setKeySelected] = useState('');
-
-    // const getAllProducts = async () => {
-    //     const res = await ProductService.getAllProduct();
-    //     return { data: res?.data, key: 'products' };
-    // };
-
-    // const getAllUsers = async () => {
-    //     const res = await UserService.getAllUsers(user?.access_token);
-    //     console.log('res', res);
-    //     return { data: res?.data, key: 'users' };
-    // };
-
-    // const queries = useQueries({
-    //     queries: [
-    //         { queryKey: ['products'], queryFn: getAllProducts, staleTime: 1000 * 60 },
-    //         { queryKey: ['users'], queryFn: getAllUsers, staleTime: 1000 * 60 },
-    //     ]
-    // });
-
-    // const memoCount = useMemo(() => {
-    //     const result = {};
-    //     try {
-    //         if (queries) {
-    //             queries.forEach((query) => {
-    //                 result[query?.data?.key] = query?.data?.data?.length;
-    //             });
-    //         }
-    //         return result;
-    //     } catch (error) {
-    //         return result;
-    //     }
-    // }, [queries]);
+    const handleOnClick = ({ key }) => {
+        setKeySelected(key);
+    };
 
     const renderPage = (key) => {
         switch (key) {
@@ -64,16 +34,12 @@ const Dashboard = () => {
                 return <ProductPage />;
             case 'productTypes':
                 return <ProductTypePage />;
+            case 'dashboard':
+                return <DashboardSummary />;
             default:
-                return <></>;
+                return;
         }
     };
-
-    const handleOnClick = ({ key }) => {
-        setKeySelected(key);
-    };
-
-
 
     return (
         <>
@@ -87,6 +53,7 @@ const Dashboard = () => {
                     }}
                     items={items}
                     onClick={handleOnClick}
+                    defaultSelectedKeys={['dashboard']}
                 />
                 <div style={{ flex: 1, padding: '15px 0 15px 15px' }}>
                     {renderPage(keySelected)}
@@ -95,5 +62,7 @@ const Dashboard = () => {
         </>
     );
 };
+
+
 
 export default Dashboard;

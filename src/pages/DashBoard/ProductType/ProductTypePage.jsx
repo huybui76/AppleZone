@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { DeleteTwoTone, EditOutlined } from '@ant-design/icons';
 import { Button, Form, Modal } from 'antd';
@@ -11,6 +11,7 @@ import { getBase64 } from '../../../utils';
 
 import './index.css';
 import * as ProductTypeService from '../../../services/ProductTypeService';
+import * as ProductService from '../../../services/ProductService';
 import { useMutationHooks } from '../../../hooks/useMutationHooks';
 
 const INITIAL_STATE = {
@@ -24,15 +25,16 @@ const ProductType = () => {
     const [form] = Form.useForm();
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
     const [deletingCategoryId, setDeletingCategoryId] = useState(null);
+    const [productCounts, setProductCounts] = useState({});
 
     const mutation = useMutationHooks(async (data) => {
         const { name, image } = data;
         if (editingProductTypeId) {
-            // If editing, update the existing product type
+
             const res = await ProductTypeService.updateProductType(editingProductTypeId, { name, image });
             return res;
         } else {
-            // If creating, create a new product type
+
             const res = await ProductTypeService.createProductType({ name, image });
             return res;
         }
@@ -44,13 +46,24 @@ const ProductType = () => {
     });
     const { data: productTypes } = queryProductType;
 
+    useEffect(() => {
+        const fetchProductCounts = async () => {
+            const counts = {};
+            if (productTypes && productTypes.data) {
+                for (const productType of productTypes.data) {
+                    const count = await ProductService.getProductByType(productType._id);
+                    counts[productType._id] = count?.data?.length;
+                }
+                setProductCounts(counts);
+            }
+        };
+
+        fetchProductCounts();
+    }, [productTypes?.data]);
+
+
     const showDeleteConfirmation = (categoryId) => {
         setDeletingCategoryId(categoryId);
-        setIsDeleteModalVisible(true);
-    };
-
-    const deleteCategory = async (_id) => {
-        setDeletingCategoryId(_id);
         setIsDeleteModalVisible(true);
     };
 
@@ -119,6 +132,8 @@ const ProductType = () => {
         }
     };
 
+
+
     return (
         <div className="dashboard_category">
             <div className="dashboard_category-add">
@@ -176,7 +191,7 @@ const ProductType = () => {
                 </Form>
             </ModalComponent>
             <h2 className="dashboard_category-title">Danh sách tất cả danh mục</h2>
-            <div className="dashboard_category-show">
+            <div className="dashboard_category-show-product-type">
                 {productTypes && productTypes.data ? (
                     productTypes.data.map((productTypeData) => (
                         <div key={productTypeData._id} className="dashboard_category-show--content">
@@ -186,6 +201,14 @@ const ProductType = () => {
                                 <EditOutlined className="edit_icon" onClick={() => editCategory(productTypeData._id)} />
                                 <DeleteTwoTone className="delete_icon" onClick={() => showDeleteConfirmation(productTypeData._id)} />
                             </div>
+                            <div className="dashboard_category-show--count">
+                                {productCounts[productTypeData._id] !== undefined ? (
+                                    <p>Số lượng: {productCounts[productTypeData._id]}</p>
+                                ) : (
+                                    <p>...</p>
+                                )}
+                            </div>
+
                         </div>
                     ))
                 ) : (
