@@ -81,7 +81,7 @@ const Dashboard = () => {
                 <Menu
                     mode="inline"
                     style={{
-                        width: 256,
+                        width: 200,
                         boxShadow: '1px 1px 2px #ccc',
                         height: '100vh'
                     }}

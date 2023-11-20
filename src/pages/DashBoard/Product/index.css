@@ -144,11 +144,7 @@
 .action-icons-container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    
+    align-self: center;
+   
 }
 
-/* Add any additional styling for your icons if needed */
-.edit_icon, .delete_icon {
-    margin: 0 5px; /* Optional: Add some margin between the icons */
-}

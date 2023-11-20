@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form, Modal, Select, InputNumber } from 'antd';
+import { Button, Form, Modal, Select, InputNumber, Space } from 'antd';
 import { DeleteTwoTone, EditOutlined } from '@ant-design/icons';
 import axiosClient from '../../../services/axiosClient';
 import ModalComponent from '../../../components/ModalComponent/ModalComponent';
@@ -17,27 +17,34 @@ import { useMutationHooks } from '../../../hooks/useMutationHooks';
 const INITIAL_STATE = {
     name: '',
     image: '',
-    type: '',  // New field
-    price: '',  // New field
-    countInStock: '',  // New field
-    rating: '',  // New field
-    discount: '',  // New field
+    type: '',
+    price: '',
+    countInStock: '',
+    rating: '',
+    discount: '',
+    sold: '',
+    description: ''
 };
 
 const Product = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingProductId, setEditingProductId] = useState(null);
-    const [rowSelected, setRowSelected] = useState('')
+    const [rowSelected, setRowSelected] = useState('');
     const [form] = Form.useForm();
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
     const [deletingProductId, setDeletingProductId] = useState(null);
     const [productTypes, setProductTypes] = useState([]);
 
+    const alertMessages = {
+        productCreated: 'Thêm sản phẩm thành công',
+        productUpdated: 'Sửa sản phẩm thành công',
+        productExists: 'Sản phẩm này đã tồn tại!',
+    };
+
     const mutation = useMutationHooks(async (data) => {
-        const { name, image, type, price, countInStock, rating, discount } = data;
+        const { name, image, type, price, countInStock, rating, discount, sold, description } = data;
 
         if (editingProductId) {
-
             const res = await ProductService.updateProduct(editingProductId, {
                 name,
                 image,
@@ -46,10 +53,11 @@ const Product = () => {
                 countInStock,
                 rating,
                 discount,
+                sold,
+                description,
             });
             return res;
         } else {
-            // If creating, create a new product
             const res = await ProductService.createProduct({
                 name,
                 image,
@@ -58,10 +66,11 @@ const Product = () => {
                 countInStock,
                 rating,
                 discount,
+                sold,
+                description,
             });
             return res;
         }
-
     });
 
     const queryProduct = useQuery({
@@ -75,10 +84,6 @@ const Product = () => {
         setIsDeleteModalVisible(true);
     };
 
-    const deleteProduct = async (productId) => {
-        setDeletingProductId(productId);
-        setIsDeleteModalVisible(true);
-    };
 
     const handleDeleteConfirmed = async () => {
         await axiosClient.delete(`product/deleteProduct/${deletingProductId}`, { _id: deletingProductId });
@@ -142,11 +147,13 @@ const Product = () => {
             form.setFieldsValue({
                 name: selectedProduct.name,
                 image: selectedProduct.image,
-                type: selectedProduct.type, // Set the product type
-                price: selectedProduct.price, // Set the product type
-                countInStock: selectedProduct.countInStock, // Set the product type
-                rating: selectedProduct.rating, // Set the product type
-                discount: selectedProduct.discount, // Set the product type
+                type: selectedProduct.type,
+                price: selectedProduct.price,
+                countInStock: selectedProduct.countInStock,
+                rating: selectedProduct.rating,
+                discount: selectedProduct.discount,
+                sold: selectedProduct.sold,
+                description: selectedProduct.description
             });
         }
     };
@@ -162,12 +169,20 @@ const Product = () => {
         },
     )
     const handleDeleteManyProducts = (ids) => {
-        mutationDeletedMany.mutate({ ids: ids }, {
-            onSettled: () => {
-                queryProduct.refetch()
-            }
-        })
-    }
+        Modal.confirm({
+            title: 'Xác nhận xoá',
+            content: 'Bạn có chắc chắn muốn xoá tất cả sản phẩm?',
+            okText: 'Xoá',
+            cancelText: 'Hủy',
+            onOk: async () => {
+                mutationDeletedMany.mutate({ ids: ids }, {
+                    onSettled: () => {
+                        queryProduct.refetch();
+                    },
+                });
+            },
+        });
+    };
     useEffect(() => {
         const fetchProductTypes = async () => {
             try {
@@ -226,6 +241,11 @@ const Product = () => {
             key: 'price',
         },
         {
+            title: 'Giảm giá',
+            dataIndex: 'discount',
+            key: 'discount',
+        },
+        {
             title: 'Số lượng',
             dataIndex: 'countInStock',
             key: 'countInStock',
@@ -236,20 +256,24 @@ const Product = () => {
             key: 'rating',
         },
         {
-            title: 'Giảm giá',
-            dataIndex: 'discount',
-            key: 'discount',
+            title: 'Đã bán',
+            dataIndex: 'sold',
+            key: 'sold',
+        },
+        {
+            title: 'Thông tin chi tiết',
+            dataIndex: 'description',
+            key: 'description',
         },
 
-
         {
-            title: 'Hành động',
+            title: 'Thao tác',
             key: 'action',
-            render: (text, record) => (
-                <span className="action-icons-container">
-                    <EditOutlined className="edit_icon" onClick={() => editProduct(record._id)} />
-                    <DeleteTwoTone className="delete_icon" onClick={() => showDeleteConfirmation(record._id)} />
-                </span>
+            render: (_, record) => (
+                <Space className="action-icons-container" size="middle">
+                    <a onClick={() => editProduct(record._id)}>Chỉnh sửa</a>
+                    <a onClick={() => showDeleteConfirmation(record._id)}>Xoá</a>
+                </Space>
             ),
         },
 
@@ -276,6 +300,8 @@ const Product = () => {
         countInStock: product.countInStock,
         rating: product.rating,
         discount: product.discount,
+        sold: product.sold,
+        description: product.description
     })).reverse();
 
 
@@ -331,11 +357,6 @@ const Product = () => {
                             ))}
                         </Select>
                     </Form.Item>
-
-
-
-
-
                     <Form.Item
                         label="Giá"
                         name="price"
@@ -346,6 +367,17 @@ const Product = () => {
                         ]}
                     >
                         <InputNumber min={0} />
+                    </Form.Item>
+                    <Form.Item
+                        label="% Giảm giá"
+                        name="discount"
+                        rules={[
+                            { required: true, message: 'Nhập Giảm giá!' },
+
+
+                        ]}
+                    >
+                        <InputNumber min={0} max={100} />
                     </Form.Item>
 
                     <Form.Item
@@ -359,30 +391,33 @@ const Product = () => {
                     >
                         <InputNumber min={0} />
                     </Form.Item>
+                    <Form.Item
+                        label="Đã bán"
+                        name="sold"
+
+                    >
+                        <InputNumber min={0} />
+                    </Form.Item>
 
                     <Form.Item
                         label="Sao"
                         name="rating"
                         rules={[
                             { required: true, message: 'Nhập số đánh giá!' },
-
-
                         ]}
                     >
                         <InputNumber min={0} max={5} />
                     </Form.Item>
 
+
                     <Form.Item
-                        label="Giảm giá"
-                        name="discount"
-                        rules={[
-                            { required: true, message: 'Nhập Giảm giá!' },
-
-
-                        ]}
+                        label="Mô tả"
+                        name="description"
+                        rules={[{ required: true, message: 'Thông tin chi tiết sản phẩm!' }]}
                     >
-                        <InputNumber min={0} max={100} />
+                        <InputComponent />
                     </Form.Item>
+
 
                     <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
                         <Button type="primary" htmlType="submit">

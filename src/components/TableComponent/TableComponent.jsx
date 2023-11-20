@@ -35,7 +35,7 @@ const TableComponent = (props) => {
                 }}
                     onClick={handleDeleteAll}
                 >
-                    Xóa tất cả
+                    Xóa các mục đã chọn
                 </div>
             )}
 
