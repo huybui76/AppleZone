@@ -38,7 +38,7 @@ const DashboardSummary = () => {
     return (
         <div style={{ display: 'flex', gap: '30px', padding: '20px' }}>
             {summaryItems.map((item) => (
-                <Card key={item.key} style={{ width: 300 }}>
+                <Card key={item.key} style={{ width: 300, backgroundColor: '#e3d9d9' }}>
                     <div style={{ display: 'flex', gap: '20px' }}>
 
                         <span style={{ fontSize: '28px' }}>{item.icon}</span>
