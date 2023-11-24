@@ -251,7 +251,7 @@ const Product = () => {
                             <img
                                 src={img}
                                 alt={`product-${index}`}
-                                style={{ width: "100%", height: "auto" }}
+                                style={{ width: "50px", height: "auto" }}
                             />
                         </div>
                     ))}

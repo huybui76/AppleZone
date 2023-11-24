@@ -36,25 +36,19 @@ const DashboardSummary = () => {
     ];
 
     return (
-        <div style={{ display: 'flex', gap: '30px', padding: '20px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '30px', padding: '20px', flexDirection: 'row' }}>
             {summaryItems.map((item) => (
-                <Card key={item.key} style={{ width: 300, backgroundColor: '#e3d9d9' }}>
+                <Card key={item.key} style={{ width: '100%', maxWidth: '300px', backgroundColor: '#e3d9d9', marginBottom: '20px' }}>
                     <div style={{ display: 'flex', gap: '20px' }}>
-
                         <span style={{ fontSize: '28px' }}>{item.icon}</span>
                         <span style={{ fontSize: '28px', color: '#1e6bc3' }}>{item.name}</span>
-
                     </div>
-
                     <p style={{ justifyContent: 'center', alignSelf: 'center' }}>
                         {item.count && <span style={{ fontSize: '68px', color: '#ec510f' }}>{item.count}</span>}
                     </p>
-
-
                 </Card>
-            ))
-            }
-        </div >
+            ))}
+        </div>
     );
 };
 

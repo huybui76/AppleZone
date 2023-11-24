@@ -1,12 +1,14 @@
 .dashboard_category-show-product-type {
-    width: 1200px;
+    width: auto;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;/* Updated to space between items */
     padding: 20px;
+    padding-right: 30px;
+    padding-left: 50px;
     gap: 15px;
-    
+   
 }
 
 

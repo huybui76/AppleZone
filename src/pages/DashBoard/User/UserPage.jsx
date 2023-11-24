@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Form, Modal, Select, Space } from 'antd';
-import { DeleteTwoTone, EditOutlined } from '@ant-design/icons';
 import axiosClient from '../../../services/axiosClient';
 import ModalComponent from '../../../components/ModalComponent/ModalComponent';
 import { useQuery } from '@tanstack/react-query';
 import InputComponent from '../../../components/InputComponent/InputComponent';
-import { WrapperUploadFile } from './style';
-import { getBase64 } from '../../../utils';
 import TableComponent from '../../../components/TableComponent/TableComponent';
-
 import './index.css';
 import * as UserService from '../../../services/UserService';
 import { useMutationHooks } from '../../../hooks/useMutationHooks';
@@ -307,7 +303,7 @@ const User = () => {
                         />
                     </div>
                 ) : (
-                    <p>Loading...</p>
+                    <p>...</p>
                 )}
             </div>
             {/* Delete Confirmation Modal */}
