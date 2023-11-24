@@ -16,16 +16,16 @@ const DashboardSummary = () => {
 
     const queryProductCount = useQuery({
         queryKey: ['productCount'],
-        queryFn: ProductService.getAllProduct,
+        queryFn: ProductService.getCountProduct,
     });
 
     const queryProductTypeCount = useQuery({
         queryKey: ['productTypeCount'],
-        queryFn: ProductTypeService.getAllProductType,
+        queryFn: ProductTypeService.getCountProductType,
     });
 
     const userCount = queryUserCount.data?.data?.length || 0;
-    const productCount = queryProductCount.data?.data?.length || 0;
+    const productCount = queryProductCount.data?.data || 0;
     const productTypeCount = queryProductTypeCount.data?.data?.length || 0;
 
     const summaryItems = [

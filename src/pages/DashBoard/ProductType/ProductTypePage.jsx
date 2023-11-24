@@ -47,19 +47,25 @@ const ProductType = () => {
     const { data: productTypes } = queryProductType;
 
     useEffect(() => {
+
         const fetchProductCounts = async () => {
-            const counts = {};
             if (productTypes && productTypes.data) {
                 for (const productType of productTypes.data) {
-                    const count = await ProductService.getProductByType(productType._id);
-                    counts[productType._id] = count?.data?.length;
+                    try {
+                        const count = await ProductService.getProductByType(productType._id);
+                        setProductCounts(prevCounts => ({
+                            ...prevCounts,
+                            [productType._id]: count?.totalProducts,
+                        }));
+                    } catch (error) {
+                        console.error('Error fetching product count:', error);
+                    }
                 }
-                setProductCounts(counts);
             }
         };
-
         fetchProductCounts();
     }, [productTypes?.data]);
+
 
 
     const showDeleteConfirmation = (categoryId) => {
@@ -208,17 +214,17 @@ const ProductType = () => {
                                     <p>...</p>
                                 )}
                             </div>
-
                         </div>
                     ))
                 ) : (
-                    <p>Loading...</p>
+                    <p>...</p>
                 )}
+
             </div>
             {/* Delete Confirmation Modal */}
             <Modal
                 title="Xác nhận xoá"
-                visible={isDeleteModalVisible}
+                open={isDeleteModalVisible}
                 onOk={handleDeleteConfirmed}
                 onCancel={() => setIsDeleteModalVisible(false)}
             >

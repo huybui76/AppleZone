@@ -27,6 +27,8 @@ const User = () => {
     const [rowSelected, setRowSelected] = useState('');
     const [form] = Form.useForm();
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
     const [deletingUserId, setDeletingUserId] = useState(null);
 
     const alertMessages = {
@@ -161,6 +163,7 @@ const User = () => {
         form.setFieldsValue({
             isAdmin: value,
         });
+        setCurrentPage(1);
     };
 
     const isLoadingUsers = queryUsers.isLoading;
@@ -180,7 +183,7 @@ const User = () => {
             title: 'STT',
             dataIndex: 'index',
             key: 'index',
-            render: (_, __, index) => index + 1,
+            render: (_, __, index) => (currentPage - 1) * pageSize + index + 1,
         },
         {
             title: 'Tên',
@@ -294,6 +297,13 @@ const User = () => {
                                     },
                                 };
                             }}
+                            pagination={{
+                                current: currentPage,
+                                pageSize: pageSize,
+                                onChange: (page, pageSize) => {
+                                    setCurrentPage(page);
+                                },
+                            }}
                         />
                     </div>
                 ) : (
@@ -303,7 +313,7 @@ const User = () => {
             {/* Delete Confirmation Modal */}
             <Modal
                 title="Xác nhận xoá"
-                visible={isDeleteModalVisible}
+                open={isDeleteModalVisible}
                 onOk={handleDeleteConfirmed}
                 onCancel={() => setIsDeleteModalVisible(false)}
             >
