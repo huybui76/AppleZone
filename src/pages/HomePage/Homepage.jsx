@@ -19,7 +19,7 @@ const Homepage = () => {
                 </div>
                 <Flashsales />
                 <BoxSlides />
-                <Footer />
+
             </div>
         </div>
     );

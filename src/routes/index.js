@@ -43,8 +43,7 @@ export const routes = [
     path: '/dashboard',
     page: Dashboard,
     isNavbar: true,
-
-
+    isFooter: false
   },
   {
     path: '*',
@@ -53,6 +52,7 @@ export const routes = [
   {
     path: '/Cart',
     page: Cart,
-    isNavbar: false
+    isNavbar: false,
+    isFooter: true
   }
 ]

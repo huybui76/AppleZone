@@ -1,43 +1,38 @@
 import "./App.css";
-import React, { Fragment } from "react";
-import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom"; // Import Outlet để render route con
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/NavBar/Navbar";
 import Footer from "./components/Footer/Footer";
 import { routes } from "./routes";
 
+const Main = ({ children, isNavbar = true, isFooter = true }) => (
+    <div>
+        {isNavbar && <Navbar />}
+        {children}
+        {isFooter && <Footer />}
+    </div>
+);
 
-const Main = ({ children }) => {
-    return (
-        <div>
-            <Navbar />
-            {children}
-        </div>
-    )
-}
 function App() {
     return (
-        <div>
-            <Router>
-                <Routes>
-                    {routes.map((route) => {
-                        const Page = route.page;
-                        const MainPage = route.isNavbar ? Main : Fragment;
-                        const hasFooter = route.isFooter;
-                        return (
-                            <Route
-                                key={route.path}
-                                path={route.path}
-                                element={
-                                    <MainPage>
-                                        <Page />
-                                    </MainPage >
-                                }
-                            />
-                        );
-                    })}
-                </Routes >
-            </Router >
-        </div >
+        <Router>
+            <Routes>
+                {routes.map((route) => {
+                    const Page = route.page;
+                    return (
+                        <Route
+                            key={route.path}
+                            path={route.path}
+                            element={
+                                <Main isNavbar={route.isNavbar} isFooter={route.isFooter}>
+                                    <Page />
+                                </Main>
+                            }
+                        />
+                    );
+                })}
+            </Routes>
+        </Router>
     );
 }
 
