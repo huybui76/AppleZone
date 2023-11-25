@@ -27,18 +27,18 @@ export const routes = [
     isNavbar: true,
     isFooter: true
   },
-  {
-    path: '/SignIn',
-    page: SignInPage,
-    isNavbar: false,
-    isFooter: true
-  },
-  {
-    path: '/SignUp',
-    page: SignUpPage,
-    isNavbar: false,
-    isFooter: true
-  },
+  // {
+  //   path: '/SignIn',
+  //   page: SignInPage,
+  //   isNavbar: false,
+  //   isFooter: true
+  // },
+  // {
+  //   path: '/SignUp',
+  //   page: SignUpPage,
+  //   isNavbar: false,
+  //   isFooter: true
+  // },
   {
     path: '/dashboard',
     page: Dashboard,

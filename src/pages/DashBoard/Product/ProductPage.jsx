@@ -485,7 +485,7 @@ const Product = () => {
                         />
                     </div>
                 ) : (
-                    <p>Loading...</p>
+                    <p>...</p>
                 )}
             </div>
             {/* Delete Confirmation Modal */}
