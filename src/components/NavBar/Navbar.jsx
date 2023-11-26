@@ -22,15 +22,18 @@ const Navbar = () => {
   return (
     <div className="navbar-container">
       <div className="navbar">
-        <NavLink className="nav-pagename" to="/">Apple Zone</NavLink>
-        <div className="nav-menu">
-          <div className="menu-component">Iphone</div>
-          <div className="menu-component">Mac</div>
-          <div className="menu-component">Ipad</div>
-          <div className="menu-component">Watch</div>
-          <div className="menu-component">Âm thanh</div>
-          <div className="menu-component">Phụ kiện</div>
-        </div>
+        <NavLink className="nav-pagename" to="/">
+          Apple Zone
+        </NavLink>
+          <NavLink to="/products-type/Iphone" target="_blank" className="menu-component" style={{textDecoration:"none"}}>
+            <div>Iphone</div>
+          </NavLink>
+          <NavLink to="/products-type/Ipad" target="_blank" className="menu-component" style={{textDecoration:"none"}}>
+            <div>Ipad</div>
+          </NavLink>
+          <NavLink to="/products-type/Watch" target="_blank" className="menu-component" style={{textDecoration:"none"}}>
+            <div>Watch</div>
+          </NavLink>
         <div className="nav-input">
           <form action='' class='search-bar'>
             <input type="text" placeholder='Tìm kiếm sản phẩm' className='input-box' />
