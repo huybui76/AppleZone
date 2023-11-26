@@ -1,21 +1,16 @@
-.dashboard_category-show-product-type {
-    width: auto;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;/* Updated to space between items */
-    padding: 20px;
-    padding-right: 30px;
-    padding-left: 50px;
-    gap: 15px;
-   
+.dashboard_category-show-product {
+    width: 90%;
+    height: auto;
+    background-color: #fff;
+    margin-left: 50px;
+    margin-right: 50px;
+    
 }
-
 
 .dashboard_category-show--content {
     position: relative;
     width: 180px;
-    height: 220px;
+    height: 235px;
     background-color: #838181;
     border-radius: 24px;
     padding: 20px;
@@ -143,3 +138,11 @@
     height: 200px;
     background-size: cover;
 }
+/* Add these styles to your CSS file or use inline styles in React */
+.action-icons-container {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+   
+}
+

@@ -1,65 +1,66 @@
-import React from 'react'
-import './Cart.css'
-import Payment from '../../components/Payment/Payment'
-import CartList from '../../components/CartList/CartList'
-import user_icon from '../../assets/user.png'
-import search_icon from '../../assets/search-interface-symbol.png'
-import shopping_cart from '../../assets/shopping-cart.png'
+import React from "react";
+import "./Cart.css";
+import Payment from "../../components/Payment/Payment";
+import CartList from "../../components/CartList/CartList";
+import searchIcon from "../../assets/search-interface-symbol.png";
+import InforCustomer from "../../components/InforCustomer/InforCustomer";
+import Shipping from "../../components/Shipping/Shipping";
+import { Button } from "antd";
+import { useNavigate } from 'react-router-dom';
 
+const Cart = () => {
+  const navigate = useNavigate();
+  const handleHomeClick = () => {
+    navigate('/');
+  };
 
-function Cart() {
   return (
-    <div className="CartContainer">
-      <div className="header--cart">
-        <div className="header__title">
-            <h1>Apple Zone</h1>
+    <div className="cart-container">
+      <div className="header-cart">
+        <div className="header-title">
+          <h1 onClick={handleHomeClick}>Apple Zone | Giỏ Hàng</h1>
         </div>
-        <div className="search__product">
-          <input type="text" placeholder="Tìm kiếm sản phẩm" className="search__product-input" />
-          <button className="search__product-button">
-            <img src={search_icon} alt="search icon" className="search__product-icon" />
+        <div className="search-product">
+          <input
+            type="text"
+            placeholder="Tìm kiếm sản phẩm"
+            className="search-product-input"
+          />
+          <button className="search-product-button">
+            <img
+              src={searchIcon}
+              alt="search icon"
+              className="search-product-icon"
+            />
           </button>
         </div>
-        <div className="user">
-          <img src={user_icon} alt="user" className='user__icon' />
-        </div>
-      </div>
-      
-      <div className="line">
-        <hr className="hr-cart"/>
       </div>
 
-      <div className="body--cart">
-        <div className="body--cart-title">
-          <div className="my-cart" >
-            <img src={shopping_cart} alt="shopping icon" className="shopping-icon"/>
-            <h2>My Cart</h2>
-          </div>
-        </div>
-
-        <div className="body--cart-content">
+      <div className="body-cart">
+        <div className="body-cart-content">
           <div className="products-list">
-            <div className="info">
-              <div className="Item">Item</div>
-              <div className="Price">Price</div>
-              <div className="Quantity">Quantity</div>
-              <div className="Total">Total</div>
+            <div className="products-list-header">
+              {/* <div className="item-space2"></div> */}
+              <div className="item1">
+                <p className="item2">Sản Phẩm</p>
+              </div>
+              <div className="price1">Đơn Giá</div>
+              <div className="quantity1">Số lượng</div>
+              <div className="total1">Số tiền</div>
+              <div className="delete1">Thao Tác</div>
             </div>
-            <hr className="hr-cart"/>
-            <CartList/>
+            <CartList />
           </div>
         </div>
+        <div className="payment">
+          <InforCustomer />
+          <Shipping />
+          <Payment />
+          <Button danger className="tbuy-btn" type="primary">Đặt Hàng</Button>
+        </div>
       </div>
-
-      <div className="payment">
-        <Payment/>
-      </div>
-
-    
     </div>
-    
-    
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;

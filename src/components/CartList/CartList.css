@@ -1,3 +1,7 @@
 .CartList {
-    
+  gap: 30px;
+}
+.list-product-order {
+  gap: 30px;
+  margin-bottom: 130px;
 }

@@ -1,14 +1,15 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useQueries } from '@tanstack/react-query';
 import { Menu } from 'antd';
 import { getItem } from '../../utils';
-import { UserOutlined, AppstoreOutlined, FileAddOutlined, DashboardOutlined } from '@ant-design/icons';
+import { UserOutlined, AppstoreOutlined, FileAddOutlined, DashboardOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 
 import ProductPage from '../../pages/DashBoard/Product/ProductPage';
 import ProductTypePage from '../../pages/DashBoard/ProductType/ProductTypePage';
 import UserPage from '../../pages/DashBoard/User/UserPage';
+
 import DashboardSummary from '../../pages/DashBoard/DashboardSummary/DashboardSummary';
+import OrdersPage from '../../pages/DashBoard/Order/OrdersPage'
 
 
 const Dashboard = () => {
@@ -20,6 +21,7 @@ const Dashboard = () => {
         getItem('Loại sản phẩm', 'productTypes', <FileAddOutlined />),
         getItem('Sản phẩm', 'products', <AppstoreOutlined />),
         getItem('Người dùng', 'users', <UserOutlined />),
+        getItem('Đơn hàng', 'orders', <ShoppingCartOutlined />),
     ];
 
     const handleOnClick = ({ key }) => {
@@ -36,6 +38,8 @@ const Dashboard = () => {
                 return <ProductTypePage />;
             case 'dashboard':
                 return <DashboardSummary />;
+            case 'orders':
+                return <OrdersPage />;
             default:
                 return;
         }

@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Form, Modal, Select, Space } from 'antd';
-import { DeleteTwoTone, EditOutlined } from '@ant-design/icons';
 import axiosClient from '../../../services/axiosClient';
 import ModalComponent from '../../../components/ModalComponent/ModalComponent';
 import { useQuery } from '@tanstack/react-query';
 import InputComponent from '../../../components/InputComponent/InputComponent';
-import { WrapperUploadFile } from './style';
-import { getBase64 } from '../../../utils';
 import TableComponent from '../../../components/TableComponent/TableComponent';
-
 import './index.css';
 import * as UserService from '../../../services/UserService';
 import { useMutationHooks } from '../../../hooks/useMutationHooks';
@@ -27,6 +23,8 @@ const User = () => {
     const [rowSelected, setRowSelected] = useState('');
     const [form] = Form.useForm();
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
     const [deletingUserId, setDeletingUserId] = useState(null);
 
     const alertMessages = {
@@ -161,6 +159,7 @@ const User = () => {
         form.setFieldsValue({
             isAdmin: value,
         });
+        setCurrentPage(1);
     };
 
     const isLoadingUsers = queryUsers.isLoading;
@@ -180,7 +179,7 @@ const User = () => {
             title: 'STT',
             dataIndex: 'index',
             key: 'index',
-            render: (_, __, index) => index + 1,
+            render: (_, __, index) => (currentPage - 1) * pageSize + index + 1,
         },
         {
             title: 'Tên',
@@ -294,16 +293,23 @@ const User = () => {
                                     },
                                 };
                             }}
+                            pagination={{
+                                current: currentPage,
+                                pageSize: pageSize,
+                                onChange: (page, pageSize) => {
+                                    setCurrentPage(page);
+                                },
+                            }}
                         />
                     </div>
                 ) : (
-                    <p>Loading...</p>
+                    <p>...</p>
                 )}
             </div>
             {/* Delete Confirmation Modal */}
             <Modal
                 title="Xác nhận xoá"
-                visible={isDeleteModalVisible}
+                open={isDeleteModalVisible}
                 onOk={handleDeleteConfirmed}
                 onCancel={() => setIsDeleteModalVisible(false)}
             >

@@ -10,6 +10,10 @@ export const getAllProduct = async (search, limit) => {
     }
     return res.data
 }
+export const getCountProduct = async () => {
+    const res = await axios.get(`${process.env.REACT_APP_API_URL}/product/getCountProduct`)
+    return res.data
+}
 
 export const getProductByType = async (id) => {
     const res = await axios.get(`${process.env.REACT_APP_API_URL}/product/getProductByType/${id}`)
