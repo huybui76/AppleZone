@@ -47,12 +47,12 @@ const Navbar = () => {
           {/* <div className="user-icon">
             <img src={user_icon} alt="" className='icon'  onClick={handleDropdownOpen}/>
           </div> */}
-          {dropdownOpen && (
+          {/* {dropdownOpen && (
             <div className="dropdown-menu">
               <NavLink to="/SignIn" >Đăng nhập</NavLink>
               <NavLink to="/SignUp">Đăng ký</NavLink>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>
