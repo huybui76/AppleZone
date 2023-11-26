@@ -86,6 +86,25 @@
   margin-bottom: 12px;
   color: #888;
 }
+.none-product {
+  background-color: #f5f0f0;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.none-product p {
+  font-size: 30px;
+  justify-content: center;
+  align-self: center;
+}
+.none-product img {
+  height: 250px;
+  justify-content: center;
+  align-self: center;
+}
 
 .search-product-icon {
   width: 1.4rem;
@@ -356,4 +375,238 @@
 
 .cancer {
   width: 0.6rem;
+}
+.payment-container {
+  position: sticky;
+  justify-content: flex-end;
+  display: flex;
+  bottom: 0;
+  width: 400px;
+  height: 11rem;
+  padding: 0px 20px 5px 20px;
+  color: #000000;
+
+  background-color: #fff;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+.payment-container1 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.total-price {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 5rem;
+}
+
+.total-price-total {
+  font-size: 20px;
+  align-self: center;
+}
+.total-price-total1 {
+  font-size: 30px;
+  color: #fa1f1f;
+  align-self: center;
+}
+
+.voucher {
+  display: flex;
+  height: 300px;
+  flex-direction: column;
+}
+.voucher p {
+  display: flex;
+  margin-left: 10px;
+  flex-direction: flex-start;
+}
+
+.total-payment {
+  display: flex;
+
+  margin-right: 20px;
+}
+
+.voucher-input-container1 {
+  display: flex;
+  background-color: #ffffff;
+
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 8px;
+  height: 2rem;
+  width: 100%;
+}
+
+.voucher-input {
+  height: 2.5rem;
+  width: 15rem;
+  border-radius: 15;
+  outline: none;
+}
+
+.voucher-btn {
+  border: none;
+  background-color: #11a1f5;
+  width: 6rem;
+  color: #ffffff;
+  font-weight: 700;
+  border-radius: 20;
+  height: 2.5rem;
+}
+
+.pay-btn {
+  height: 2rem;
+  width: 6rem;
+  border: none;
+  background-color: #f96934;
+  color: #ffffff;
+  font-weight: 700;
+  margin-left: 24px;
+  cursor: pointer;
+  border-radius: 1;
+}
+.shipping-container {
+  position: sticky;
+  justify-content: flex-end;
+  display: flex;
+  bottom: 0;
+  width: 400px;
+  height: 7rem;
+  padding: 0px 20px 20px 20px;
+  color: #000000;
+
+  background-color: #fff;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+.shipping-container1 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.voucher {
+  display: flex;
+  height: 300px;
+  flex-direction: column;
+}
+.voucher p {
+  display: flex;
+  margin-left: 10px;
+  flex-direction: flex-start;
+}
+
+.total-payment {
+  display: flex;
+
+  margin-right: 20px;
+}
+
+.voucher-input-container1 {
+  display: flex;
+  background-color: #ffffff;
+
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 8px;
+  height: 2rem;
+  width: 100%;
+}
+
+.voucher-input {
+  height: 2.5rem;
+  width: 15rem;
+  border-radius: 15;
+  outline: none;
+}
+
+.voucher-btn {
+  border: none;
+  background-color: #11a1f5;
+  width: 6rem;
+  color: #ffffff;
+  font-weight: 700;
+  border-radius: 20;
+  height: 2.5rem;
+}
+
+.pay-btn {
+  height: 2rem;
+  width: 6rem;
+  border: none;
+  background-color: #f96934;
+  color: #ffffff;
+  font-weight: 700;
+  margin-left: 24px;
+  cursor: pointer;
+  border-radius: 1;
+}
+.information-container {
+  position: sticky;
+
+  display: flex;
+  bottom: 0;
+  width: 400px;
+
+  padding: 20px;
+  color: #000000;
+
+  background-color: #fff;
+  margin-top: 50px;
+  border-radius: 8px;
+}
+.information-container1 {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.ship-container {
+  flex: 0.1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-info-add {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 1% 0 20px;
+}
+
+.button-info-add button {
+  background-color: #0fa6ecd2;
+  color: #fff;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.user-data {
+  flex: 0.7;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.user-data1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.user-data-name {
+  margin-right: 10px;
+}
+.user-data-name p {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.user-data-name3 {
+  height: auto;
+}
+.user-data-name3 p {
+  font-size: 1rem;
+  color: #343333;
 }

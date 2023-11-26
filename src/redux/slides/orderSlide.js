@@ -4,13 +4,14 @@ const initialState = {
     orderItems: [],
 
     shippingAddress: {},
-    paymentMethod: "",
+    shippingMethod
+        : "",
     itemsPrice: 0,
     shippingPrice: 0,
 
     totalPrice: 0,
     phone: "",
-    isSucessOrder: false,
+    isSuccessOrder: false,
 };
 
 export const orderSlide = createSlice({
@@ -23,9 +24,9 @@ export const orderSlide = createSlice({
                 (item) => item?.product === orderItem.product
             );
             if (itemOrder) {
-                if (itemOrder.amount <= itemOrder.countInstock) {
+                if (itemOrder.amount <= itemOrder.countInStock) {
                     itemOrder.amount += orderItem?.amount;
-                    state.isSucessOrder = true;
+                    state.isSuccessOrder = true;
                     state.isErrorOrder = false;
                 }
             } else {
@@ -33,14 +34,14 @@ export const orderSlide = createSlice({
             }
         },
         resetOrder: (state) => {
-            state.isSucessOrder = false;
+            state.isSuccessOrder = false;
         },
         increaseAmount: (state, action) => {
             const { idProduct } = action.payload;
             const itemOrder = state?.orderItems?.find(
                 (item) => item?.product === idProduct
             );
-            const itemOrderSelected = state?.orderItemsSlected?.find(
+            const itemOrderSelected = state?.orderItemsSelected?.find(
                 (item) => item?.product === idProduct
             );
             itemOrder.amount++;
@@ -53,7 +54,7 @@ export const orderSlide = createSlice({
             const itemOrder = state?.orderItems?.find(
                 (item) => item?.product === idProduct
             );
-            const itemOrderSelected = state?.orderItemsSlected?.find(
+            const itemOrderSelected = state?.orderItemsSelected?.find(
                 (item) => item?.product === idProduct
             );
             itemOrder.amount--;
@@ -67,12 +68,12 @@ export const orderSlide = createSlice({
             const itemOrder = state?.orderItems?.filter(
                 (item) => item?.product !== idProduct
             );
-            const itemOrderSeleted = state?.orderItemsSlected?.filter(
+            const itemOrderSelected = state?.orderItemsSelected?.filter(
                 (item) => item?.product !== idProduct
             );
 
             state.orderItems = itemOrder;
-            state.orderItemsSlected = itemOrderSeleted;
+            state.orderItemsSelected = itemOrderSelected;
         },
     },
 });

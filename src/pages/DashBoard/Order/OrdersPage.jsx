@@ -84,30 +84,31 @@ const Order = () => {
                 <>
                     {orderItems.map((item, index) => (
                         <div key={index}>
-                            <div>Sản phẩm : {getNameProduct(item.product)}</div>
-                            <div>Số lượng : {item.amount}</div>
+                            <div>{getNameProduct(item.product)} - SL: {item.amount}</div>
+                            {/* <p>{item.amount}</p> */}
                         </div>
                     ))}
                 </>
             ),
         },
         {
-            title: "Phương thức thanh toán",
-            dataIndex: "paymentMethod",
-            key: "paymentMethod",
+            title: "PTNH",
+            dataIndex: "shippingMethod",
+            key: "shippingMethod",
+
         },
         {
             title: "Giá",
             dataIndex: "itemsPrice",
             key: "itemsPrice",
         },
+        // {
+        //     title: "Phí giao hàng",
+        //     dataIndex: "shippingPrice",
+        //     key: "shippingPrice",
+        // },
         {
-            title: "Phí giao hàng",
-            dataIndex: "shippingPrice",
-            key: "shippingPrice",
-        },
-        {
-            title: "Tổng đơn hàng",
+            title: "Kết Toán",
             dataIndex: "totalPrice",
             key: "totalPrice",
         },
@@ -132,7 +133,7 @@ const Order = () => {
             _id: order._id,
             shippingAddress: order.shippingAddress,
             orderItems: order.orderItems,
-            paymentMethod: order.paymentMethod,
+            shippingMethod: order.shippingMethod,
             itemsPrice: order.itemsPrice,
             shippingPrice: order.shippingPrice,
             totalPrice: order.totalPrice,
