@@ -6,13 +6,19 @@ import searchIcon from "../../assets/search-interface-symbol.png";
 import InforCustomer from "../../components/InforCustomer/InforCustomer";
 import Shipping from "../../components/Shipping/Shipping";
 import { Button } from "antd";
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
+  const navigate = useNavigate();
+  const handleHomeClick = () => {
+    navigate('/');
+  };
+
   return (
     <div className="cart-container">
       <div className="header-cart">
         <div className="header-title">
-          <h1>Apple Zone | Giỏ Hàng</h1>
+          <h1 onClick={handleHomeClick}>Apple Zone | Giỏ Hàng</h1>
         </div>
         <div className="search-product">
           <input
