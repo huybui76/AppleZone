@@ -53,6 +53,6 @@ export const routes = [
     path: '/cart',
     page: Cart,
     isNavbar: false,
-    isFooter: true
+    isFooter: false
   }
 ]
