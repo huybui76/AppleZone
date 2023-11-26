@@ -9,6 +9,8 @@ import slide1 from "../../assets/animate1.webp"
 import slide2 from "../../assets/animate2.webp"
 import slide3 from "../../assets/animate3.webp"
 import slide4 from "../../assets/animate4.webp"
+import { useQuery } from '@tanstack/react-query'
+import Loading from '../../components/Loading/Loading';
 
 
 const Homepage = () => {

@@ -8,6 +8,7 @@ import Slider from "react-slick";
 import ProductsPage from "../../pages/ProductsPage/ProductsPage";
 import "./BoxSlides.css";
 
+
 const BoxSlides = (props) => {
       // Component cho nút previous
       const CustomPrevArrow = (props) => {

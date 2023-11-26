@@ -121,6 +121,30 @@ const productData1 = [
       "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_300x300/https://cdn.tgdd.vn/Products/Images/7077/289818/s16/apple-watch-s8-ultra-cao-su-vang-thumbtz-1-1-650x650.png",
     price: 11000,
     discount: 3
+  },  
+  {
+    id: 10,
+    name: "iPhone 11 128GB",
+    image:
+      "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_300x300/https://cdn.tgdd.vn/Products/Images/7077/289818/s16/apple-watch-s8-ultra-cao-su-vang-thumbtz-1-1-650x650.png",
+    price: 11000,
+    discount: 3
+  },
+  {
+    id: 11,
+    name: "iPhone 11 128GB",
+    image:
+      "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_300x300/https://cdn.tgdd.vn/Products/Images/7077/289818/s16/apple-watch-s8-ultra-cao-su-vang-thumbtz-1-1-650x650.png",
+    price: 11000,
+    discount: 3
+  },
+  {
+    id: 12,
+    name: "iPhone 11 128GB",
+    image:
+      "https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100,s_300x300/https://cdn.tgdd.vn/Products/Images/7077/289818/s16/apple-watch-s8-ultra-cao-su-vang-thumbtz-1-1-650x650.png",
+    price: 11000,
+    discount: 3
   },
 ];
 const productData2 = [

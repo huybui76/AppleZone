@@ -6,6 +6,7 @@ import SignInPage from "../pages/SignInPage/SignInPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import Cart from "../pages/Cart/Cart";
 import Dashboard from "../pages/DashBoard/DashBoardPage";
+import ProductTypePage from "../pages/ProductTypePage/ProductTypePage";
 export const routes = [
   {
     path: '/',
@@ -54,5 +55,10 @@ export const routes = [
     path: '/Cart',
     page: Cart,
     isNavbar: false
+  },
+  {
+    path: '/products-type/:product',
+    page: ProductTypePage,
+    isNavbar: true
   }
 ]
