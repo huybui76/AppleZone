@@ -1,7 +1,6 @@
 import React from 'react'
 import './Payment.css'
-import InputComponent from '../InputComponent/InputComponent'
-import { Button, Input, Flex, Radio } from 'antd';
+import { Button, Input, } from 'antd';
 
 
 function Payment() {

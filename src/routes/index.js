@@ -2,8 +2,8 @@ import Homepage from "../pages/HomePage/Homepage";
 import OrderPage from "../pages/OrderPage/OrderPage";
 import ProductsPage from "../pages/ProductsPage/ProductsPage";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
-import SignInPage from "../pages/SignInPage/SignInPage";
-import SignUpPage from "../pages/SignUpPage/SignUpPage";
+// import SignInPage from "../pages/SignInPage/SignInPage";
+// import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import Cart from "../pages/Cart/Cart";
 import Dashboard from "../pages/DashBoard/DashBoardPage";
 export const routes = [

@@ -1,9 +1,9 @@
-import React, { useDebounce, useState, useSelector, useEffect } from "react";
+import React from "react";
 import Flashsales from "../../components/Flashsales/Flashsales";
 import SlideAnimate from "../../components/SlideAnimate/SlideAnimate";
-import Footer from "../../components/Footer/Footer";
+
 import BoxSlides from "../../components/BoxSlides/BoxSlides";
-import * as ProductService from "../../services/ProductService";
+
 import "./Homepage.css";
 import slide1 from "../../assets/animate1.webp";
 import slide2 from "../../assets/animate2.webp";

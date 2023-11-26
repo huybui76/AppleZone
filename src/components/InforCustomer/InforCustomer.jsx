@@ -1,7 +1,7 @@
 import "./InforCustomer.css";
 import InputComponent from "../InputComponent/InputComponent";
 import React, { useState, useEffect } from "react";
-import { Button, Form, Modal } from "antd";
+import { Button, Form } from "antd";
 import ModalComponent from "../../components/ModalComponent/ModalComponent";
 
 function InforCustomer() {
