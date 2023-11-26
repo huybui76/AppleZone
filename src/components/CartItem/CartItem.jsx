@@ -1,10 +1,13 @@
 import React from "react";
 import "./CartItem.css";
-const price = (item, discountPercentage) => {
-
+const priceDiscount = (item, discountPercentage) => {
     const discountedPrice = item - (item * discountPercentage) / 100;
-    return discountedPrice
+    return discountedPrice.toLocaleString()
 }
+const priceTotal = (price, count) => {
+    const priceTotal = price * count;
+    return priceTotal.toLocaleString(); // Thêm dấu phẩy phân tách hàng nghìn
+};
 function CartItem({ item }) {
     return (
         <div className="item-container">
@@ -24,8 +27,8 @@ function CartItem({ item }) {
 
             <div className="item-price">
 
-                <div className="item-price1">{item.price}</div>
-                <div className="item-price2">{price(item.price, item.discount)}</div>
+                <div className="item-price1">{item.price.toLocaleString()}</div>
+                <div className="item-price2">{priceDiscount(item.price, item.discount)}</div>
             </div>
             <div className="item-quantity">
                 <div className="item-quantity1">
@@ -40,7 +43,7 @@ function CartItem({ item }) {
                 </div>
             </div>
 
-            <div className="total">{item.price}</div>
+            <div className="total">{priceTotal(item.price, item.amount)}</div>
             <div className="remove-item-area">
 
                 <button className="remove-item-btn">

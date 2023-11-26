@@ -50,7 +50,7 @@ export const routes = [
     page: NotFoundPage
   },
   {
-    path: '/Cart',
+    path: '/cart',
     page: Cart,
     isNavbar: false,
     isFooter: true

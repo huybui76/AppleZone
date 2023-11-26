@@ -1,11 +1,12 @@
 const item_list = [
   {
     id: 1,
-    name: 'Iphone 15 proff fff ffffff ffff ff fffff fff ff fffs sssf ff ff',
+    name: 'Iphone 15 Pro max 256gb',
     detail: 'Black, 512GB',
     img: "images/sales-img/black__efg76fuz5hm6_large.jpg",
     price: 2000000000,
-    discount: 5
+    discount: 5,
+    amount: 5,
   },
 
   {
