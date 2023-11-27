@@ -194,7 +194,7 @@ const Cart = () => {
                       <div className="item__img-name1">
                         <div className="item__img-container">
                           <img
-                            src={order?.image}
+                            src={order?.image[0]}
                             alt={order?.name}
                             className="item-img"
                           />
