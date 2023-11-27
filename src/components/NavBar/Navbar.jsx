@@ -25,14 +25,14 @@ const Navbar = () => {
         <NavLink className="nav-pagename" to="/">
           Apple Zone
         </NavLink>
-          <NavLink to="/products-type/Iphone" target="_blank" className="menu-component" style={{textDecoration:"none"}}>
+          <NavLink to="/products-type/6564aee73adaf4c11a499a6b" target="_blank" className="menu-component" style={{textDecoration:"none"}}>
             <div>Iphone</div>
           </NavLink>
-          <NavLink to="/products-type/Ipad" target="_blank" className="menu-component" style={{textDecoration:"none"}}>
+          <NavLink to="/products-type/6564aefd3adaf4c11a499a72" target="_blank" className="menu-component" style={{textDecoration:"none"}}>
             <div>Ipad</div>
           </NavLink>
-          <NavLink to="/products-type/Watch" target="_blank" className="menu-component" style={{textDecoration:"none"}}>
-            <div>Watch</div>
+          <NavLink to="/products-type/6564af133adaf4c11a499a7c" target="_blank" className="menu-component" style={{textDecoration:"none"}}>
+            <div>Mac</div>
           </NavLink>
         <div className="nav-input">
           <form action='' class='search-bar'>

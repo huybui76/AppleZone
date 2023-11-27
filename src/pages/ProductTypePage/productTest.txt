@@ -3,7 +3,6 @@ import "./ProductTypePage.css";
 import slide1 from "../../assets/animate1.webp";
 import slide2 from "../../assets/animate2.webp";
 import slide3 from "../../assets/animate3.webp";
-import Loading from "../../components/Loading/Loading";
 import {  WrapperProducts } from './style'
 import { Col, Pagination, Row } from 'antd'
 import appleIcon from "../../assets/apple.jpg";
@@ -20,67 +19,80 @@ import { useSelector } from 'react-redux'
 import { useDebounce } from '../../hooks/useDebounce'
 const ProductTypePage = (props) => {
 
-  // Watch: 655ac5d41ad762f698f5e415
+  // Watch:     655ac5d41ad762f698f5e415
+  // Iphone:    655ac5791ad762f698f5e405
+  // Ipad:      655ac5ee1ad762f698f5e41a
+  // Imac:      655ac5a41ad762f698f5e40d
+  // Mac:       655ac58e1ad762f698f5e409
+  // Tai nghe:  655ac5c11ad762f698f5e411
   
 
   let typeOfProdduct = "";
+  let title = "";
   const { product } = useParams();
   const [products, setProducts] = useState([])
   const searchProduct = useSelector((state) => state?.product?.search)
   const searchDebounce = useDebounce(searchProduct, 500)
   const [loading, setLoading] = useState(false)
   const [limit, setLimit] = useState(2)
-  const [typeProducts, setTypeProducts] = useState([])
   const [panigate, setPanigate] = useState({
-    page: 0,
-    limit: 10,
-    total: 1,
+      page: 0,
+      limit: 10,
+      total: 1,
   })
-  const fetchProductType = async (type, page, limit) => {
-    setLoading(true)
-    console.log(type);
-    const res = await ProductService.getProductsType(type, page, limit)
-    if(res?.status == 'OK') {
-      setLoading(false)
-      setProducts(res?.data)
-      setPanigate({...panigate, total: res?.totalPage})
-    }else {
-      setLoading(false)
-    }
-  }
-  useEffect(() => {
-    if(product){
-      fetchProductType(product, panigate.page, panigate.limit)
-    }
-  }, [product, panigate.page, panigate.limit])
-  
+  // const fetchProductType = async (type, page, limit) => {
+  //   setLoading(true)
+  //   const res = await ProductService.getProductsType(type, page, limit)
+  //   if(res?.status == 'OK') {
+  //       setLoading(false)
+  //       setProducts(res?.data)
+  //       setPanigate({...panigate, total: res?.totalPage})
+  //   }else {
+  //       setLoading(false)
+  //   }
+  // }
+  // useEffect(() => {
+  //   if(product){
+  //       fetchProductType(product, panigate.page, panigate.limit)
+  //   }
+  // }, [product, panigate.page, panigate.limit])
   const onChange = (current, pageSize) => {
     setPanigate({...panigate, page: current - 1, limit: pageSize})    
   }
-  // const fetchProductByType = async (id) => {
-  //   const res = await ProductService.getProductByType(id);
-  //   setProductsByType(res);
-  //   return res
-  // }
-
   let data = [];
-  console.log(products);
-  
+  console.log(product);
+  switch (product) {
+      case "655ac5791ad762f698f5e405":
+      title="Iphone";
+      data = productData;
+      break;
+      case "655ac5ee1ad762f698f5e41a":
+        title="Ipad";
+      data = productData2;
+      break;
+      case "655ac58e1ad762f698f5e409":
+        title="Mac";
+      data = productData1;
+      break;
+    default:
+      break;
+  }
 
-
-  // Xử lí lấy dữ liệu
-  // const fetchProductAll = async(context) => {
-  //   const limit = context?.queryKey && context?.queryKey[1]
-  //   const search = context?.queryKey && context?.queryKey[2]
-  //   const res = await ProductService.getAllProduct(search, limit)
-  //   return res
-  // }
+  const fetchProductAll = async(context) => {
+    const limit = context?.queryKey && context?.queryKey[1]
+    const search = context?.queryKey && context?.queryKey[2]
+    const res = await ProductService.getAllProduct(search, limit)
+    return res
+  }
   
-  // const { isLoading, data: listProduct, isPreviousData } = useQuery({
-  //   queryKey: ['products', limit, searchDebounce],
-  //   queryFn: fetchProductAll,
-  //   options: { retry: 3, retryDelay: 1000, keepPreviousData: true }
-  // })
+  const { isLoading, data: listProduct, isPreviousData } = useQuery({
+    queryKey: ['products', limit, searchDebounce],
+    queryFn: fetchProductAll,
+    options: { retry: 3, retryDelay: 1000, keepPreviousData: true }
+  })
+  
+  console.log("all products:"+listProduct);
+  // console.log("product type: "+products);
   return (
     <div className="product-page">
       <div className="product">
@@ -91,16 +103,16 @@ const ProductTypePage = (props) => {
             alt="search icon"
             style={{ width: "60px", backgroundColor:"none" }}
           />
-          <h1 className="titleText">Iphone</h1>
+          <h1 className="titleText">{title}</h1>
         </div>
       </div>
-      <Loading isLoading={loading}>
+      {/* <Loading isLoading={loading}> */}
             <div style={{ marginLeft:'150px',marginBottom:'50px', width: '100%' }}>
                 <div style={{ width: '1270px', margin: '0 auto', height: '100%' }}>
                     <Row style={{ flexWrap: 'nowrap', paddingTop: '10px',height: 'calc(100% - 20px)' }}>
                         <Col span={20} style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
                             <WrapperProducts >
-                            {products.map((product) => (
+                            {data.map((product) => (
                                 <ProductCard
                                   key={product.id}
                                   image={product.image}
@@ -118,8 +130,9 @@ const ProductTypePage = (props) => {
                     </Row>
                 </div>
             </div>
-        </Loading>
-      </div>
+        {/* </Loading> */}
+      <Footer />
+    </div>
   );
 };
 
