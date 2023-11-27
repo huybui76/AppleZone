@@ -9,8 +9,10 @@ import slide1 from "../../assets/animate1.webp";
 import slide2 from "../../assets/animate2.webp";
 import slide3 from "../../assets/animate3.webp";
 import slide4 from "../../assets/animate4.webp";
+import { useDispatch } from "react-redux";
 
 const Homepage = () => {
+
     return (
         <div className="container">
             <div className="body">

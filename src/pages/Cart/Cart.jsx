@@ -10,6 +10,7 @@ import orderSlide, {
   decreaseAmount,
   increaseAmount,
   removeOrderProduct,
+  removeAllOrderProduct
 } from "../../redux/slides/orderSlide";
 import ModalComponent from "../../components/ModalComponent/ModalComponent";
 import InputComponent from "../../components/InputComponent/InputComponent";
@@ -18,6 +19,8 @@ import cartProduct_data from "./cartProduct_data";
 const Cart = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedShippingMethod, setSelectedShippingMethod] = useState(1);
+  const [discountCode, setDiscountCode] = useState("");
+  const [isDiscountValid, setIsDiscountValid] = useState("");
   const [form] = Form.useForm();
   const [user, setUser] = useState({
     name: localStorage.getItem("userName") || "",
@@ -40,38 +43,36 @@ const Cart = () => {
     dispatch(removeOrderProduct({ idProduct }));
   };
 
+  const handleDiscountApply = () => {
+
+    if (discountCode === "APPLEZONE") {
+      setIsDiscountValid(10);
+    } else if (discountCode === "APPLE") {
+      setIsDiscountValid(5);
+    } else {
+      setIsDiscountValid(null);
+    }
+  };
+
   const priceMemo = useMemo(() => {
-    return order?.orderItemsSelected?.reduce((total, cur) => {
+    return order?.orderItems?.reduce((total, cur) => {
       return total + cur.price * cur.amount;
     }, 0);
   }, [order]);
 
   const priceDiscountMemo = useMemo(() => {
-    return order?.orderItemsSelected?.reduce((total, cur) => {
-      const totalDiscount = cur.discount || 0;
+    return order?.orderItems?.reduce((total, cur) => {
+      const totalDiscount = isDiscountValid || 0;
       return total + (priceMemo * (totalDiscount * cur.amount)) / 100;
     }, 0) || 0;
-  }, [order, priceMemo]);
+  }, [order, priceMemo, isDiscountValid]);
 
-  const deliveryPriceMemo = useMemo(() => {
-    if (priceMemo >= 20000 && priceMemo < 500000) {
-      return 10000;
-    } else if (priceMemo >= 500000 || order?.orderItemsSelected?.length === 0) {
-      return 0;
-    } else {
-      return 20000;
-    }
-  }, [priceMemo, order]);
 
   const totalPriceMemo = useMemo(() => {
-    return priceMemo - priceDiscountMemo + deliveryPriceMemo;
-  }, [priceMemo, priceDiscountMemo, deliveryPriceMemo]);
+    console.log('totalPriceMemo', priceMemo, priceDiscountMemo)
+    return priceMemo - priceDiscountMemo;
+  }, [priceMemo, priceDiscountMemo]);
 
-  const itemsDelivery = [
-    { title: "20.000 VND", description: "Dưới 200.000 VND" },
-    { title: "10.000 VND", description: "Từ 200.000 VND đến dưới 500.000 VND" },
-    { title: "Free ship", description: "Trên 500.000 VND" },
-  ];
 
   const handleHomeClick = () => {
     navigate("/");
@@ -85,7 +86,7 @@ const Cart = () => {
       });
 
       setIsModalOpen(false);
-      handlePlaceOrder();
+
     } catch (error) {
       console.error("Error updating user information:", error);
     }
@@ -111,21 +112,24 @@ const Cart = () => {
     return priceTotal.toLocaleString();
   };
   const handlePlaceOrder = async () => {
+
+    if (!user.name || !user.phone || !user.address) {
+      message.error("Vui lòng nhập thông tin giao hàng trước khi đặt hàng.");
+      return;
+    }
+
     const orderData = {
       fullName: user.name,
       phone: user.phone,
       address: user.address,
       shippingMethod: selectedShippingMethod,
-      // orderItems: order.map((item) => ({
-      //   productId: item.product,
-      //   quantity: item.amount,
-      // })),
-      itemsPrice: 1200000,
-      totalPrice: 3242342,
-      orderItems: [{
-        "amount": 1,
-        "product": "6560809ffce71c0d4b565439"
-      }]
+      orderItems: order?.orderItems?.map((item) => ({
+        product: item.product,
+        amount: item.amount,
+      })),
+      itemsPrice: priceMemo,
+      totalPrice: totalPriceMemo,
+
     };
 
     try {
@@ -133,6 +137,9 @@ const Cart = () => {
 
       if (response.status === "OK") {
         message.success("Đặt hàng thành công!");
+        const productsToRemove = order?.orderItems.map(item => item.product);
+        dispatch(removeAllOrderProduct(productsToRemove));
+        navigate('/order-success')
       } else {
         message.error("Đã có lỗi xảy ra khi đặt hàng. Vui lòng thử lại!");
       }
@@ -166,7 +173,7 @@ const Cart = () => {
           </button>
         </div>
       </div>
-      {cartProduct_data.length !== 0 ? (
+      {order?.orderItems?.length !== 0 ? (
         <div>
           <div className="body-cart">
             <div className="body-cart-content">
@@ -181,7 +188,7 @@ const Cart = () => {
                   <div className="delete1">Thao Tác</div>
                 </div>
 
-                {cartProduct_data.map((order) => (
+                {order?.orderItems?.map((order) => (
                   <div className="item-container" key={order?.product}>
                     <div className="item__img-name">
                       <div className="item__img-name1">
@@ -208,15 +215,15 @@ const Cart = () => {
                     <div className="item-quantity">
                       <div
                         className="item-quantity1"
-                        onClick={() =>
+
+                      >
+                        <button className="minus" onClick={() =>
                           handleChangeCount(
                             "decrease",
                             order?.product,
                             order?.amount === 1
                           )
-                        }
-                      >
-                        <button className="minus">
+                        }>
                           <img
                             src="/minus.png"
                             alt="minus"
@@ -229,7 +236,7 @@ const Cart = () => {
                           value={order?.amount}
                           size="small"
                           min={1}
-                          max={order?.countInstock}
+                          max={order?.countInStock}
                         >
                           {order.amount}
                         </div>
@@ -239,7 +246,7 @@ const Cart = () => {
                             handleChangeCount(
                               "increase",
                               order?.product,
-                              order?.amount === order.countInstock,
+                              order?.amount === order.countInStock,
                               order?.amount === 1
                             )
                           }
@@ -313,6 +320,10 @@ const Cart = () => {
                         name="sdt"
                         rules={[
                           { required: true, message: "Vui lòng nhập thông tin!" },
+                          {
+                            pattern: /^0\d{9}$/,
+                            message: "Số điện thoại không hợp lệ.",
+                          },
                         ]}
                       >
                         <InputComponent />
@@ -329,7 +340,7 @@ const Cart = () => {
 
                       <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
                         <Button type="primary" htmlType="submit">
-                          Submit
+                          Nhập
                         </Button>
                       </Form.Item>
                     </Form>
@@ -372,12 +383,14 @@ const Cart = () => {
                   <div className="voucher">
                     <p className="">Sử Dụng Mã Giảm Giá</p>
                     <div className="voucher-input-container1">
-                      <Input className="voucher-input" placeholder="Mã Giảm Giá" />
-                      <Button className="voucher-btn" value="default">
+                      <Input className="voucher-input" placeholder="Mã Giảm Giá" onChange={(e) => setDiscountCode(e.target.value)} />
+                      <Button type="primary" className="voucher-btn" value="default" onClick={handleDiscountApply}>
                         Áp Dụng
                       </Button>
                     </div>
-                    <hr />
+                    {isDiscountValid && <div className="success-discount" style={{ color: "#ff0000" }}>-{isDiscountValid}%</div>}
+
+                    {/* <hr /> */}
                     <div className="total-price">
                       <p className="total-price-total">Tổng Tiền</p>
                       <p className="total-price-total1">{totalPriceMemo.toLocaleString()}</p>
