@@ -25,13 +25,13 @@ const Navbar = () => {
 
     dispatch(addOrderProduct({
       orderItem: {
-        name: "mac m1 pro1q7",
+        name: " 'handleDropdownOpen' is assigned a value but never used  'handleDropdownOpen' is assigned a value but never used",
         amount: 1,
-        image: "https://nhadepso.com/wp-content/uploads/2023/02/55-hinh-anh-con-bo-dep-hai-huoc-than-thuoc-voi-nhieu-the-he_9.jpg",
+        image: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Yen_Bai_-_dogs_-_P1390010.JPG",
         price: 13434000,
-        product: "656015fffce71c0d4b5653c6",
-        countInStock: 13,
-        discount: 1,
+        product: "6560809ffce71c0d4b565439",
+        countInStock: 20,
+        discount: 10,
       }
     }))
   }
