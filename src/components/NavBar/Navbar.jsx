@@ -37,6 +37,15 @@ const Navbar = () => {
           <NavLink to="/products-type/6564af133adaf4c11a499a7c" target="_blank" className="menu-component" style={{textDecoration:"none"}}>
             <div>Mac</div>
           </NavLink>
+          <NavLink to="/products-type/6564af273adaf4c11a499a89" target="_blank" className="menu-component" style={{textDecoration:"none"}}>
+            <div>Tai nghe</div>
+          </NavLink>
+          <NavLink to="/products-type/6564af3f3adaf4c11a499a99" target="_blank" className="menu-component" style={{textDecoration:"none"}}>
+            <div>Phụ kiện</div>
+          </NavLink>
+          <NavLink to="/products-type/6564af583adaf4c11a499aac" target="_blank" className="menu-component" style={{textDecoration:"none"}}>
+            <div>Apple Watch</div>
+          </NavLink>
         <div className="nav-input">
           <form action='' class='search-bar'>
             <input type="text" placeholder='Tìm kiếm sản phẩm' className='input-box' />

@@ -71,7 +71,7 @@ const ProductsPage = () => {
   };
 
   return (
-    <div style={{ marginTop: "70px", zIndex: "-1", height: "400vh" }}>
+    <div style={{ marginTop: "70px", zIndex: "-1" }}>
       <Loading isLoading={loading}>
         <div style={{ background: "#efefef" }}>
           <Loading isLoading={loading}>
