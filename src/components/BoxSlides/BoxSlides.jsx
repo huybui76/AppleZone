@@ -1,15 +1,23 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import appleIcon from "../../assets/apple.jpg";
 import { productData } from "../../constants/list";
 import { productData1 } from "../../constants/list";
+import Loading from "../Loading/Loading";
 import { productData2 } from "../../constants/list";
 import ProductCard from "../ProductCard/ProductCard";
 import Slider from "react-slick";
 import ProductsPage from "../../pages/ProductsPage/ProductsPage";
 import "./BoxSlides.css";
+import * as ProductService from "../../services/ProductService";
 
 
 const BoxSlides = (props) => {
+    const [loadingIphone, setLoadingIphone] = useState(false)
+    const [iphones, setIphones] = useState([]);
+    const [loadingIpad, setLoadingIpad] = useState(false)
+    const [watchs, setWatchs] = useState([]);
+    const [loadingWatch, setLoadingWatch] = useState(false)
+    const [ipads, setIpads] = useState([]);
       // Component cho nút previous
       const CustomPrevArrow = (props) => {
         const { onClick } = props;
@@ -27,6 +35,7 @@ const BoxSlides = (props) => {
           </div>
         );
       };
+      
   var settings = {
     dots: true,
     infinite: false,
@@ -61,6 +70,42 @@ const BoxSlides = (props) => {
       },
     ],
   };
+  const fetchProductsIphone = async (type, limit) =>{
+    setLoadingIphone(true);
+    const res = await ProductService.getProductsType(type, 0, limit);
+    if (res?.status == "OK") {
+      setLoadingIphone(false);
+      setIphones(res?.data);
+    } else {
+      setLoadingIphone(false);
+    }
+  }
+  const fetchProductsIpad = async (type, limit) =>{
+    setLoadingIpad(true);
+    const res = await ProductService.getProductsType(type, 0, limit);
+    if (res?.status == "OK") {
+      setLoadingIpad(false);
+      setIpads(res?.data);
+    } else {
+      setLoadingIpad(false);
+    }
+  }
+  const fetchProductsWatch = async (type, limit) =>{
+    setLoadingWatch(true);
+    const res = await ProductService.getProductsType(type, 0, limit);
+    if (res?.status == "OK") {
+      setLoadingWatch(false);
+      setWatchs(res?.data);
+    } else {
+      setLoadingWatch(false);
+    }
+  }
+  useEffect(() => {
+    fetchProductsIpad("6564aee73adaf4c11a499a6b", 8)
+    fetchProductsIphone("6564aefd3adaf4c11a499a72", 8)
+    fetchProductsWatch("6564af583adaf4c11a499aac", 8)
+  }, []);
+
 
   return (
     <div>
@@ -78,20 +123,23 @@ const BoxSlides = (props) => {
           <h2 className="titleText">iPhone</h2>
         </a>
         <div className="blocks-display">
+        <Loading isLoading={loadingIphone}>
           <Slider {...settings}>
-            {productData.map((product) => (
+            {iphones.map((product) => (
               <ProductCard
-                key={product.id}
-                image={product.image}
-                name={product.name}
-                price={product.price}
-                totalSales={product.totalSales}
-                timeLeft={product.timeLeft}
-                rating={product.rating}
-                discount={product.discount}
-              />
+              key={product._id}
+              productId={product._id}
+              image={product.image}
+              name={product.name}
+              price={product.price}
+              totalSales={product.totalSales}
+              timeLeft={product.timeLeft}
+              rating={product.rating}
+              discount={product.discount}
+            />
             ))}
           </Slider>
+          </Loading>
 
         </div>
       </div>
@@ -109,21 +157,23 @@ const BoxSlides = (props) => {
           <h2 className="titleText">Watch</h2>
         </a>
         <div className="blocks-display">
+        <Loading isLoading={loadingIpad}>
           <Slider {...settings}>
-            {productData1.map((product) => (
+            {ipads.map((product) => (
               <ProductCard
-                key={product.id}
-                image={product.image}
-                name={product.name}
-                price={product.price}
-                totalSales={product.totalSales}
-                timeLeft={product.timeLeft}
-                rating={product.rating}
-                discount={product.discount}
-              />
+              key={product._id}
+              productId={product._id}
+              image={product.image}
+              name={product.name}
+              price={product.price}
+              totalSales={product.totalSales}
+              timeLeft={product.timeLeft}
+              rating={product.rating}
+              discount={product.discount}
+            />
             ))}
           </Slider>
-
+          </Loading>
         </div>
       </div>
       <div className="box-slide">
@@ -140,21 +190,23 @@ const BoxSlides = (props) => {
           <h2 className="titleText">iPad</h2>
         </a>
         <div className="blocks-display">
+        <Loading isLoading={loadingWatch}>
           <Slider {...settings}>
-            {productData2.map((product) => (
+            {watchs.map((product) => (
               <ProductCard
-                key={product.id}
-                image={product.image}
-                name={product.name}
-                price={product.price}
-                totalSales={product.totalSales}
-                timeLeft={product.timeLeft}
-                rating={product.rating}
-                discount={product.discount}
-              />
+              key={product._id}
+              productId={product._id}
+              image={product.image}
+              name={product.name}
+              price={product.price}
+              totalSales={product.totalSales}
+              timeLeft={product.timeLeft}
+              rating={product.rating}
+              discount={product.discount}
+            />
             ))}
           </Slider>
-
+        </Loading>
         </div>
       </div>
     </div>

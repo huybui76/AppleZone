@@ -6,9 +6,33 @@ import productSet from "../../assets/setProduct.jpg";
 import returnImg from "../../assets/return.jpg";
 import shipping from "../../assets/shipping.jpg";
 import contact from "../../assets/contact.jpg";
+import { addOrderProduct, resetOrder } from "../../redux/slides/orderSlide";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import gurantee from "../../assets/gurantee.jpg";
 import { NavLink } from "react-router-dom";
 const ProductDetail = (props) => {
+  const navigate = useNavigate();
+  const handleCartIconClick = () => {
+    navigate("/cart");
+  };
+  const dispatch = useDispatch();
+  const dispatchProduct = () => {
+    dispatch(
+      addOrderProduct({
+        orderItem: {
+          name: props.product.name,
+          amount: 1,
+          image: props.product.image,
+          price: props.product.price,
+          product: props.product._id,
+          countInStock: props.product.countInStock,
+          discount: props.product.discount,
+        },
+      })
+    );
+  };
+
   const qrImage =
     "https://cdn.tgdd.vn/mwgcart/topzone/images/promote_loyalty/qr.png?v=1";
   const dienmayxanhLogo =
@@ -33,11 +57,7 @@ const ProductDetail = (props) => {
         <h1 className="product-side-nanme">{props.product.name}</h1>
         <div className="product-side-sell">
           <h3 className="product-side-sell-discount" id="price">
-            {(
-              props.product.price -
-              (20 * props.product.price) / 100
-            )}
-            đ
+            {props.product.price - (20 * props.product.price) / 100}đ
           </h3>
           <h5 className="product-side-sell-price">
             <strike>{props.product.price}đ</strike>{" "}
@@ -57,7 +77,7 @@ const ProductDetail = (props) => {
             {props.product.description}
           </h5>
         </div>
-        <button className="buy-btn">Mua ngay</button>
+        <button className="buy-btn" onClick={dispatchProduct}>Mua ngay</button>
         <div className="buy">
           <button className="buy-installment">
             <p
@@ -168,7 +188,7 @@ const ProductDetail = (props) => {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              gap:"10px"
+              gap: "10px",
             }}
           >
             <img style={{ width: "150px" }} src={chPlay} alt="" />
