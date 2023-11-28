@@ -15,7 +15,7 @@ const ProductCard = (props) => {
       target="_blank"
       className="productCard"
     >
-      <img src={props.image} alt="hello" className="productImage" />
+      <img src={props.image[0]} alt="hello" className="productImage" />
       <h3 className="title">{props.name}</h3>
       <div className="bottom">
         <p className="discount">{props.price}</p>
