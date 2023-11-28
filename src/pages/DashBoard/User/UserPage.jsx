@@ -8,6 +8,7 @@ import TableComponent from '../../../components/TableComponent/TableComponent';
 import './index.css';
 import * as UserService from '../../../services/UserService';
 import { useMutationHooks } from '../../../hooks/useMutationHooks';
+import { messageSuccess, messageError } from "../../../utils";
 
 const INITIAL_STATE = {
     name: '',
@@ -33,6 +34,7 @@ const User = () => {
         userExists: 'Người dùng này đã tồn tại!',
         emailExists: 'Email này đã được sử dụng trước đó!',
         passLength: 'Mật khẩu phải dài hơn 6 kí tự!',
+        userDeleted: 'Xoá thông tin người dùng thành công',
     };
 
     const mutation = useMutationHooks(async (data) => {
@@ -76,6 +78,7 @@ const User = () => {
 
         queryUsers.refetch();
         setIsDeleteModalVisible(false);
+        messageSuccess(alertMessages.userDeleted)
     };
 
     const handleCancel = () => {
@@ -90,11 +93,11 @@ const User = () => {
         );
 
         if (isEmailExists) {
-            alert(alertMessages.emailExists);
+            messageError(alertMessages.emailExists);
             return;
         }
         if (values.password.length < 6) {
-            alert(alertMessages.passLength);
+            messageError(alertMessages.passLength);
             return;
         }
 
@@ -103,13 +106,13 @@ const User = () => {
 
             if (data?.status === 'OK' && data?.message === 'CREATE USER SUCCESS') {
                 handleCancel();
-                alert(alertMessages.userCreated);
+                messageSuccess(alertMessages.userCreated);
                 queryUsers.refetch();
             }
 
             if (data?.status === 'OK' && data?.message === 'UPDATE USER SUCCESS') {
                 handleCancel();
-                alert(alertMessages.userUpdated);
+                messageSuccess(alertMessages.userUpdated);
                 queryUsers.refetch();
             }
         } catch (error) {

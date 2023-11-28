@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Upload, Button, Form, Modal, Select, InputNumber, Space } from "antd";
+import { Button, Form, Modal, Select, InputNumber, Space } from "antd";
 import axiosClient from "../../../services/axiosClient";
 import ModalComponent from "../../../components/ModalComponent/ModalComponent";
 import { useQuery } from "@tanstack/react-query";
 import InputComponent from "../../../components/InputComponent/InputComponent";
-import { WrapperUploadFile } from "./style";
-import { getBase64 } from "../../../utils";
+import { messageSuccess, messageError } from "../../../utils";
 import TableComponent from "../../../components/TableComponent/TableComponent";
-import { UploadOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import "./index.css";
 import * as ProductService from "../../../services/ProductService";
@@ -41,6 +39,7 @@ const Product = () => {
         productCreated: "Thêm sản phẩm thành công",
         productUpdated: "Sửa sản phẩm thành công",
         productExists: "Sản phẩm này đã tồn tại!",
+        productDeleted: "Xoá sản phẩm thành công",
     };
 
     const mutation = useMutationHooks(async (data) => {
@@ -103,6 +102,7 @@ const Product = () => {
 
         queryProduct.refetch();
         setIsDeleteModalVisible(false);
+        messageSuccess(alertMessages.productDeleted)
     };
 
     const handleCancel = () => {
@@ -119,19 +119,11 @@ const Product = () => {
         );
 
         if (isNameExists) {
-            alert("Sản phẩm này đã tồn tại!");
+            messageError(alertMessages.productExists)
             return;
         }
 
         try {
-            // const image = values.images.map((image) => image.originFileObj);
-            // const images = values.images; // Array of uploaded images
-
-            // // Convert each image to base64 using getBase64
-            // const image = await Promise.all(
-            //     images.map(async (image) => await getBase64(image.originFileObj))
-            // );
-
             const data = await mutation.mutateAsync(values);
             setImage([])
             if (
@@ -139,14 +131,14 @@ const Product = () => {
                 data?.message === "Product created successfully"
             ) {
                 handleCancel();
-                alert("Thêm sản phẩm thành công");
+                messageSuccess(alertMessages.productCreated)
 
                 queryProduct.refetch();
             }
 
             if (data?.status === "OK" && data?.message === "UPDATE PRODUCT SUCCESS") {
                 handleCancel();
-                alert("Sửa sản phẩm thành công");
+                messageSuccess(alertMessages.productUpdated)
 
                 queryProduct.refetch();
             }
@@ -155,15 +147,6 @@ const Product = () => {
         }
     };
 
-    // const handleOnchangeAvatar = async ({ fileList }) => {
-    //     const file = fileList[0];
-    //     if (!file.url && !file.preview) {
-    //         file.preview = await getBase64(file.originFileObj);
-    //     }
-    //     form.setFieldsValue({
-    //         image: file.preview,
-    //     });
-    // };
 
     const editProduct = (productId) => {
         const selectedProduct = products.data.find(
@@ -272,7 +255,8 @@ const Product = () => {
             title: "Giá",
             dataIndex: "price",
             key: "price",
-            sorter: (a, b) => a.price - b.price
+            sorter: (a, b) => a.price - b.price,
+            render: (price) => price.toLocaleString("vi-VN")
         },
         {
             title: "Giảm giá",
@@ -363,7 +347,7 @@ const Product = () => {
     const isLoadingProducts = queryProduct.isLoading;
 
     const dataTable = products?.data
-        ?.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+        // ?.slice((currentPage - 1) * pageSize, currentPage * pageSize)
         ?.map((product) => ({
             key: product._id,
             _id: product._id,
