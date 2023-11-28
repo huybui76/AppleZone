@@ -21,25 +21,6 @@ const Navbar = () => {
     navigate('/cart');
   };
   const dispatch = useDispatch()
-  const dispatchProduct = () => {
-
-    dispatch(addOrderProduct({
-      orderItem: {
-        name: "Ipad pro m12aaaa",
-        amount: 2,
-        "image": [
-          "https://res.cloudinary.com/dgcxf9zyh/image/upload/v1701097682/AppleZone/kycn6u8y2t8jnkpgsfdg.webp",
-          "https://res.cloudinary.com/dgcxf9zyh/image/upload/v1701097682/AppleZone/wddsncyqikqugdwuisr5.jpg",
-          "https://res.cloudinary.com/dgcxf9zyh/image/upload/v1701097682/AppleZone/iehjqbplzq1tiafc9nul.png",
-          "https://res.cloudinary.com/dgcxf9zyh/image/upload/v1701097683/AppleZone/xclfh9gykx9jpfkgzhqh.png"
-        ],
-        price: 230000,
-        product: "6564b0d43adaf4c11a499b3b",
-        countInStock: 123,
-        discount: 4,
-      }
-    }))
-  }
 
   return (
     <div className="navbar-container">
@@ -65,9 +46,6 @@ const Navbar = () => {
         <div className="nav-icon">
           <div className="shopping-icon">
             <img src={shopping_icon} alt="" className='icon' onClick={handleCartIconClick} />
-          </div>
-          <div className="shopping-icon">
-            <img src={shopping_icon} alt="" className='icon' onClick={dispatchProduct} />
           </div>
           {/* <div className="user-icon">
             <img src={user_icon} alt="" className='icon'  onClick={handleDropdownOpen}/>

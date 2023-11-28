@@ -23,7 +23,7 @@ const ProductDetail = (props) => {
         orderItem: {
           name: props.product.name,
           amount: 1,
-          image: props.product.image,
+          image: props.product.image[0],
           price: props.product.price,
           product: props.product._id,
           countInStock: props.product.countInStock,
@@ -47,20 +47,20 @@ const ProductDetail = (props) => {
         <div className="product-intro-image">
           <img
             className="product-intro-image-src"
-            src={props.product.image}
+            src={props?.product?.image[0]}
             alt="iphone"
           />
         </div>
         <div></div>
       </aside>
       <aside className="product-side">
-        <h1 className="product-side-nanme">{props.product.name}</h1>
+        <h1 className="product-side-nanme">{props.product?.name}</h1>
         <div className="product-side-sell">
           <h3 className="product-side-sell-discount" id="price">
-            {props.product.price - (20 * props.product.price) / 100}đ
+            {props.product.price - (20 * props.product?.price) / 100}đ
           </h3>
           <h5 className="product-side-sell-price">
-            <strike>{props.product.price}đ</strike>{" "}
+            <strike>{props.product?.price}đ</strike>{" "}
           </h5>
         </div>
         <div className="product-side-ad">
@@ -74,7 +74,7 @@ const ProductDetail = (props) => {
         </div>
         <div className="product-side-title">
           <h5 className="product-side-title-detail">
-            {props.product.description}
+            {props.product?.description}
           </h5>
         </div>
         <button className="buy-btn" onClick={dispatchProduct}>Mua ngay</button>
