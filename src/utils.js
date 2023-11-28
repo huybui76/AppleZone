@@ -1,4 +1,4 @@
-
+import { message } from 'antd'
 export const isJsonString = (data) => {
     try {
         JSON.parse(data)
@@ -39,3 +39,23 @@ export const convertPrice = (price) => {
 
 
 
+
+
+export const messageSuccess = (text) => {
+    message.success({
+        content: text,
+        className: 'custom-class',
+        style: {
+            marginTop: '10vh',
+        },
+    });
+};
+export const messageError = (text) => {
+    message.error({
+        content: text,
+        className: 'custom-class',
+        style: {
+            marginTop: '10vh',
+        },
+    });
+};

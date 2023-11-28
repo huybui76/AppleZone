@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { DeleteTwoTone, EditOutlined, UploadOutlined } from "@ant-design/icons";
-import { Button, Form, Modal, Upload } from "antd";
+import { Button, Form, Modal, Upload, message } from "antd";
 import axiosClient from "../../../services/axiosClient";
 import ModalComponent from "../../../components/ModalComponent/ModalComponent";
 import { useQuery } from "@tanstack/react-query";
 import InputComponent from "../../../components/InputComponent/InputComponent";
 import { WrapperHeader, WrapperUploadFile } from "./style";
-import { getBase64 } from "../../../utils";
+import { messageSuccess, messageError } from "../../../utils";
 import "./index.css";
 import * as ProductTypeService from "../../../services/ProductTypeService";
 import * as ProductService from "../../../services/ProductService";
 import { useMutationHooks } from "../../../hooks/useMutationHooks";
 import axios from 'axios';
+
 
 const INITIAL_STATE = {
     name: "",
@@ -81,6 +82,7 @@ const ProductType = () => {
 
         queryProductType.refetch();
         setIsDeleteModalVisible(false);
+        messageSuccess('Xoá danh mục thành công')
     };
 
     const handleCancel = () => {
@@ -97,7 +99,7 @@ const ProductType = () => {
         );
 
         if (isNameExists) {
-            alert("Danh mục này đã tồn tại!");
+            messageError('Danh mục này đã tồn tại')
             return;
         }
 
@@ -110,9 +112,10 @@ const ProductType = () => {
                 data?.message === "ProductType created successfully"
             ) {
                 handleCancel();
-                alert("Thêm danh mục thành công");
+
                 // Update the query to refetch data after mutation
                 queryProductType.refetch();
+                messageSuccess('Thêm danh mục thành công')
             }
 
             if (
@@ -120,7 +123,7 @@ const ProductType = () => {
                 data?.message === "UPDATE PRODUCT TYPE SUCCESS"
             ) {
                 handleCancel();
-                alert("Sửa danh mục thành công");
+                messageSuccess('Sửa danh mục thành công')
                 // Update the query to refetch data after mutation
                 queryProductType.refetch();
             }
@@ -129,15 +132,7 @@ const ProductType = () => {
         }
     };
 
-    const handleOnchangeAvatar = async ({ fileList }) => {
-        const file = fileList[0];
-        if (!file.url && !file.preview) {
-            file.preview = await getBase64(file.originFileObj);
-        }
-        form.setFieldsValue({
-            image: file.preview,
-        });
-    };
+
     const editCategory = (productTypeId) => {
         const selectedProductType = productTypes.data.find(
             (item) => item._id === productTypeId
