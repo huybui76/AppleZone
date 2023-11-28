@@ -61,6 +61,15 @@ const ProductTypePage = (props) => {
     case "6564af133adaf4c11a499a7c":
       typeOfProdduct = "Mac";
       break;
+    case "6564af133adaf4c11a499a7c":
+      typeOfProdduct = "Tai nghe";
+      break;
+    case "6564af3f3adaf4c11a499a99":
+      typeOfProdduct = "Phụ kiện";
+      break;
+    case "6564af583adaf4c11a499aac":
+      typeOfProdduct = "Apple Watch";
+      break;
     default:
       break;
   }

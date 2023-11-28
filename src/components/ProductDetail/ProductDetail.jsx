@@ -42,14 +42,16 @@ const ProductDetail = (props) => {
   const appStore =
     "https://cdn.tgdd.vn/mwgcart/topzone/images/promote_loyalty/appstore.png";
   return (
-    <div className="product">
+    <div className="product1">
       <aside className="product-intro">
         <div className="product-intro-image">
-          <img
-            className="product-intro-image-src"
-            src={props?.product?.image[0]}
-            alt="iphone"
-          />
+          {props.product?.image && props.product.image.length > 0 && (
+            <img
+              className="product-intro-image-src"
+              src={props.product.image[0]}
+              alt="iphone"
+            />
+          )}
         </div>
         <div></div>
       </aside>
@@ -57,7 +59,7 @@ const ProductDetail = (props) => {
         <h1 className="product-side-nanme">{props.product?.name}</h1>
         <div className="product-side-sell">
           <h3 className="product-side-sell-discount" id="price">
-            {props.product.price - (20 * props.product?.price) / 100}đ
+            {props.product.price - (props.product?.discount * props.product?.price) / 100}đ
           </h3>
           <h5 className="product-side-sell-price">
             <strike>{props.product?.price}đ</strike>{" "}
@@ -73,11 +75,13 @@ const ProductDetail = (props) => {
           <img src={question} style={{ width: "30px" }} alt="" />
         </div>
         <div className="product-side-title">
-          <h5 className="product-side-title-detail">
+          <h5 className="product-side-title-detail">  
             {props.product?.description}
           </h5>
         </div>
-        <button className="buy-btn" onClick={dispatchProduct}>Mua ngay</button>
+        <button className="buy-btn" onClick={dispatchProduct}>
+          Mua ngay
+        </button>
         <div className="buy">
           <button className="buy-installment">
             <p
