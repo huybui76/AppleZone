@@ -1,5 +1,5 @@
 import Homepage from "../pages/HomePage/Homepage";
-import OrderPage from "../pages/OrderPage/OrderPage";
+
 import ProductsPage from "../pages/ProductsPage/ProductsPage";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 // import SignInPage from "../pages/SignInPage/SignInPage";
@@ -7,6 +7,7 @@ import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import Cart from "../pages/Cart/Cart";
 import Dashboard from "../pages/DashBoard/DashBoardPage";
 import ProductTypePage from "../pages/ProductTypePage/ProductTypePage";
+import OrderSuccessPage from "../pages/OrderSuccess/OrderSuccessPage";
 export const routes = [
   {
     path: '/',
@@ -17,13 +18,14 @@ export const routes = [
 
   },
   {
-    path: '/order',
-    page: OrderPage,
-    isNavbar: true,
-    isFooter: true
+    path: '/order-success',
+    page: OrderSuccessPage,
+    isNavbar: false,
+    isFooter: false
   },
+
   {
-    path: '/products',
+    path: '/products/:id',
     page: ProductsPage,
     isNavbar: true,
     isFooter: true
@@ -54,7 +56,7 @@ export const routes = [
     path: '/cart',
     page: Cart,
     isNavbar: false,
-    isFooter: true
+    isFooter: false
   },
   {
     path: '/products-type/:product',

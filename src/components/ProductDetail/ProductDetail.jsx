@@ -36,11 +36,11 @@ const ProductDetail = (props) => {
             {(
               props.product.price -
               (20 * props.product.price) / 100
-            ).toLocaleString("vi-VN")}
+            )}
             đ
           </h3>
           <h5 className="product-side-sell-price">
-            <strike>{props.product.price.toLocaleString("vi-VN")}đ</strike>{" "}
+            <strike>{props.product.price}đ</strike>{" "}
           </h5>
         </div>
         <div className="product-side-ad">
@@ -52,22 +52,9 @@ const ProductDetail = (props) => {
           <p className="product-side-ad-title"> Tích lũy quà tặng tặng VIP </p>
           <img src={question} style={{ width: "30px" }} alt="" />
         </div>
-        <div className="product-storage">
-          <h3>Dung lượng</h3>
-          <ul className="product-storage-ssd">
-            {props.product.ssd.map((e) => {
-              return (
-                <li>
-                  {" "}
-                  <a>{e}GB</a>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
         <div className="product-side-title">
           <h5 className="product-side-title-detail">
-            {props.product.discountTitle}
+            {props.product.description}
           </h5>
         </div>
         <button className="buy-btn">Mua ngay</button>
@@ -109,7 +96,7 @@ const ProductDetail = (props) => {
         </div>
         <div className="product-side-set">
           <img style={{ width: "30px" }} src={gurantee} alt="" />
-          <h5>{props.product.productGuarantee}</h5>
+          <p>Bảo hành chính hãng 1 năm</p>
         </div>
         <div className="product-side-set">
           <img style={{ width: "30px" }} src={shipping} alt="" />

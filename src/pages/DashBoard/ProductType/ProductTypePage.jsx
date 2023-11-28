@@ -11,6 +11,7 @@ import "./index.css";
 import * as ProductTypeService from "../../../services/ProductTypeService";
 import * as ProductService from "../../../services/ProductService";
 import { useMutationHooks } from "../../../hooks/useMutationHooks";
+import axios from 'axios';
 
 const INITIAL_STATE = {
     name: "",
@@ -24,6 +25,7 @@ const ProductType = () => {
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
     const [deletingCategoryId, setDeletingCategoryId] = useState(null);
     const [productCounts, setProductCounts] = useState({});
+    const [image, setImage] = useState([]);
 
     const mutation = useMutationHooks(async (data) => {
         const { name, image } = data;
@@ -102,6 +104,7 @@ const ProductType = () => {
         try {
             const data = await mutation.mutateAsync(values);
 
+            setImage([])
             if (
                 data?.status === "OK" &&
                 data?.message === "ProductType created successfully"
@@ -148,6 +151,44 @@ const ProductType = () => {
             });
         }
     };
+    const uploadPhoto = async (ev) => {
+        try {
+            const files = ev.target.files;
+            console.log(files);
+
+            const CLOUD_NAME = 'dgcxf9zyh';
+            const PRESET_NAME = 'demo-upload';
+            const FOLDER_NAME = 'AppleZone';
+
+            const api = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+
+            const uploadPromises = Array.from(files).map(async (file) => {
+                const formData = new FormData();
+                formData.append('upload_preset', PRESET_NAME);
+                formData.append('folder', FOLDER_NAME);
+                formData.append('file', file);
+
+                const response = await axios.post(api, formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    }
+                });
+
+                return response.data.secure_url;
+            });
+
+            const urls = await Promise.all(uploadPromises);
+            console.log("FFFFFFFFFFFFFF", urls)
+            setImage(urls);
+            form.setFieldsValue({
+                image: urls,
+            });
+        } catch (error) {
+            console.error('Error uploading images:', error);
+            // Thêm xử lý lỗi nếu cần
+        }
+    };
+
 
     return (
         <div className="dashboard_category">
@@ -180,19 +221,18 @@ const ProductType = () => {
                         label="Hình ảnh"
                         name="image"
                         rules={[{ required: true, message: "Chọn hình ảnh!" }]}
-                    >
-                        <Upload
-                            listType="picture-card"
-                            maxCount={1}
-                            beforeUpload={() => false}
-                            onChange={handleOnchangeAvatar}
-                        >
-                            <div>
-                                <Button icon={<UploadOutlined />} size="small" />
-                                <div style={{ marginTop: 6 }}>Upload</div>
-                            </div>
+                    ><div>
 
-                        </Upload>
+                            <input onChange={(ev) => uploadPhoto(ev)} type="file" />
+                            <div className='pre_photos'>
+                                {image && (
+
+                                    image.map((photo, index) => (
+                                        <img style={{ height: '50px' }} key={index} src={photo} alt="" />
+                                    ))
+                                )}
+                            </div>
+                        </div>
                     </Form.Item>
                     <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
                         <Button type="primary" htmlType="submit">

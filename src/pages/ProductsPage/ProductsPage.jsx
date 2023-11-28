@@ -1,16 +1,38 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import ProductDetail from "../../components/ProductDetail/ProductDetail";
 import { productData } from "../../constants/products";
 import "./ProductsPage.css";
+import Loading from "../../components/Loading/Loading";
+import * as ProductService from "../../services/ProductService"
 import { productData as productAttached } from "../../constants/attached";
 import Slider from "react-slick";
 import plus from "../../assets/plus.jpg";
-
+import { useParams } from "react-router-dom";
 const ProductsPage = () => {
+  const {id} = useParams();
+  console.log("productid: "+id);
   const iphoneAttached = "https://cdn.tgdd.vn/Products/Images/42/305658/s16/iphone-15-pro-max-white-thumbtz-650x650.png";
   const charge = "https://cdn.tgdd.vn/Products/Images/9499/315355/s16/TimerThumb/de-sac-khong-day-magsafe-3-in-1-15w-anker-737-cube-y1811.png";
   const opLung = "https://cdn.tgdd.vn/Products/Images/60/315041/s16/op-lung-magsafe-iphone-15-plus-vai-apple-mt473-thumb-650x650.png";
-  
+  const [product, setProducts] = useState({})
+  const [loading, setLoading] = useState(false)
+  const fetDetailProduct = async (id) => {
+    setLoading(true)
+    const res = await ProductService.getDetailsProduct(id)
+    if(res?.status == 'OK') {
+      setLoading(false)
+      setProducts(res?.data)
+    }
+    else {
+      setLoading(true)
+    }
+  }
+  useEffect(() => {
+    if(id){
+      fetDetailProduct(id)
+    }
+  }, [id])
+  console.log(product);
   var settings = {
     dots: true,
     infinite: false,
@@ -45,10 +67,12 @@ const ProductsPage = () => {
       },
     ],
   };
+
   return (
     <div style={{marginTop:"70px", zIndex:"-1", height:"400vh"}}>
+      <Loading isLoading={loading}>
       <div style={{ background: "#efefef" }}>
-        <ProductDetail product={productData[0]} />
+        <ProductDetail product={product} />
       </div>
       <div className="attached">
         <p style={{ fontSize: "30px", fontWeight: "bold" }}>
@@ -107,6 +131,7 @@ const ProductsPage = () => {
         <p>Nếu đã mua sản phẩm này tại TopZone. Hãy đánh giá ngay để giúp hàng ngàn người chọn mua hàng tốt nhất bạn nhé!</p>
         <div></div>
       </div>
+      </Loading>
     </div>
   );
 };

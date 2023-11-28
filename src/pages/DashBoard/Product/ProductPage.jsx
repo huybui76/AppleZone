@@ -8,7 +8,7 @@ import { WrapperUploadFile } from "./style";
 import { getBase64 } from "../../../utils";
 import TableComponent from "../../../components/TableComponent/TableComponent";
 import { UploadOutlined } from '@ant-design/icons';
-
+import axios from 'axios';
 import "./index.css";
 import * as ProductService from "../../../services/ProductService";
 import * as ProductTypeService from "../../../services/ProductTypeService";
@@ -36,7 +36,7 @@ const Product = () => {
     const [productTypes, setProductTypes] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
-
+    const [image, setImage] = useState([]);
     const alertMessages = {
         productCreated: "Thêm sản phẩm thành công",
         productUpdated: "Sửa sản phẩm thành công",
@@ -125,15 +125,15 @@ const Product = () => {
 
         try {
             // const image = values.images.map((image) => image.originFileObj);
-            const images = values.images; // Array of uploaded images
+            // const images = values.images; // Array of uploaded images
 
-            // Convert each image to base64 using getBase64
-            const image = await Promise.all(
-                images.map(async (image) => await getBase64(image.originFileObj))
-            );
+            // // Convert each image to base64 using getBase64
+            // const image = await Promise.all(
+            //     images.map(async (image) => await getBase64(image.originFileObj))
+            // );
 
-            const data = await mutation.mutateAsync({ ...values, image });
-
+            const data = await mutation.mutateAsync(values);
+            setImage([])
             if (
                 data?.status === "OK" &&
                 data?.message === "Product created successfully"
@@ -315,6 +315,43 @@ const Product = () => {
             ),
         },
     ];
+    const uploadPhoto = async (ev) => {
+        try {
+            const files = ev.target.files;
+            console.log(files);
+
+            const CLOUD_NAME = 'dgcxf9zyh';
+            const PRESET_NAME = 'demo-upload';
+            const FOLDER_NAME = 'AppleZone';
+
+            const api = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+
+            const uploadPromises = Array.from(files).map(async (file) => {
+                const formData = new FormData();
+                formData.append('upload_preset', PRESET_NAME);
+                formData.append('folder', FOLDER_NAME);
+                formData.append('file', file);
+
+                const response = await axios.post(api, formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    }
+                });
+
+                return response.data.secure_url;
+            });
+
+            const urls = await Promise.all(uploadPromises);
+            console.log("FFFFFFFFFFFFFF", urls)
+            setImage(urls);
+            form.setFieldsValue({
+                image: urls,
+            });
+        } catch (error) {
+            console.error('Error uploading images:', error);
+            // Thêm xử lý lỗi nếu cần
+        }
+    };
 
     const handleChangeSelect = (value) => {
         form.setFieldsValue({
@@ -371,22 +408,20 @@ const Product = () => {
                     </Form.Item>
                     <Form.Item
                         label="Hình ảnh"
-                        name="images"
+                        name="image"
                         rules={[{ required: true, message: "Chọn hình ảnh!" }]}
-                    >
-                        <Upload
-                            listType="picture-card"
-                            fileList={form.getFieldValue('images')}
-                            beforeUpload={() => false}
-                            onChange={({ fileList }) => form.setFieldsValue({ images: fileList })}
-                        >
-                            {form.getFieldValue('images') && form.getFieldValue('images').length >= 4 ? null : (
-                                <div>
-                                    <Button icon={<UploadOutlined />} size="small" />
-                                    <div style={{ marginTop: 8 }}>Upload</div>
-                                </div>
-                            )}
-                        </Upload>
+                    ><div>
+
+                            <input onChange={(ev) => uploadPhoto(ev)} type="file" multiple />
+                            <div className='pre_photos'>
+                                {image && (
+
+                                    image.map((photo, index) => (
+                                        <img style={{ height: '50px' }} key={index} src={photo} alt="" />
+                                    ))
+                                )}
+                            </div>
+                        </div>
                     </Form.Item>
 
                     <Form.Item

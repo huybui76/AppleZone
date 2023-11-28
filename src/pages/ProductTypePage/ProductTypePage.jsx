@@ -65,7 +65,6 @@ const ProductTypePage = (props) => {
 
   let data = [];
   console.log(products);
-  
 
 
   // Xử lí lấy dữ liệu
@@ -102,7 +101,8 @@ const ProductTypePage = (props) => {
                             <WrapperProducts >
                             {products.map((product) => (
                                 <ProductCard
-                                  key={product.id}
+                                  key={product._id}
+                                  productId={product._id}
                                   image={product.image}
                                   name={product.name}
                                   price={product.price}

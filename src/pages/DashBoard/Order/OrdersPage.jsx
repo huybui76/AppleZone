@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, Modal, Space } from "antd";
+import { Button, Form, Modal, Space, message } from "antd";
 import { useQuery } from "@tanstack/react-query";
 import TableComponent from "../../../components/TableComponent/TableComponent";
 import * as OrderService from "../../../services/OrderService";
@@ -33,10 +33,14 @@ const Order = () => {
 
     const handleDeleteConfirmed = async () => {
         const productToDel = orders?.data?.find((order) => order._id === deletingOrderId)
-        await OrderService.cancelOrder(deletingOrderId, productToDel?.orderItems);
+        const response = await OrderService.cancelOrder(deletingOrderId, productToDel?.orderItems);
 
         queryOrder.refetch();
         setIsDeleteModalVisible(false);
+        if (response.status === "OK") {
+            message.success("Xoá Đơn Hàng Thành Công!");
+            console.log("Xoá Đơn Hàng Thành Công!");
+        }
     };
     const getNameProduct = (productId) => {
         const product = products?.data?.find(
@@ -55,6 +59,21 @@ const Order = () => {
             },
         });
     };
+    const GetTime = (time) => {
+        const dateObject = new Date(time);
+
+        // Lấy thông tin về ngày và giờ
+        const year = dateObject.getFullYear();
+        const month = dateObject.getMonth() + 1; // Tháng bắt đầu từ 0, nên cần cộng thêm 1
+        const day = dateObject.getDate();
+        const hours = dateObject.getHours();
+        const minutes = dateObject.getMinutes();
+
+        return (
+            <div >{hours}:{minutes} / {day}-{month}-{year}</div>
+        )
+
+    }
 
     const columns = [
         {
@@ -84,32 +103,41 @@ const Order = () => {
                 <>
                     {orderItems.map((item, index) => (
                         <div key={index}>
-                            <div>Sản phẩm : {getNameProduct(item.product)}</div>
-                            <div>Số lượng : {item.amount}</div>
+                            <div>{getNameProduct(item.product)} - SL: {item.amount}</div>
+                            {/* <p>{item.amount}</p> */}
                         </div>
                     ))}
                 </>
             ),
         },
         {
-            title: "Phương thức thanh toán",
-            dataIndex: "paymentMethod",
-            key: "paymentMethod",
+            title: "PTNH",
+            dataIndex: "shippingMethod",
+            key: "shippingMethod",
+
         },
         {
             title: "Giá",
             dataIndex: "itemsPrice",
             key: "itemsPrice",
         },
+        // {
+        //     title: "Phí giao hàng",
+        //     dataIndex: "shippingPrice",
+        //     key: "shippingPrice",
+        // },
         {
-            title: "Phí giao hàng",
-            dataIndex: "shippingPrice",
-            key: "shippingPrice",
-        },
-        {
-            title: "Tổng đơn hàng",
+            title: "Kết Toán",
             dataIndex: "totalPrice",
             key: "totalPrice",
+        },
+        {
+            title: "Thời Gian",
+            dataIndex: "createdAt",
+            key: "createdAt",
+            render: (createdAt) => (
+                GetTime(createdAt)
+            ),
         },
         {
             title: "Thao tác",
@@ -126,18 +154,21 @@ const Order = () => {
     const isLoadingOrders = queryOrder.isLoading;
 
     const dataTable = orders?.data
-        ?.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+        // ?.slice((currentPage - 1) * pageSize, currentPage * pageSize)
         ?.map((order) => ({
             key: order._id,
             _id: order._id,
             shippingAddress: order.shippingAddress,
             orderItems: order.orderItems,
-            paymentMethod: order.paymentMethod,
+            shippingMethod: order.shippingMethod,
             itemsPrice: order.itemsPrice,
             shippingPrice: order.shippingPrice,
             totalPrice: order.totalPrice,
+            createdAt: order.createdAt
         }))
-        .reverse();
+
+
+
 
     return (
         <div className="dashboard_category">

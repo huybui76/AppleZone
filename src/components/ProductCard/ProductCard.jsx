@@ -10,7 +10,8 @@ import { Link, NavLink } from "react-router-dom";
 const ProductCard = (props) => {
   return (
     <NavLink
-      to="/products"
+      // to=`/products/${}`
+      to={`/products/${props.productId}`}
       target="_blank"
       className="productCard"
     >
