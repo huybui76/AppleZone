@@ -8,6 +8,7 @@ import Cart from "../pages/Cart/Cart";
 import Dashboard from "../pages/DashBoard/DashBoardPage";
 import ProductTypePage from "../pages/ProductTypePage/ProductTypePage";
 import OrderSuccessPage from "../pages/OrderSuccess/OrderSuccessPage";
+import FindPage from "../pages/FindPage/FindPage";
 export const routes = [
   {
     path: '/',
@@ -45,6 +46,12 @@ export const routes = [
   {
     path: '/dashboard',
     page: Dashboard,
+    isNavbar: true,
+    isFooter: false
+  },
+  {
+    path: '/find/:searchValue',
+    page: FindPage,
     isNavbar: true,
     isFooter: false
   },
