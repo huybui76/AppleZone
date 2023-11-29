@@ -54,6 +54,11 @@
   overflow: hidden;
   transition: color 0.4s ease-in-out;
 }
+.menu-item-name{
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+}
 
 .menu-component::before {
   content: "";
@@ -129,6 +134,7 @@
   display: flex;
   gap: 20px;
   padding-left: 60px;
+  width: 50px;
 }
 
 .icon {

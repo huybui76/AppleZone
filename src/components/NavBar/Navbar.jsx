@@ -28,24 +28,24 @@ const Navbar = () => {
         <NavLink className="nav-pagename" to="/">
           Apple Zone
         </NavLink>
-          <NavLink to="/products-type/6564aee73adaf4c11a499a6b" target="_blank" className="menu-component" style={{textDecoration:"none"}}>
-            <div>Iphone</div>
-          </NavLink>
-          <NavLink to="/products-type/6564aefd3adaf4c11a499a72" target="_blank" className="menu-component" style={{textDecoration:"none"}}>
-            <div>Ipad</div>
-          </NavLink>
-          <NavLink to="/products-type/6564af133adaf4c11a499a7c" target="_blank" className="menu-component" style={{textDecoration:"none"}}>
-            <div>Mac</div>
-          </NavLink>
-          <NavLink to="/products-type/6564af273adaf4c11a499a89" target="_blank" className="menu-component" style={{textDecoration:"none"}}>
-            <div>Tai nghe</div>
-          </NavLink>
-          <NavLink to="/products-type/6564af3f3adaf4c11a499a99" target="_blank" className="menu-component" style={{textDecoration:"none"}}>
-            <div>Phụ kiện</div>
-          </NavLink>
-          <NavLink to="/products-type/6564af583adaf4c11a499aac" target="_blank" className="menu-component" style={{textDecoration:"none"}}>
-            <div>Apple Watch</div>
-          </NavLink>
+        <NavLink to="/products-type/6564aee73adaf4c11a499a6b" target="_blank" className="menu-component" style={{ textDecoration: "none" }}>
+          <div className='menu-item-name'>iPhone</div>
+        </NavLink>
+        <NavLink to="/products-type/6564aefd3adaf4c11a499a72" target="_blank" className="menu-component" style={{ textDecoration: "none" }}>
+          <div className='menu-item-name'>iPad</div>
+        </NavLink>
+        <NavLink to="/products-type/6564af133adaf4c11a499a7c" target="_blank" className="menu-component" style={{ textDecoration: "none" }}>
+          <div className='menu-item-name'>Mac</div>
+        </NavLink>
+        <NavLink to="/products-type/6564af273adaf4c11a499a89" target="_blank" className="menu-component" style={{ textDecoration: "none" }}>
+          <div className='menu-item-name'>Tai nghe</div>
+        </NavLink>
+        <NavLink to="/products-type/6564af3f3adaf4c11a499a99" target="_blank" className="menu-component" style={{ textDecoration: "none" }}>
+          <div className='menu-item-name'>Phụ kiện</div>
+        </NavLink>
+        <NavLink to="/products-type/6564af583adaf4c11a499aac" target="_blank" className="menu-component" style={{ textDecoration: "none" }}>
+          <div className='menu-item-name'>Watch</div>
+        </NavLink>
         <div className="nav-input">
           <form action='' class='search-bar'>
             <input type="text" placeholder='Tìm kiếm sản phẩm' className='input-box' />
