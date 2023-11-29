@@ -46,7 +46,7 @@ const Navbar = () => {
           className="menu-component"
           style={{ textDecoration: "none" }}
         >
-          <div>Iphone</div>
+          <div className="menu-item-name">iPhone</div>
         </NavLink>
         <NavLink
           to="/products-type/6564aefd3adaf4c11a499a72"
@@ -54,7 +54,7 @@ const Navbar = () => {
           className="menu-component"
           style={{ textDecoration: "none" }}
         >
-          <div>Ipad</div>
+          <div className="menu-item-name">iPad</div>
         </NavLink>
         <NavLink
           to="/products-type/6564af133adaf4c11a499a7c"
@@ -62,7 +62,7 @@ const Navbar = () => {
           className="menu-component"
           style={{ textDecoration: "none" }}
         >
-          <div>Mac</div>
+          <div className="menu-item-name">Mac</div>
         </NavLink>
         <NavLink
           to="/products-type/6564af273adaf4c11a499a89"
@@ -70,7 +70,7 @@ const Navbar = () => {
           className="menu-component"
           style={{ textDecoration: "none" }}
         >
-          <div>Tai nghe</div>
+          <div className="menu-item-name">Tai nghe</div>
         </NavLink>
         <NavLink
           to="/products-type/6564af3f3adaf4c11a499a99"
@@ -78,7 +78,7 @@ const Navbar = () => {
           className="menu-component"
           style={{ textDecoration: "none" }}
         >
-          <div>Phụ kiện</div>
+          <div className="menu-item-name">Phụ kiện</div>
         </NavLink>
         <NavLink
           to="/products-type/6564af583adaf4c11a499aac"
@@ -86,7 +86,7 @@ const Navbar = () => {
           className="menu-component"
           style={{ textDecoration: "none" }}
         >
-          <div>Apple Watch</div>
+          <div className="menu-item-name">Watch</div>
         </NavLink>
         <div className="nav-input">
           <form onSubmit={handleSearchSubmit} className="search-bar">
