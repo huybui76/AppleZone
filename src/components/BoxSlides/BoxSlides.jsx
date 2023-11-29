@@ -154,7 +154,7 @@ const BoxSlides = (props) => {
             alt="search icon"
             style={{ width: "60px", color: "white" }}
           />
-          <h2 className="titleText">Watch</h2>
+          <h2 className="titleText">Ipad</h2>
         </a>
         <div className="blocks-display">
         <Loading isLoading={loadingIpad}>
@@ -187,7 +187,7 @@ const BoxSlides = (props) => {
             alt="search icon"
             style={{ width: "60px", color: "white" }}
           />
-          <h2 className="titleText">iPad</h2>
+          <h2 className="titleText">Phụ kiện</h2>
         </a>
         <div className="blocks-display">
         <Loading isLoading={loadingWatch}>
