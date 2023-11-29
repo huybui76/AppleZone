@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, Modal, Space, message } from "antd";
+import { Modal, Space, message } from "antd";
 import { useQuery } from "@tanstack/react-query";
 import TableComponent from "../../../components/TableComponent/TableComponent";
 import * as OrderService from "../../../services/OrderService";
 import * as ProductService from "../../../services/ProductService";
-import { useMutationHooks } from "../../../hooks/useMutationHooks";
+import { messageSuccess, messageError } from "../../../utils";
 
 import "./index.css";
 
@@ -38,8 +38,8 @@ const Order = () => {
         queryOrder.refetch();
         setIsDeleteModalVisible(false);
         if (response.status === "OK") {
-            message.success("Xoá Đơn Hàng Thành Công!");
-            console.log("Xoá Đơn Hàng Thành Công!");
+            messageSuccess('Xoá Đơn Hàng Thành Công')
+
         }
     };
     const getNameProduct = (productId) => {
@@ -70,7 +70,7 @@ const Order = () => {
         const minutes = dateObject.getMinutes();
 
         return (
-            <div >{hours}:{minutes} / {day}-{month}-{year}</div>
+            <div >{hours}:{minutes} | {day}-{month}-{year}</div>
         )
 
     }
@@ -89,9 +89,9 @@ const Order = () => {
             key: "shippingAddress",
             render: (shippingAddress) => (
                 <>
-                    <div>Tên: {shippingAddress.fullName}</div>
-                    <div>Địa chỉ: {shippingAddress.address}</div>
-                    <div>Số điện thoại: {shippingAddress.phone}</div>
+                    <div style={{ fontWeight: '500' }}>{shippingAddress.fullName}</div>
+                    <div style={{ fontWeight: '500' }}>{shippingAddress.phone}</div>
+                    <div> {shippingAddress.address}</div>
                 </>
             ),
         },
@@ -114,12 +114,16 @@ const Order = () => {
             title: "PTNH",
             dataIndex: "shippingMethod",
             key: "shippingMethod",
+            render: (shippingMethod) => (
+                shippingMethod === "1" ? <div>COD</div> : <div>IN STORE</div>
+            )
 
         },
         {
             title: "Giá",
             dataIndex: "itemsPrice",
             key: "itemsPrice",
+            render: (itemsPrice) => itemsPrice.toLocaleString("vi-VN")
         },
         // {
         //     title: "Phí giao hàng",
@@ -130,6 +134,7 @@ const Order = () => {
             title: "Kết Toán",
             dataIndex: "totalPrice",
             key: "totalPrice",
+            render: (totalPrice) => totalPrice.toLocaleString("vi-VN")
         },
         {
             title: "Thời Gian",
@@ -144,7 +149,6 @@ const Order = () => {
             key: "action",
             render: (_, record) => (
                 <Space className="action-icons-container" size="middle">
-                    {/* Add any other actions you want to include */}
                     <a onClick={() => showDeleteConfirmation(record._id)}>Xoá</a>
                 </Space>
             ),
@@ -154,7 +158,7 @@ const Order = () => {
     const isLoadingOrders = queryOrder.isLoading;
 
     const dataTable = orders?.data
-        // ?.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+
         ?.map((order) => ({
             key: order._id,
             _id: order._id,

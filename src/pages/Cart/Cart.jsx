@@ -349,14 +349,14 @@ const Cart = () => {
                   <div className="user-data">
                     <div className="user-data1">
                       <div className="user-data-name">
-                        <p>{user.name}</p>
+                        <div className="user-data-name1">{user.name}</div>
                       </div>
                       <div className="user-data-name">
-                        <p>{user.phone}</p>
+                        <div className="user-data-name1">{user.phone}</div>
                       </div>
                     </div>
                     <div className="user-data-name3">
-                      <p>{user.address}</p>
+                      <div>{user.address}</div>
                     </div>
                   </div>
                 </div>
