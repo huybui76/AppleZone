@@ -20,7 +20,7 @@ const Cart = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedShippingMethod, setSelectedShippingMethod] = useState(1);
   const [discountCode, setDiscountCode] = useState("");
-  const [isDiscountValid, setIsDiscountValid] = useState("");
+  const [isDiscountValid, setIsDiscountValid] = useState(0);
   const [form] = Form.useForm();
   const [user, setUser] = useState({
     name: localStorage.getItem("userName") || "",
@@ -194,7 +194,7 @@ const Cart = () => {
                       <div className="item__img-name1">
                         <div className="item__img-container">
                           <img
-                            src={order?.image[0]}
+                            src={order?.image}
                             alt={order?.name}
                             className="item-img"
                           />
@@ -388,7 +388,20 @@ const Cart = () => {
                         Áp Dụng
                       </Button>
                     </div>
-                    {isDiscountValid && <div className="success-discount" style={{ color: "#ff0000" }}>-{isDiscountValid}%</div>}
+                    {isDiscountValid !== null ? (
+                      isDiscountValid ? (
+                        <div className="success-discount" style={{ color: "#ff0000" }}>
+                          -{isDiscountValid}%
+                        </div>
+                      ) : (
+                        <div className="error-discount" style={{ color: "#ff0000" }}>
+                          Mã giảm giá không tồn tại
+                        </div>
+                      )
+                    ) : (
+                      ''
+                    )}
+
 
                     {/* <hr /> */}
                     <div className="total-price">

@@ -7,6 +7,12 @@
   align-items: center;
   justify-content: center;
   vertical-align: bottom;
+  
+}
+
+.product-slide-name{
+  margin: 10px;
+width: 200px;
 }
 .product-slide:hover{
   cursor: pointer;

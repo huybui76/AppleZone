@@ -18,8 +18,8 @@ const ProductCard = (props) => {
       <div className="element-container1">
         <img src={props.image[0]} alt="hello" className="productImage" />
       </div>
-      <div  className="element-container2">
-        <h3 className="title">{props.name}</h3>
+      <div className="element-container2">
+        <h3 className="title" style={{ fontSize: '1rem', lineHeight: '1.2' }}>{props.name}</h3>
         <div className="bottom">
           {/* <p className="discount">{props.price}đ</p>
           <p className="price">{props.price}đ</p>

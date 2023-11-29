@@ -75,12 +75,12 @@ const ProductDetail = (props) => {
           <img src={question} style={{ width: "30px" }} alt="" />
         </div>
         <div className="product-side-title">
-          <h5 className="product-side-title-detail">  
+          <h5 className="product-side-title-detail">
             {props.product?.description}
           </h5>
         </div>
         <button className="buy-btn" onClick={dispatchProduct}>
-          Mua ngay
+          Thêm vào giỏ hàng
         </button>
         <div className="buy">
           <button className="buy-installment">

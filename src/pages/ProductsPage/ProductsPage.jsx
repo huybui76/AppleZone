@@ -90,7 +90,7 @@ const ProductsPage = () => {
                   src={product.image}
                   alt=""
                 />
-                <p>{product.name}</p>
+                <div className="product-slide-name">{product.name}</div>
                 <div className="product-slide-title">
                   <p>
                     {(
@@ -133,7 +133,7 @@ const ProductsPage = () => {
             >
               <div className="attached-list-more">
                 <img style={{ width: "200px" }} src={charge} alt="" />
-                <p>Đế sạc không dây MagSafe 3 in 1 15W Anker 737 Cube Y1811</p>
+                <p style={{ width: "200px" }}>Đế sạc không dây MagSafe 3 in 1 15W Anker 737 Cube Y1811</p>
                 <p>2.580.000₫</p>
                 <p>
                   <strike>3.690.000₫</strike> -30%
@@ -141,7 +141,7 @@ const ProductsPage = () => {
               </div>
               <div className="attached-list-more">
                 <img style={{ width: "200px" }} src={opLung} alt="" />
-                <p>
+                <p style={{ width: "200px" }}>
                   Ốp lưng Magsafe cho iPhone 15 Plus Vải Tinh Dệt Apple MT473
                 </p>
                 <p>1.435.000₫</p>
@@ -164,7 +164,7 @@ const ProductsPage = () => {
             Đánh giá sản phẩm này
           </p>
           <p>
-            Nếu đã mua sản phẩm này tại TopZone. Hãy đánh giá ngay để giúp hàng
+            Nếu đã mua sản phẩm này tại AppleZone. Hãy đánh giá ngay để giúp hàng
             ngàn người chọn mua hàng tốt nhất bạn nhé!
           </p>
           <div></div>

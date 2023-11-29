@@ -102,7 +102,10 @@ const ProductTypePage = (props) => {
   return (
     <div className="product-page">
       <div className="product">
-        <img className="product-image" src={slide1} alt="" />
+        <div>
+
+          <img className="product-image" src={slide1} alt="" />
+        </div>
         <div className="logo">
           <img
             src={appleIcon}
