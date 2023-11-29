@@ -4,6 +4,7 @@
   display: flex;
   position: relative;
   flex-direction: column;
+  justify-content: space-evenly;
   margin: 20px;
   padding: 10px;
   vertical-align: top;
@@ -13,6 +14,23 @@
   background-color: rgb(236, 236, 236);
   text-decoration: none;
 }
+.element-container1{
+  height: 50%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.element-container2{
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+}
+
 .productCard:hover{
   transform: translateY(-0.5rem);
   box-shadow: 0.5rem 0.75rem 1.5rem #bbbbbb;
@@ -30,11 +48,8 @@
 .bottom{
   display: flex;
   flex-direction: row;
-  justify-content:space-evenly;
+  justify-content:space-between;
   vertical-align: bottom;
-  padding-left: 20px;
-  padding-right: 20px;
-  
 }
 .discount{
   font-size: 20px;
@@ -45,7 +60,8 @@
   vertical-align: bottom;
   margin-top: 20px;
   font-size: 17px;
-}
+  margin-left: 10px;
+} 
 .percent{
 }
 

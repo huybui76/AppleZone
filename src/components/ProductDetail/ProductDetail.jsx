@@ -59,10 +59,10 @@ const ProductDetail = (props) => {
         <h1 className="product-side-nanme">{props.product?.name}</h1>
         <div className="product-side-sell">
           <h3 className="product-side-sell-discount" id="price">
-            {props.product.price - (props.product?.discount * props.product?.price) / 100}đ
+            {props.product?.price ? (props.product.price - (props.product?.discount * props.product?.price) / 100).toLocaleString('vi-VN') : ""}đ
           </h3>
           <h5 className="product-side-sell-price">
-            <strike>{props.product?.price}đ</strike>{" "}
+            <strike>{props.product?.price ? (props.product?.price).toLocaleString('vi-VN') : ""}đ</strike>{" "}
           </h5>
         </div>
         <div className="product-side-ad">

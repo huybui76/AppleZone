@@ -101,9 +101,9 @@ const BoxSlides = (props) => {
     }
   }
   useEffect(() => {
-    fetchProductsIpad("6564aee73adaf4c11a499a6b", 8)
-    fetchProductsIphone("6564aefd3adaf4c11a499a72", 8)
-    fetchProductsWatch("6564af583adaf4c11a499aac", 8)
+    fetchProductsIpad("6564aefd3adaf4c11a499a72", 8)
+    fetchProductsIphone("6564aee73adaf4c11a499a6b", 8)
+    fetchProductsWatch("6564af3f3adaf4c11a499a99", 8)
   }, []);
 
 

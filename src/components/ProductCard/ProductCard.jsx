@@ -15,12 +15,19 @@ const ProductCard = (props) => {
       target="_blank"
       className="productCard"
     >
-      <img src={props.image[0]} alt="hello" className="productImage" />
-      <h3 className="title">{props.name}</h3>
-      <div className="bottom">
-        <p className="discount">{props.price}</p>
-        <p className="price">{props.price}đ</p>
-        <p className="percent">-{props.discount}%</p>
+      <div className="element-container1">
+        <img src={props.image[0]} alt="hello" className="productImage" />
+      </div>
+      <div  className="element-container2">
+        <h3 className="title">{props.name}</h3>
+        <div className="bottom">
+          {/* <p className="discount">{props.price}đ</p>
+          <p className="price">{props.price}đ</p>
+          <p className="percent">-{props.discount}%</p> */}
+          {props.discount ? <p className="discount">{`${(props.price - (props.price * props.discount) / 100).toLocaleString('vi-VN')}₫`}</p> : ''}
+          {props.price ? <p className="price">{`${props.price.toLocaleString('vi-VN')}₫`}</p> : ''}
+          {props.discount ? <p className="percent">{`-${props.discount}%`}</p> : ''}
+        </div>
       </div>
     </NavLink>
   );
