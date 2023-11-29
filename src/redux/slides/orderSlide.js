@@ -4,11 +4,9 @@ const initialState = {
     orderItems: [],
 
     shippingAddress: {},
-    shippingMethod
-        : "",
+    shippingMethod: "",
     itemsPrice: 0,
     shippingPrice: 0,
-
     totalPrice: 0,
     phone: "",
     isSuccessOrder: false,

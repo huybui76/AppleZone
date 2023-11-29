@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ProductDetail.css";
 import logo from "../../assets/logo.png";
 import question from "../../assets/question_mark.png";
@@ -8,14 +8,26 @@ import shipping from "../../assets/shipping.jpg";
 import contact from "../../assets/contact.jpg";
 import { addOrderProduct, resetOrder } from "../../redux/slides/orderSlide";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import gurantee from "../../assets/gurantee.jpg";
 import { NavLink } from "react-router-dom";
+import { messageSuccess, messageError } from "../../utils";
 const ProductDetail = (props) => {
   const navigate = useNavigate();
+  const orderItem = useSelector((state) => state.order)
   const handleCartIconClick = () => {
     navigate("/cart");
   };
+
+  useEffect(() => {
+    if (orderItem.isSuccessOrder) {
+      messageSuccess('Đã thêm vào giỏ hàng')
+    }
+    return () => {
+      dispatch(resetOrder())
+    }
+  }, [orderItem.isSuccessOrder])
+
   const dispatch = useDispatch();
   const dispatchProduct = () => {
     dispatch(

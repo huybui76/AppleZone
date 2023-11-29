@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import FindPage from "../../pages/FindPage/FindPage";
 import "./Navbar.css";
-
+import { ShoppingCartOutlined } from '@ant-design/icons';
 import search_icon from "../../assets/search-interface-symbol.png";
-import shopping_icon from "../../assets/shopping-cart.png";
-import user_icon from "../../assets/user.png";
 import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addOrderProduct, resetOrder } from "../../redux/slides/orderSlide";
+import { useDispatch, useSelector } from "react-redux";
+import { Badge } from 'antd'
+
+
 
 const Navbar = () => {
+  const order = useSelector((state) => state.order)
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState('');
@@ -108,13 +109,14 @@ const Navbar = () => {
         </div>
         <div className="nav-icon">
           <div className="shopping-icon">
-            <img
-              src={shopping_icon}
-              alt=""
-              className="icon"
-              onClick={handleCartIconClick}
-            />
+            <div onClick={handleCartIconClick} style={{ cursor: 'pointer' }}>
+              <Badge count={order?.orderItems?.length} size="small">
+                <ShoppingCartOutlined style={{ fontSize: '37px', color: '#333030' }} />
+              </Badge>
+
+            </div>
           </div>
+
           {/* <div className="user-icon">
             <img src={user_icon} alt="" className='icon'  onClick={handleDropdownOpen}/>
           </div> */}
