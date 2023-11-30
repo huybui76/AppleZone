@@ -89,7 +89,7 @@ const BoxSlides = (props) => {
     const res = await ProductService.getProductsType(type, 0, limit);
     if (res?.status == "OK") {
       setLoadingAir(false);
-      setAsetLoadingAirs(res?.data);
+      setAirs(res?.data);
     } else {
       setLoadingAir(false);
     }
@@ -128,8 +128,8 @@ const BoxSlides = (props) => {
     fetchProductsIpad("6564aefd3adaf4c11a499a72", 8)
     fetchProductsIphone("6564aee73adaf4c11a499a6b", 8)
     fetchProductsWatch("6564af3f3adaf4c11a499a99", 8)
-    fetchProductsMac("6564af133adaf4c11a499a7c",8)
-    fetchProductsAir("6564af273adaf4c11a499a89",8)
+    fetchProductsMac("6564af133adaf4c11a499a7c", 8)
+    fetchProductsAir("6564af273adaf4c11a499a89", 8)
 
   }, []);
 
@@ -298,7 +298,7 @@ const BoxSlides = (props) => {
           </Loading>
         </div>
       </div>
-      
+
     </div>
   );
 };
