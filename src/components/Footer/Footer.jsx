@@ -6,24 +6,25 @@ function Footer() {
         <div className='footer_container'>
             <div className="footer_content_container">
                 <p className="footer_notice">
-                    1. Your bank may charge you fees if your debit card account contains insufficient funds to make loan repayments.
-                    Apple Pay Later loans are subject to eligibility and approval. Available only in the U.S. May not be available
-                    in all states. Not available in U.S. territories. Loans made by Apple Financing LLC, NMLS #2154940. CA loans
-                    made or arranged pursuant to a California Financing Law license. To use Apple Pay Later, you must have an
-                    iPhone or iPad updated to the latest version of iOS or iPadOS. Update to the latest version by going to
-                    Settings {'>'} General {'>'} Software Update. Tap Download and Install. For more eligibility details,
-                    see <a href="https://support.apple.com/en-us/HT212967" className="support-apple-link">https://support.apple.com/en-us/HT212967</a>.
+                    Apple Zone là một cửa hàng chuyên cung cấp và phân phối các sản phẩm của Apple, đem đến trải nghiệm mua sắm đẳng cấp cho khách hàng yêu thích công nghệ. Với mục tiêu làm nổi bật vẻ đẹp và hiệu suất của sản phẩm Apple, Apple Zone cam kết mang đến cho khách hàng sự hài lòng tối đa.
                     <br />
                     <br />
-                    2. Trade-in values will vary based on the condition, year, and configuration of your eligible trade-in device.
-                    Not all devices are eligible for credit. You must be at least 18 years old to be eligible to trade in for
-                    credit or for an Apple Gift Card. Trade-in value may be applied toward qualifying new device purchase, or
-                    added to an Apple Gift Card. Actual value awarded is based on receipt of a qualifying device matching the
-                    description provided when estimate was made.
+                    Sản Phẩm Chính
+                    <br />
+                    1. iPhone: Apple Zone cung cấp những phiên bản mới nhất và độc đáo của dòng điện thoại iPhone, từ iPhone SE đến các mô hình cao cấp như iPhone Pro Max.
+                    <br />
+                    2. iPad và iPad Pro: Với nhiều tùy chọn kích thước màn hình và tính năng, khách hàng có thể tìm thấy sự lựa chọn phù hợp với nhu cầu công việc và giải trí của mình.
+                    <br />
+                    3. MacBook và iMac: Apple Zone mang đến những máy tính xách tay và máy tính để bàn mạnh mẽ, thiết kế tinh tế, và hiệu suất đỉnh cao.
+                    <br />
+                    4. Apple Watch: Đồng hồ thông minh của Apple không chỉ là một công cụ theo dõi sức khỏe mà còn là một phụ kiện thời trang. Apple Zone cung cấp nhiều lựa chọn về mẫu mã và tính năng.
+                    <br />
+                    5. Phụ Kiện Apple: Ngoài ra, cửa hàng cũng cung cấp nhiều phụ kiện chính hãng như tai nghe AirPods, bao da, sạc không dây, và nhiều sản phẩm khác.
                     <br />
                     <br />
-                    Apple Vision Pro has not been authorized as required by the rules of the Federal Communications Commission.
-                    This device is not, and may not be, offered for sale or lease, or sold or leased, until authorization is obtained.
+                    Dịch Vụ Hỗ Trợ
+                    <br />
+                    Không chỉ là nơi mua sắm, Apple Zone còn cam kết đảm bảo dịch vụ hỗ trợ khách hàng xuất sắc. Đội ngũ nhân viên chuyên nghiệp và thân thiện sẵn sàng giúp đỡ khách hàng trong quá trình chọn mua và sau bán hàng.
                     <br />
                     <br />
 
