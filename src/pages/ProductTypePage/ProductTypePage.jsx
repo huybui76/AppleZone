@@ -61,7 +61,7 @@ const ProductTypePage = (props) => {
     case "6564af133adaf4c11a499a7c":
       typeOfProdduct = "Mac";
       break;
-    case "6564af133adaf4c11a499a7c":
+    case "6564af273adaf4c11a499a89":
       typeOfProdduct = "Tai nghe";
       break;
     case "6564af273adaf4c11a499a89":

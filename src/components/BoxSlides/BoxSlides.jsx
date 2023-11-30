@@ -116,7 +116,7 @@ const BoxSlides = (props) => {
     fetchProductsIpad("6564aefd3adaf4c11a499a72", 8)
     fetchProductsIphone("6564aee73adaf4c11a499a6b", 8)
     fetchProductsWatch("6564af3f3adaf4c11a499a99", 8)
-    fetchProductsMac("6564af133adaf4c11a499a7c", 8)
+    fetchProductsMac("6564af133adaf4c11a499a7c",8)
   }, []);
 
 
@@ -188,10 +188,24 @@ const BoxSlides = (props) => {
             </Slider>
           </Loading>
         </div>
+      </div>
+      <div className="box-slide">
+        <a
+          href="https://youtu.be/dQw4w9WgXcQ"
+          className="logo-cate"
+          target="_blank"
+        >
+          <img
+            src={appleIcon}
+            alt="search icon"
+            style={{ width: "60px", color: "white" }}
+          />
+          <h2 className="titleText">Phụ kiện</h2>
+        </a>
         <div className="blocks-display">
-          <Loading isLoading={loadingMac}>
+          <Loading isLoading={loadingWatch}>
             <Slider {...settings}>
-              {macs.map((product) => (
+              {watchs.map((product) => (
                 <ProductCard
                   key={product._id}
                   productId={product._id}
@@ -219,12 +233,12 @@ const BoxSlides = (props) => {
             alt="search icon"
             style={{ width: "60px", color: "white" }}
           />
-          <h2 className="titleText">Phụ kiện</h2>
+          <h2 className="titleText">Mac</h2>
         </a>
         <div className="blocks-display">
-          <Loading isLoading={loadingWatch}>
+          <Loading isLoading={loadingMac}>
             <Slider {...settings}>
-              {watchs.map((product) => (
+              {macs.map((product) => (
                 <ProductCard
                   key={product._id}
                   productId={product._id}
