@@ -20,6 +20,8 @@ const BoxSlides = (props) => {
   const [ipads, setIpads] = useState([]);
   const [loadingMac, setLoadingMac] = useState(false)
   const [macs, setMacs] = useState([]);
+  const [loadingAir, setLoadingAir] = useState(false)
+  const [airs, setAirs] = useState([]);
   // Component cho nút previous
   const CustomPrevArrow = (props) => {
     const { onClick } = props;
@@ -82,6 +84,16 @@ const BoxSlides = (props) => {
       setLoadingIphone(false);
     }
   }
+  const fetchProductsAir = async (type, limit) => {
+    setLoadingIphone(true);
+    const res = await ProductService.getProductsType(type, 0, limit);
+    if (res?.status == "OK") {
+      setLoadingAir(false);
+      setAsetLoadingAirs(res?.data);
+    } else {
+      setLoadingAir(false);
+    }
+  }
   const fetchProductsIpad = async (type, limit) => {
     setLoadingIpad(true);
     const res = await ProductService.getProductsType(type, 0, limit);
@@ -117,6 +129,8 @@ const BoxSlides = (props) => {
     fetchProductsIphone("6564aee73adaf4c11a499a6b", 8)
     fetchProductsWatch("6564af3f3adaf4c11a499a99", 8)
     fetchProductsMac("6564af133adaf4c11a499a7c",8)
+    fetchProductsAir("6564af273adaf4c11a499a89",8)
+
   }, []);
 
 
@@ -198,12 +212,12 @@ const BoxSlides = (props) => {
             alt="search icon"
             style={{ width: "60px", color: "white" }}
           />
-          <h2 className="titleText">Phụ kiện</h2>
+          <h2 className="titleText">Mac</h2>
         </a>
         <div className="blocks-display">
-          <Loading isLoading={loadingWatch}>
+          <Loading isLoading={loadingMac}>
             <Slider {...settings}>
-              {watchs.map((product) => (
+              {macs.map((product) => (
                 <ProductCard
                   key={product._id}
                   productId={product._id}
@@ -230,12 +244,12 @@ const BoxSlides = (props) => {
             alt="search icon"
             style={{ width: "60px", color: "white" }}
           />
-          <h2 className="titleText">Mac</h2>
+          <h2 className="titleText">Tai nghe</h2>
         </a>
         <div className="blocks-display">
-          <Loading isLoading={loadingMac}>
+          <Loading isLoading={loadingAir}>
             <Slider {...settings}>
-              {macs.map((product) => (
+              {airs.map((product) => (
                 <ProductCard
                   key={product._id}
                   productId={product._id}
@@ -252,6 +266,39 @@ const BoxSlides = (props) => {
           </Loading>
         </div>
       </div>
+      <div className="box-slide">
+        <a
+          className="logo-cate"
+          target="_blank"
+        >
+          <img
+            src={appleIcon}
+            alt="search icon"
+            style={{ width: "60px", color: "white" }}
+          />
+          <h2 className="titleText">Phụ kiện</h2>
+        </a>
+        <div className="blocks-display">
+          <Loading isLoading={loadingWatch}>
+            <Slider {...settings}>
+              {watchs.map((product) => (
+                <ProductCard
+                  key={product._id}
+                  productId={product._id}
+                  image={product.image}
+                  name={product.name}
+                  price={product.price}
+                  totalSales={product.totalSales}
+                  timeLeft={product.timeLeft}
+                  rating={product.rating}
+                  discount={product.discount}
+                />
+              ))}
+            </Slider>
+          </Loading>
+        </div>
+      </div>
+      
     </div>
   );
 };
