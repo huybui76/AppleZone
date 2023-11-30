@@ -158,7 +158,6 @@ const BoxSlides = (props) => {
       </div>
       <div className="box-slide">
         <a
-          href="https://youtu.be/dQw4w9WgXcQ"
           className="logo-cate"
           target="_blank"
         >
@@ -191,7 +190,6 @@ const BoxSlides = (props) => {
       </div>
       <div className="box-slide">
         <a
-          href="https://youtu.be/dQw4w9WgXcQ"
           className="logo-cate"
           target="_blank"
         >
@@ -224,7 +222,6 @@ const BoxSlides = (props) => {
       </div>
       <div className="box-slide">
         <a
-          href="https://youtu.be/dQw4w9WgXcQ"
           className="logo-cate"
           target="_blank"
         >
