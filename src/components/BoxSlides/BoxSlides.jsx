@@ -18,6 +18,8 @@ const BoxSlides = (props) => {
   const [watchs, setWatchs] = useState([]);
   const [loadingWatch, setLoadingWatch] = useState(false)
   const [ipads, setIpads] = useState([]);
+  const [loadingMac, setLoadingMac] = useState(false)
+  const [macs, setMacs] = useState([]);
   // Component cho nút previous
   const CustomPrevArrow = (props) => {
     const { onClick } = props;
@@ -100,10 +102,21 @@ const BoxSlides = (props) => {
       setLoadingWatch(false);
     }
   }
+  const fetchProductsMac = async (type, limit) => {
+    setLoadingWatch(true);
+    const res = await ProductService.getProductsType(type, 0, limit);
+    if (res?.status == "OK") {
+      setLoadingMac(false);
+      setMacs(res?.data);
+    } else {
+      setLoadingMac(false);
+    }
+  }
   useEffect(() => {
     fetchProductsIpad("6564aefd3adaf4c11a499a72", 8)
     fetchProductsIphone("6564aee73adaf4c11a499a6b", 8)
     fetchProductsWatch("6564af3f3adaf4c11a499a99", 8)
+    fetchProductsMac("6564af133adaf4c11a499a7c", 8)
   }, []);
 
 
@@ -160,6 +173,25 @@ const BoxSlides = (props) => {
           <Loading isLoading={loadingIpad}>
             <Slider {...settings}>
               {ipads.map((product) => (
+                <ProductCard
+                  key={product._id}
+                  productId={product._id}
+                  image={product.image}
+                  name={product.name}
+                  price={product.price}
+                  totalSales={product.totalSales}
+                  timeLeft={product.timeLeft}
+                  rating={product.rating}
+                  discount={product.discount}
+                />
+              ))}
+            </Slider>
+          </Loading>
+        </div>
+        <div className="blocks-display">
+          <Loading isLoading={loadingMac}>
+            <Slider {...settings}>
+              {macs.map((product) => (
                 <ProductCard
                   key={product._id}
                   productId={product._id}
