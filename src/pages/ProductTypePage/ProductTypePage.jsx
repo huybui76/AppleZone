@@ -64,7 +64,7 @@ const ProductTypePage = (props) => {
     case "6564af133adaf4c11a499a7c":
       typeOfProdduct = "Tai nghe";
       break;
-    case "6564af3f3adaf4c11a499a99":
+    case "6564af273adaf4c11a499a89":
       typeOfProdduct = "Phụ kiện";
       break;
     case "6564af583adaf4c11a499aac":
