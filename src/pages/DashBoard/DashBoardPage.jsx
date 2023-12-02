@@ -7,6 +7,7 @@ import { UserOutlined, AppstoreOutlined, FileAddOutlined, DashboardOutlined, Sho
 import ProductPage from '../../pages/DashBoard/Product/ProductPage';
 import ProductTypePage from '../../pages/DashBoard/ProductType/ProductTypePage';
 import UserPage from '../../pages/DashBoard/User/UserPage';
+import ProductLab from '../../pages/DashBoard/ProductLab/ProductLab';
 
 import DashboardSummary from '../../pages/DashBoard/DashboardSummary/DashboardSummary';
 import OrdersPage from '../../pages/DashBoard/Order/OrdersPage'
@@ -22,6 +23,7 @@ const Dashboard = () => {
         getItem('Sản phẩm', 'products', <AppstoreOutlined />),
         getItem('Người dùng', 'users', <UserOutlined />),
         getItem('Đơn hàng', 'orders', <ShoppingCartOutlined />),
+        getItem('Sản phẩm lab', 'productLab', <AppstoreOutlined />),
     ];
 
     const handleOnClick = ({ key }) => {
@@ -40,6 +42,8 @@ const Dashboard = () => {
                 return <DashboardSummary />;
             case 'orders':
                 return <OrdersPage />;
+            case 'productLab':
+                return <ProductLab />;
             default:
                 return;
         }

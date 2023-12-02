@@ -268,8 +268,13 @@ const Product = () => {
             title: "Số lượng",
             dataIndex: "countInStock",
             key: "countInStock",
-            sorter: (a, b) => a.countInStock - b.countInStock
+            sorter: (a, b) => a.countInStock - b.countInStock,
+            render: (countInStock) => {
+                return countInStock === 0 ? <div style={{ color: '#fc0000' }}><b>Hết Hàng </b>({countInStock})</div>
+                    : <div style={{ color: '#000000' }}><b>Còn Hàng </b>({countInStock})</div>;
+            },
         },
+
         {
             title: "Rating",
             dataIndex: "rating",
