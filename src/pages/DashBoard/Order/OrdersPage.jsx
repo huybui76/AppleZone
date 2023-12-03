@@ -115,8 +115,12 @@ const Order = () => {
             dataIndex: "shippingMethod",
             key: "shippingMethod",
             render: (shippingMethod) => (
-                shippingMethod === "1" ? <div>COD</div> : <div>IN STORE</div>
+                shippingMethod === "1" ? <div>COD</div> :
+                    shippingMethod === "2" ? <div>IN STORE</div> :
+                        shippingMethod === "3" ? <div>PAYPAL</div> :
+                            <div>NOT KNOW</div>
             )
+
 
         },
         {
