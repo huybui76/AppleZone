@@ -9,10 +9,13 @@ function ProductItem({ product }) {
       <NavLink
         // to=`/products/${}`
         to={`/products/${product._id}`}
-        target="_blank"
+        className="sale1-container"
       >
         <div className="img-container">
-          <div className="sales-percentage">-{product.discount}%</div>
+          <div className="sales-percentage1">
+
+            <div className="sales-percentage">-{product.discount}%</div>
+          </div>
           <div className="product-img">
             <img src={product.image[0]} alt={product.name} />
           </div>
@@ -22,9 +25,9 @@ function ProductItem({ product }) {
           <div className="sales-price">
             {product?.price
               ? (
-                  product.price -
-                  (product?.discount * product?.price) / 100
-                ).toLocaleString("vi-VN")
+                product.price -
+                (product?.discount * product?.price) / 100
+              ).toLocaleString("vi-VN")
               : ""}{" "}
             Đ
           </div>

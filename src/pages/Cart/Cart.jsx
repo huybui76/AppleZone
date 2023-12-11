@@ -185,6 +185,7 @@ const Cart = () => {
 
   return (
     <div className="cart-container">
+      <div className="header-cart-container">
       <div className="header-cart">
         <div className="header-title">
           <h1 onClick={handleHomeClick}>Apple Zone | Giỏ Hàng</h1>
@@ -203,6 +204,7 @@ const Cart = () => {
             />
           </button>
         </div>
+      </div>
       </div>
       {order?.orderItems?.length !== 0 ? (
         <div>

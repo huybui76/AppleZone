@@ -9,14 +9,14 @@ import Loading from "../Loading/Loading";
 function Menu() {
   const searchProduct = useSelector((state) => state?.product?.search);
   const searchDebounce = useDebounce(searchProduct, 500);
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(4);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const fetchProductAll = async (searchDebounce, limit) => {
     setLoading(true);
     const res = await ProductService.getAllProduct(searchDebounce, limit);
-    if (res?.status == "OK") {
+    if (res?.status === "OK") {
       setLoading(false);
       setProducts(res?.data);
     } else {
