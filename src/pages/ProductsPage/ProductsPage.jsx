@@ -10,7 +10,7 @@ import plus from "../../assets/plus.jpg";
 import { useParams } from "react-router-dom";
 const ProductsPage = () => {
   const { id } = useParams();
-  console.log("productid: " + id);
+
   const iphoneAttached =
     "https://cdn.tgdd.vn/Products/Images/42/305658/s16/iphone-15-pro-max-white-thumbtz-650x650.png";
   const charge =
@@ -34,7 +34,7 @@ const ProductsPage = () => {
       fetDetailProduct(id);
     }
   }, [id]);
-  console.log(product);
+
   var settings = {
     dots: true,
     infinite: false,

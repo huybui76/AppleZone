@@ -149,7 +149,7 @@ const ProductType = () => {
     const uploadPhoto = async (ev) => {
         try {
             const files = ev.target.files;
-            console.log(files);
+      
 
             const CLOUD_NAME = 'dgcxf9zyh';
             const PRESET_NAME = 'demo-upload';
@@ -173,7 +173,7 @@ const ProductType = () => {
             });
 
             const urls = await Promise.all(uploadPromises);
-            console.log("FFFFFFFFFFFFFF", urls)
+          
             setImage(urls);
             form.setFieldsValue({
                 image: urls,

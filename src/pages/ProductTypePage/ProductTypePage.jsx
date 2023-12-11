@@ -35,7 +35,7 @@ const ProductTypePage = (props) => {
   });
   const fetchProductType = async (type, page, limit) => {
     setLoading(true);
-    console.log(type);
+
     const res = await ProductService.getProductsType(type, page, limit);
     if (res?.status == "OK") {
       setLoading(false);
@@ -84,7 +84,7 @@ const ProductTypePage = (props) => {
   // }
 
   let data = [];
-  console.log(products);
+
 
   // Xử lí lấy dữ liệu
   // const fetchProductAll = async(context) => {
