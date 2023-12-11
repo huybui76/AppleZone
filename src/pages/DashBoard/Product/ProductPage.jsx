@@ -96,9 +96,7 @@ const Product = () => {
     };
 
     const handleDeleteConfirmed = async () => {
-        await axiosClient.delete(`product/deleteProduct/${deletingProductId}`, {
-            _id: deletingProductId,
-        });
+        await ProductService.deleteProduct(deletingProductId)
 
         queryProduct.refetch();
         setIsDeleteModalVisible(false);
@@ -211,6 +209,7 @@ const Product = () => {
     const columns = [
         {
             title: "STT",
+            align:'center',
             dataIndex: "index",
             key: "index",
             render: (_, __, index) => (currentPage - 1) * pageSize + index + 1,
@@ -218,54 +217,40 @@ const Product = () => {
         },
 
         {
-            title: "Tên",
-            dataIndex: "name",
-            key: "name",
-
-        },
-        {
-            title: "Hình Ảnh",
-            dataIndex: "image",
-            key: "image",
-            render: (images) => (
-                <div style={{ display: "flex", flexWrap: "wrap" }}>
-                    {images.map((img, index) => (
-                        <div key={index} style={{ flex: "0 0 calc(33.33% - 10px)", margin: "0 5px 10px 0" }}>
-                            <img
-                                src={img}
-                                alt={`product-${index}`}
-                                style={{ width: "50px", height: "auto" }}
-                            />
-                        </div>
-                    ))}
+            title: "Tên sản phẩm",
+            dataIndex: "info",
+            key: "info",
+            render: (text, record) => (
+              <div style={{ display: "flex", alignItems: "center" , maxWidth:'500px'}}>
+                <img
+                  alt=""
+                  src={record.image[0]}
+                  style={{ width: "30%", height: "auto", marginRight: "8px" }}
+                />
+                <div>
+                  <div>
+                    <strong style={{color:'#ae0303'}}>{record.name}</strong>
+                  </div>
+                  <div>{record.description}</div>
                 </div>
+              </div>
             ),
-        },
-        {
-            title: "Loại sản phẩm",
-            dataIndex: "type",
-            key: "type",
-            render: (type) => {
-                const productType = productTypes.find((pt) => pt._id === type);
-                return productType ? productType.name : "N/A";
-            },
-        },
+          },
 
-        {
+          {
             title: "Giá",
             dataIndex: "price",
+            align:'center',
             key: "price",
-            sorter: (a, b) => a.price - b.price,
-            render: (price) => price.toLocaleString("vi-VN")
-        },
+            render: (price) => {
+              const formattedPrice = price.toFixed(0).replace(/\d(?=(\d{3})+$)/g, "$&,");
+              return <strong>{`${formattedPrice} VNĐ`}</strong>;
+            },
+          },
+     
         {
-            title: "Giảm giá",
-            dataIndex: "discount",
-            key: "discount",
-            sorter: (a, b) => a.discount - b.discount
-        },
-        {
-            title: "Số lượng",
+            title: "Tình Trạng",
+            align:'center',
             dataIndex: "countInStock",
             key: "countInStock",
             sorter: (a, b) => a.countInStock - b.countInStock,
@@ -275,26 +260,12 @@ const Product = () => {
             },
         },
 
-        {
-            title: "Rating",
-            dataIndex: "rating",
-            key: "rating",
-            sorter: (a, b) => a.rating - b.rating
-        },
-        {
-            title: "Đã bán",
-            dataIndex: "sold",
-            key: "sold",
-            sorter: (a, b) => a.sold - b.sold
-        },
-        {
-            title: "Thông tin chi tiết",
-            dataIndex: "description",
-            key: "description",
-        },
+       
+      
 
         {
             title: "Thao tác",
+            align:'center',
             key: "action",
             render: (_, record) => (
                 <Space className="action-icons-container" size="middle">
