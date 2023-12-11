@@ -16,6 +16,7 @@ import orderSlide, {
 import ModalComponent from "../../components/ModalComponent/ModalComponent";
 import InputComponent from "../../components/InputComponent/InputComponent";
 import { messageSuccess, messageError } from "../../utils";
+import AddressApi from "../../components/AddressComponent/AddressApi";
 
 
 const Cart = () => {
@@ -23,16 +24,25 @@ const Cart = () => {
   const [selectedShippingMethod, setSelectedShippingMethod] = useState(1);
   const [discountCode, setDiscountCode] = useState("");
   const [isDiscountValid, setIsDiscountValid] = useState("");
+  const [selectedAddress, setSelectedAddress] = useState(null);
   const [form] = Form.useForm();
   const [user, setUser] = useState({
     name: localStorage.getItem("userName") || "",
     phone: localStorage.getItem("userPhone") || "",
     address: localStorage.getItem("userAddress") || "",
+    detailAddress: localStorage.getItem("userDetailAddress") || "",
   });
   const [totalAmountUSD, setTotalAmountUSD] = useState(0);
   const order = useSelector((state) => state.order);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const handleAddressSelect = (address) => {
+    setSelectedAddress(address);
+    form.setFieldsValue({
+      address: `${address?.ward}, ${address?.district}, ${address?.province}`,
+    });
+  };
 
   const handleChangeCount = (type, idProduct, limited) => {
     if (type === "increase" && !limited) {
@@ -76,11 +86,7 @@ const Cart = () => {
     return priceMemo - priceDiscountMemo;
   }, [priceMemo, priceDiscountMemo]);
 
-  // const totalAmountUSD = useMemo(() => {
-  //   const exchangeRate = 0.000041;
-  //   return (totalPriceMemo * exchangeRate).toFixed(2);
-  // }, [totalPriceMemo]);
-  console.log("FFFFFFFFFFFF", priceMemo, priceDiscountMemo, totalPriceMemo, totalAmountUSD)
+
 
   useEffect(() => {
     const exchangeRate = 0.000041;
@@ -95,11 +101,13 @@ const Cart = () => {
     navigate("/");
   };
   const onFinish = async (values) => {
+
     try {
       setUser({
         name: values.name,
         phone: values.sdt,
         address: values.address,
+        detailAddress: values.detailAddress,
       });
 
       setIsModalOpen(false);
@@ -111,9 +119,11 @@ const Cart = () => {
 
 
   useEffect(() => {
+   
     localStorage.setItem("userName", user.name);
     localStorage.setItem("userPhone", user.phone);
     localStorage.setItem("userAddress", user.address);
+    localStorage.setItem("userDetailAddress", user.detailAddress);
   }, [user]);
 
   const handleCancel = () => {
@@ -130,7 +140,7 @@ const Cart = () => {
   };
   const handlePlaceOrder = async (payStatus) => {
 
-    if (!user.name || !user.phone || !user.address) {
+    if (!user.name || !user.phone || !user.address||!user.detailAddress) {
       messageError("Vui lòng nhập thông tin giao hàng trước khi đặt hàng.");
       return;
     }
@@ -138,8 +148,9 @@ const Cart = () => {
     const orderData = {
       fullName: user.name,
       phone: user.phone,
-      address: user.address,
-      shippingMethod: selectedShippingMethod,
+      address:`${user.detailAddress}, ${user.address}`,
+     
+       shippingMethod: selectedShippingMethod,
       orderItems: order?.orderItems?.map((item) => ({
         product: item.product,
         amount: item.amount,
@@ -152,7 +163,7 @@ const Cart = () => {
 
     try {
       const response = await OrderService.createOrder(orderData);
-      console.log("status", payStatus)
+
       if (response.status === "OK" || response.status === "OK" && payStatus.status === "COMPLETED") {
         messageSuccess("Đặt hàng thành công!");
         const productsToRemove = order?.orderItems.map(item => item.product);
@@ -169,7 +180,7 @@ const Cart = () => {
     }
   };
 
-  console.log(totalAmountUSD)
+
 
 
   return (
@@ -348,16 +359,28 @@ const Cart = () => {
                       >
                         <InputComponent />
                       </Form.Item>
+                    
                       <Form.Item
                         label="Địa Chỉ"
                         name="address"
                         rules={[
+                          { required: true, message: "Vui lòng nhập thông tin Địa chỉ!" },
+                        ]}
+                      >
+                      
+                        <AddressApi onAddressSelect={handleAddressSelect} />
+                      </Form.Item>
+
+                      <Form.Item
+                        label="Địa Chỉ Cụ Thể"
+                        name="detailAddress"
+                        rules={[
                           { required: true, message: "Vui lòng nhập thông tin!" },
                         ]}
                       >
-                        <InputComponent />
+                      
+                        <InputComponent maxLength={45} />
                       </Form.Item>
-
                       <Form.Item wrapperCol={{ offset: 20, span: 16 }}>
                         <Button type="primary" htmlType="submit">
                           Nhập
@@ -376,7 +399,8 @@ const Cart = () => {
                       </div>
                     </div>
                     <div className="user-data-name3">
-                      <div>{user.address}</div>
+                    <div style={{padding:'2px'}}>{user.detailAddress}</div>
+                     <div style={{padding:'2px'}}>{user.address}</div> 
                     </div>
                   </div>
                 </div>

@@ -38,8 +38,7 @@ const FindPage = () => {
   useEffect(() => {
     if (searchValue) {
       fetAllProduct(searchValue, 20);
-      console.log(searchValue);
-      console.log(products);
+   
     }
   }, []);
   return (

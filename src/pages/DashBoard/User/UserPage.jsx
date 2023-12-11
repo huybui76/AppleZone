@@ -66,7 +66,7 @@ const User = () => {
         queryFn: UserService.getAllUser,
     });
     const { data: users } = queryUsers;
-    console.log(users)
+
 
     const showDeleteConfirmation = (userId) => {
         setDeletingUserId(userId);
