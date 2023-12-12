@@ -9,10 +9,7 @@ import Menu from '../SalesMenu/SalesMenu'
 const Flashsales = () => {
     return (
         <div className='flashsales-container'>
-            <div className="header-sale">
-                <div className='square'></div>
-                <div className="header-text">Hôm nay</div>
-            </div>
+
             <div className="body-sale-container">
                 <div className="flashsales-countdown">
                     <div className="flashsales-countdown-time">
@@ -35,6 +32,7 @@ const Flashsales = () => {
 
 
             </div>
+
 
         </div>
     )

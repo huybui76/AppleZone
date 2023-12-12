@@ -4,6 +4,10 @@ import * as ProductService from "../../services/ProductService";
 import ProductCard from "../ProductCard/ProductCard";
 import Slider from "react-slick";
 import "./BoxSlides.css";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
 
 const BoxSlides = () => {
   const [products, setProducts] = useState({
@@ -66,27 +70,28 @@ const BoxSlides = () => {
     fetchProducts("6564af273adaf4c11a499a89", 8, 'tai nghe');
     fetchProducts("6564af3f3adaf4c11a499a99", 8, 'phụ kiện');
   }, []);
-  console.log("daaaaaaaaaaa", products)
+
 
   const renderProductCards = (products) => {
     if (!products || !Array.isArray(products)) {
       return null; // or an empty array, depending on your preference
     }
-    console.log("DDDDDD", products)
+
 
     return products.map((product) => (
-      <ProductCard
-        key={product._id}
-        productId={product._id}
-        image={product.image}
-        name={product.name}
-        price={product.price}
-        totalSales={product.totalSales}
-        timeLeft={product.timeLeft}
-        rating={product.rating}
-        discount={product.discount}
-      />
-    ));
+      <SwiperSlide key={product._id} style={{ width: '292.5px' }}>
+        <ProductCard
+          key={product._id}
+          productId={product._id}
+          image={product.image}
+          name={product.name}
+          price={product.price}
+          totalSales={product.totalSales}
+          timeLeft={product.timeLeft}
+          rating={product.rating}
+          discount={product.discount}
+        />
+      </SwiperSlide>))
   };
 
 
@@ -100,8 +105,29 @@ const BoxSlides = () => {
           </a>
           <div className="blocks-display">
             {/* <Slider {...settings}> */}
-            {renderProductCards(products[category.toLowerCase()])}
+            {/* {renderProductCards(products[category.toLowerCase()])} */}
             {/* </Slider> */}
+            <>
+              <Swiper
+                slidesPerView={4}
+                spaceBetween={20}
+                pagination={{
+                  clickable: true,
+                  type: 'progress',
+                }}
+                modules={[Pagination]}
+                className="mySwiper"
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  flexDirection: 'row',
+                  overflowY: 'auto'
+                }}
+              >
+                {renderProductCards(products[category.toLowerCase()])}
+
+              </Swiper>
+            </>
           </div>
         </div>
       ))}

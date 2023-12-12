@@ -100,67 +100,65 @@ const ProductTypePage = (props) => {
   //   options: { retry: 3, retryDelay: 1000, keepPreviousData: true }
   // })
   return (
-    <div className="product-page">
-      <div className="product">
-        <div>
+    <div className="product-page-container">
+      <div className="product-page">
+        <div className="product">
+          <div>
+            <img className="product-image" src={slide1} alt="" />
+          </div>
 
-          <img className="product-image" src={slide1} alt="" />
+          <a className="logo-cate">
+            <img src={appleIcon} alt="search icon" style={{ width: "27px", color: "white", paddingBottom: '9px' }} />
+            <h2 className="titleText">{typeOfProdduct}</h2>
+          </a>
         </div>
-        <div className="logo">
-          <img
-            src={appleIcon}
-            alt="search icon"
-            style={{ width: "60px", backgroundColor: "none" }}
-          />
-          <h1 className="titleText">{typeOfProdduct}</h1>
-        </div>
-      </div>
-      <Loading isLoading={loading}>
-        <div
-          style={{ marginLeft: "150px", marginBottom: "50px", width: "100%" }}
-        >
-          <div style={{ width: "1270px", margin: "0 auto", height: "100%" }}>
-            <Row
-              style={{
-                flexWrap: "nowrap",
-                paddingTop: "10px",
-                height: "calc(100% - 20px)",
-              }}
-            >
-              <Col
-                span={20}
+        <Loading isLoading={loading}>
+          <div
+            style={{ marginLeft: "150px", marginBottom: "50px", width: "100%" }}
+          >
+            <div style={{ width: "1270px", margin: "0 auto", height: "100%" }}>
+              <Row
                 style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
+                  flexWrap: "nowrap",
+                  paddingTop: "10px",
+                  height: "calc(100% - 20px)",
                 }}
               >
-                <WrapperProducts>
-                  {products.map((product) => (
-                    <ProductCard
-                      key={product._id}
-                      productId={product._id}
-                      image={product.image}
-                      name={product.name}
-                      price={product.price}
-                      totalSales={product.totalSales}
-                      timeLeft={product.timeLeft}
-                      rating={product.rating}
-                      discount={product.discount}
-                    />
-                  ))}
-                </WrapperProducts>
-                <Pagination
-                  defaultCurrent={panigate.page + 1}
-                  total={panigate?.total}
-                  onChange={onChange}
-                  style={{ textAlign: "center", marginTop: "10px" }}
-                />
-              </Col>
-            </Row>
+                <Col
+                  span={20}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <WrapperProducts>
+                    {products.map((product) => (
+                      <ProductCard
+                        key={product._id}
+                        productId={product._id}
+                        image={product.image}
+                        name={product.name}
+                        price={product.price}
+                        totalSales={product.totalSales}
+                        timeLeft={product.timeLeft}
+                        rating={product.rating}
+                        discount={product.discount}
+                      />
+                    ))}
+                  </WrapperProducts>
+                  <Pagination
+                    defaultCurrent={panigate.page + 1}
+                    total={panigate?.total}
+                    onChange={onChange}
+                    style={{ textAlign: "center", marginTop: "10px" }}
+                  />
+                </Col>
+              </Row>
+            </div>
           </div>
-        </div>
-      </Loading>
+        </Loading>
+      </div>
     </div>
   );
 };

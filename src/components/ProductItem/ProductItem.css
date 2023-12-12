@@ -6,7 +6,7 @@
   text-align: center;
 
   height: auto;
-  width: 24%;
+
   gap: 5px;
   background-color: #f5f5f5;
   border-radius: 23px;
@@ -30,7 +30,7 @@
 }
 .sales-percentage1 {
   height: 80%;
-  width: 24%;
+  width: 100%;
   position: absolute;
 }
 

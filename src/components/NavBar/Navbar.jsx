@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FindPage from "../../pages/FindPage/FindPage";
 import "./Navbar.css";
-import { ShoppingCartOutlined } from '@ant-design/icons';
+import { ShoppingOutlined } from '@ant-design/icons';
 import search_icon from "../../assets/search-interface-symbol.png";
 import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -43,55 +43,55 @@ const Navbar = () => {
         </NavLink>
         <div className="nav-cate">
 
-        
-        <NavLink
-          to="/products-type/6564aee73adaf4c11a499a6b"
-         
-          className="menu-component"
-          style={{ textDecoration: "none" }}
-        >
-          <div className="menu-item-name">iPhone</div>
-        </NavLink>
-        <NavLink
-          to="/products-type/6564aefd3adaf4c11a499a72"
-         
-          className="menu-component"
-          style={{ textDecoration: "none" }}
-        >
-          <div className="menu-item-name">iPad</div>
-        </NavLink>
-        <NavLink
-          to="/products-type/6564af133adaf4c11a499a7c"
-         
-          className="menu-component"
-          style={{ textDecoration: "none" }}
-        >
-          <div className="menu-item-name">Mac</div>
-        </NavLink>
-        <NavLink
-          to="/products-type/6564af273adaf4c11a499a89"
-         
-          className="menu-component"
-          style={{ textDecoration: "none" }}
-        >
-          <div className="menu-item-name">Tai nghe</div>
-        </NavLink>
-        <NavLink
-          to="/products-type/6564af3f3adaf4c11a499a99"
-         
-          className="menu-component"
-          style={{ textDecoration: "none" }}
-        >
-          <div className="menu-item-name">Phụ kiện</div>
-        </NavLink>
-        <NavLink
-          to="/products-type/6564af583adaf4c11a499aac"
-         
-          className="menu-component"
-          style={{ textDecoration: "none" }}
-        >
-          <div className="menu-item-name">Watch</div>
-        </NavLink>
+
+          <NavLink
+            to="/products-type/6564aee73adaf4c11a499a6b"
+
+            className="menu-component"
+            style={{ textDecoration: "none" }}
+          >
+            <div className="menu-item-name">iPhone</div>
+          </NavLink>
+          <NavLink
+            to="/products-type/6564aefd3adaf4c11a499a72"
+
+            className="menu-component"
+            style={{ textDecoration: "none" }}
+          >
+            <div className="menu-item-name">iPad</div>
+          </NavLink>
+          <NavLink
+            to="/products-type/6564af133adaf4c11a499a7c"
+
+            className="menu-component"
+            style={{ textDecoration: "none" }}
+          >
+            <div className="menu-item-name">Mac</div>
+          </NavLink>
+          <NavLink
+            to="/products-type/6564af273adaf4c11a499a89"
+
+            className="menu-component"
+            style={{ textDecoration: "none" }}
+          >
+            <div className="menu-item-name">Tai nghe</div>
+          </NavLink>
+          <NavLink
+            to="/products-type/6564af3f3adaf4c11a499a99"
+
+            className="menu-component"
+            style={{ textDecoration: "none" }}
+          >
+            <div className="menu-item-name">Phụ kiện</div>
+          </NavLink>
+          <NavLink
+            to="/products-type/6564af583adaf4c11a499aac"
+
+            className="menu-component"
+            style={{ textDecoration: "none" }}
+          >
+            <div className="menu-item-name">Watch</div>
+          </NavLink>
         </div>
         <div className="nav-input">
           <form onSubmit={handleSearchSubmit} className="search-bar">
@@ -115,7 +115,7 @@ const Navbar = () => {
           <div className="shopping-icon">
             <div onClick={handleCartIconClick} style={{ cursor: 'pointer' }}>
               <Badge count={order?.orderItems?.length} size="small">
-                <ShoppingCartOutlined style={{ fontSize: '37px', color: '#333030' }} />
+                <ShoppingOutlined style={{ fontSize: '22px', color: '#000000' }} />
               </Badge>
 
             </div>
