@@ -18,6 +18,7 @@ import * as ProductService from "../../services/ProductService";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDebounce } from "../../hooks/useDebounce";
+import { center } from "@cloudinary/url-gen/qualifiers/textAlignment";
 const ProductTypePage = (props) => {
   // Watch: 655ac5d41ad762f698f5e415
 
@@ -107,29 +108,33 @@ const ProductTypePage = (props) => {
             <img className="product-image" src={slide1} alt="" />
           </div>
 
-          <a className="logo-cate">
+          <a className="logo-cate" href="a">
             <img src={appleIcon} alt="search icon" style={{ width: "27px", color: "white", paddingBottom: '9px' }} />
             <h2 className="titleText">{typeOfProdduct}</h2>
           </a>
         </div>
         <Loading isLoading={loading}>
           <div
-            style={{ marginLeft: "150px", marginBottom: "50px", width: "100%" }}
+            style={{ marginBottom: "50px", width: "100%", display: 'flex', justifyContent: 'center' }}
           >
             <div style={{ width: "1270px", margin: "0 auto", height: "100%" }}>
               <Row
+                wrap={true}
                 style={{
-                  flexWrap: "nowrap",
+                  // flexWrap: "nowrap",
                   paddingTop: "10px",
                   height: "calc(100% - 20px)",
+                  width: "100%", display: 'flex', justifyContent: 'center'
                 }}
               >
                 <Col
                   span={20}
+
                   style={{
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "space-between",
+                    justifyContent: "center",
+                    width: "100%"
                   }}
                 >
                   <WrapperProducts>
