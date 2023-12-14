@@ -8,6 +8,7 @@ import ProductPage from '../../pages/DashBoard/Product/ProductPage';
 import ProductTypePage from '../../pages/DashBoard/ProductType/ProductTypePage';
 import UserPage from '../../pages/DashBoard/User/UserPage';
 import ProductLab from '../../pages/DashBoard/ProductLab/ProductLab';
+import ProductLab2 from '../../pages/DashBoard/ProductLab2/ProductLab2';
 
 import DashboardSummary from '../../pages/DashBoard/DashboardSummary/DashboardSummary';
 import OrdersPage from '../../pages/DashBoard/Order/OrdersPage'
@@ -24,6 +25,7 @@ const Dashboard = () => {
         getItem('Người dùng', 'users', <UserOutlined />),
         getItem('Đơn hàng', 'orders', <ShoppingCartOutlined />),
         getItem('Sản phẩm lab', 'productLab', <AppstoreOutlined />),
+        getItem('Sản phẩm lab 2', 'productLab2', <AppstoreOutlined />),
     ];
 
     const handleOnClick = ({ key }) => {
@@ -44,6 +46,8 @@ const Dashboard = () => {
                 return <OrdersPage />;
             case 'productLab':
                 return <ProductLab />;
+                case 'productLab2':
+                return <ProductLab2 />;
             default:
                 return;
         }

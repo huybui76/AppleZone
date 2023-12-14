@@ -1,0 +1,72 @@
+.product-lab2-container {
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+
+  justify-content: center;
+}
+
+.product-lab2-container1 {
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-left: 50px;
+}
+
+.product-lab2-container2 {
+  width: 50%;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.email-container {
+  margin-top: 30px;
+}
+
+.email-container1 {
+  margin-bottom: 30px;
+}
+
+.product-lab2-container2 .h1 {
+  text-align: center;
+  align-self: center;
+}
+.infor-title {
+  align-self: center;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.infor-v {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 90px 20px 0px;
+}
+
+.infor-name {
+  align-self: center;
+}
+
+.infor-button {
+  align-self: center;
+}
+
+.dashboard_category-form form {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard_category-form form input {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+}
+
+.ant-message {
+  margin-top: 100px !important;
+}
