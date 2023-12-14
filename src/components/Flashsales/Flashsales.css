@@ -1,83 +1,116 @@
-.flashsales-container{
+.flashsales-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 50px auto 80px;
+  max-width: 1200px;
+  min-width: 1024px;
+
+  width: 100%;
+  flex-direction: row;
+}
+.body-sale-container {
+  width: 100%;
+}
+.body-sale-container {
+  width: 100%;
+  background-color: #d0d0d0;
+  border-radius: 20px;
+}
+.Menu {
+  gap: 10;
 }
 
-.header{
-    display: flex;
-    align-items: center;
+.header-sale {
+  display: flex;
+  align-items: center;
+  width: 14%;
+}
+.menu-container {
+  width: calc(100%-40px);
+  padding: 20px;
 }
 
-.square{
-    background-color: red;
-    height: 50px;
-    width: 16px;
-    border-radius: 2px;
-    margin: 20px;
+.square {
+  background-color: red;
+  height: 50px;
+  width: 16px;
+  border-radius: 2px;
+  margin: 20px;
 }
 
-.header-text{
-    font-size: 20px;
-    color: #DB4444;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    text-align: center;
+.header-text {
+  font-size: 20px;
+  color: #db4444;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
+.flashsales-countdown-time {
+  display: flex;
+
+  flex-direction: row;
 }
 
-.flashsales-countdown{
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
-    padding-top: 5px;
+.flashsales-countdown {
+  display: flex;
+  align-items: space-between;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
 }
 
-.flashsales-text{
-    font-size: 50px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
+.flashsales-text {
+  font-size: 50px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  padding: 20px;
+  color: #ed6205;
 }
 
-.countdowntimer{
-    padding-left: 60px;
+.countdowntimer {
+  padding-left: 60px;
+  padding: 20px;
 }
 
-.buttons-flashsales{
-    display: flex;
-    gap: 12px;
-    padding-left: 550px;
+.buttons-flashsales {
+  display: flex;
+  gap: 12px;
 }
 
-.left-button{
-    height: 50px;
-    width: 50px;
-    border-radius: 50px;
-    border: 0px;
-    background-image: url('../../assets/right-arrow.png');
-    background-size: 20px;
-    background-repeat: no-repeat;
-    background-position: center;
-    transform: rotate(180deg);
-    cursor: pointer;
-    transition: background-color 0.3s ease, font-weight 0.3s ease;
+.left-button {
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  border: 0px;
+  background-image: url("../../assets/right-arrow.png");
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: rotate(180deg);
+  cursor: pointer;
+  transition: background-color 0.3s ease, font-weight 0.3s ease;
 }
 
-.right-button{
-    height: 50px;
-    width: 50px;
-    border-radius: 50px;
-    border: 0px;
-    background-image: url('../../assets/right-arrow.png');
-    background-size: 20px;
-    background-repeat: no-repeat;
-    background-position: center;
-    cursor: pointer;
-    transition: background-color 0.5s ease, font-weight 0.3s ease;
+.right-button {
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  border: 0px;
+  background-image: url("../../assets/right-arrow.png");
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  transition: background-color 0.5s ease, font-weight 0.3s ease;
 }
 
 .left-button:hover,
 .right-button:hover {
-    background-color: #d0d0d0; /* Màu nền mờ khi hover */
+  background-color: #d0d0d0; /* Màu nền mờ khi hover */
 }
 
 .left-button:active,
 .right-button:active {
-    background-color: #f8f8f8; /* Đậm khi click vào */
+  background-color: #f8f8f8; /* Đậm khi click vào */
 }

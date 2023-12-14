@@ -1,168 +1,157 @@
-import React, { useState, useEffect } from "react";
-import "./ProductTypePage.css";
-import slide1 from "../../assets/animate1.webp";
-import slide2 from "../../assets/animate2.webp";
-import slide3 from "../../assets/animate3.webp";
-import Loading from "../../components/Loading/Loading";
-import { WrapperProducts } from "./style";
-import { Col, Pagination, Row } from "antd";
-import appleIcon from "../../assets/apple.jpg";
-import slide4 from "../../assets/animate4.webp";
-import ProductCard from "../../components/ProductCard/ProductCard";
-import Footer from "../../components/Footer/Footer";
-import { productData } from "../../constants/list";
-import { productData1 } from "../../constants/list";
-import { productData2 } from "../../constants/list";
-import { useQuery } from "@tanstack/react-query";
-import * as ProductService from "../../services/ProductService";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useDebounce } from "../../hooks/useDebounce";
-const ProductTypePage = (props) => {
-  // Watch: 655ac5d41ad762f698f5e415
+import { useState, useEffect } from 'react'
+import { Col, Pagination, Row, Button } from 'antd'
+import { WrapperProducts } from './style'
+import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { useDebounce } from '../../hooks/useDebounce'
+import logo2 from '../../assets/logo2.svg'
+import slide1 from '../../assets/animate1.webp'
+import ProductCard from '../../components/ProductCard/ProductCard'
+import * as ProductService from '../../services/ProductService'
+import { Skeleton } from 'antd'
 
-  let typeOfProdduct = "";
-  const { product } = useParams();
-  const [products, setProducts] = useState([]);
-  const searchProduct = useSelector((state) => state?.product?.search);
-  const searchDebounce = useDebounce(searchProduct, 500);
-  const [loading, setLoading] = useState(false);
-  const [limit, setLimit] = useState(2);
-  const [panigate, setPanigate] = useState({
-    page: 0,
-    limit: 10,
-    total: 1,
-  });
-  const fetchProductType = async (type, page, limit) => {
-    setLoading(true);
+import './ProductTypePage.css'
 
-    const res = await ProductService.getProductsType(type, page, limit);
-    if (res?.status == "OK") {
-      setLoading(false);
-      setProducts(res?.data);
-      setPanigate({ ...panigate, total: res?.totalPage });
-    } else {
-      setLoading(false);
-    }
-  };
-  useEffect(() => {
-    if (product) {
-      fetchProductType(product, panigate.page, panigate.limit);
-    }
-  }, [product, panigate.page, panigate.limit]);
+const ProductTypePage = () => {
+  const { product } = useParams()
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [page, setPage] = useState(6) // Track the current page
+  const [hasMore, setHasMore] = useState(true) // Flag to check if there are more products to load
 
-  switch (product) {
-    case "6564aee73adaf4c11a499a6b":
-      typeOfProdduct = "Iphone";
-      break;
-    case "6564aefd3adaf4c11a499a72":
-      typeOfProdduct = "Ipad";
-      break;
-    case "6564af133adaf4c11a499a7c":
-      typeOfProdduct = "Mac";
-      break;
-    case "6564af273adaf4c11a499a89":
-      typeOfProdduct = "Tai nghe";
-      break;
-    case "6564af3f3adaf4c11a499a99":
-      typeOfProdduct = "Phụ kiện";
-      break;
-    case "6564af583adaf4c11a499aac":
-      typeOfProdduct = "Apple Watch";
-      break;
+  const getProductTypeLabel = (productId) => {
+    switch (productId) {
+    case '6564aee73adaf4c11a499a6b':
+      return 'Iphone'
+    case '6564aefd3adaf4c11a499a72':
+      return 'Ipad'
+
+    case '6564af133adaf4c11a499a7c':
+      return 'Mac'
+    case '6564af273adaf4c11a499a89':
+      return 'Tai nghe'
+    case '6564af3f3adaf4c11a499a99':
+      return 'Phụ kiện'
+    case '6564af583adaf4c11a499aac':
+      return 'Apple Watch'
     default:
-      break;
+      return ''
+    }
   }
 
-  const onChange = (current, pageSize) => {
-    setPanigate({ ...panigate, page: current - 1, limit: pageSize });
-  };
-  // const fetchProductByType = async (id) => {
-  //   const res = await ProductService.getProductByType(id);
-  //   setProductsByType(res);
-  //   return res
-  // }
+  const typeOfProduct = getProductTypeLabel(product)
 
-  let data = [];
+  const fetchProducts = async (type, page) => {
+    setLoading(true)
+    try {
+      const res = await ProductService.getProductsType(type, 0, page)
+      if (res?.status === 'OK') {
+        setLoading(false)
+        setProducts((prevProducts) => {
+          const newProducts = res?.data.filter(
+            (newProduct) => !prevProducts.some((existingProduct) => existingProduct._id === newProduct._id)
+          )
+          return [...prevProducts, ...newProducts]
+        })
+        setHasMore(res?.data.length !== res?.total)
+      } else {
+        setLoading(false)
+        // Handle error, e.g., show an error message
+      }
+    } catch (error) {
+      setLoading(false)
+      // Handle error, e.g., show an error message
+    }
+  }
 
+  const handleLoadMore = () => {
+    if (hasMore) {
+      setPage((prevPage) => prevPage + 6)
+    }
+  }
 
-  // Xử lí lấy dữ liệu
-  // const fetchProductAll = async(context) => {
-  //   const limit = context?.queryKey && context?.queryKey[1]
-  //   const search = context?.queryKey && context?.queryKey[2]
-  //   const res = await ProductService.getAllProduct(search, limit)
-  //   return res
-  // }
+  const resetStateOnProductChange = () => {
+    setProducts([])
+    setPage(6)
+    setHasMore(true)
+  }
 
-  // const { isLoading, data: listProduct, isPreviousData } = useQuery({
-  //   queryKey: ['products', limit, searchDebounce],
-  //   queryFn: fetchProductAll,
-  //   options: { retry: 3, retryDelay: 1000, keepPreviousData: true }
-  // })
-  return (
-    <div className="product-page">
-      <div className="product">
-        <div>
+  useEffect(() => {
+    resetStateOnProductChange()
+  }, [product])
 
-          <img className="product-image" src={slide1} alt="" />
-        </div>
-        <div className="logo">
-          <img
-            src={appleIcon}
-            alt="search icon"
-            style={{ width: "60px", backgroundColor: "none" }}
+  useEffect(() => {
+    if (product && hasMore) {
+      fetchProducts(product, page)
+    }
+  }, [product, page, hasMore])
+
+  const renderProductCards = (products) => {
+    if (!products || !Array.isArray(products) || products.length === 0) {
+      return null
+    }
+
+    return (
+      <WrapperProducts>
+        {products.map((product) => (
+          <ProductCard
+            key={product._id}
+            productId={product._id}
+            image={product.image}
+            name={product.name}
+            price={product.price}
+            totalSales={product.totalSales}
+            timeLeft={product.timeLeft}
+            rating={product.rating}
+            discount={product.discount}
           />
-          <h1 className="titleText">{typeOfProdduct}</h1>
+        ))}
+      </WrapperProducts>
+    )
+  }
+
+  const renderProductSlides = (productData) => {
+    if (productData && Array.isArray(productData) && productData.length > 0) {
+      return renderProductCards(productData)
+    } else {
+      return Array.from({ length: 4 }).map((_, index) => <Skeleton key={index} height={390} width={292.5} active />)
+    }
+  }
+
+
+  return (
+    <div className="product-page-container">
+      <div className="product-page">
+        <div className="product">
+          <div>
+            <img className="product-image" src={slide1} alt="" />
+          </div>
+          <a className="logo-cate" href="a">
+            <img src={logo2} alt="search icon" style={{ width: '32px', color: 'white', paddingBottom: '5px' }} />
+            <h2 className="titleText">{typeOfProduct}</h2>
+          </a>
         </div>
-      </div>
-      <Loading isLoading={loading}>
-        <div
-          style={{ marginLeft: "150px", marginBottom: "50px", width: "100%" }}
-        >
-          <div style={{ width: "1270px", margin: "0 auto", height: "100%" }}>
-            <Row
-              style={{
-                flexWrap: "nowrap",
-                paddingTop: "10px",
-                height: "calc(100% - 20px)",
-              }}
-            >
-              <Col
-                span={20}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                }}
-              >
-                <WrapperProducts>
-                  {products.map((product) => (
-                    <ProductCard
-                      key={product._id}
-                      productId={product._id}
-                      image={product.image}
-                      name={product.name}
-                      price={product.price}
-                      totalSales={product.totalSales}
-                      timeLeft={product.timeLeft}
-                      rating={product.rating}
-                      discount={product.discount}
-                    />
-                  ))}
-                </WrapperProducts>
-                <Pagination
-                  defaultCurrent={panigate.page + 1}
-                  total={panigate?.total}
-                  onChange={onChange}
-                  style={{ textAlign: "center", marginTop: "10px" }}
-                />
+
+        <div style={{ marginBottom: '50px', width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <div style={{ width: '1270px', margin: '0 auto', height: '100%' }}>
+            <Row wrap={true} style={{ paddingTop: '10px', height: 'calc(100% - 20px)', width: '100%', display: 'flex', justifyContent: 'center' }}>
+              <Col span={20} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%' }}>
+                {renderProductSlides(products)}
+
+
+                {hasMore && (
+                  <Button type="primary" className='button-load' onClick={handleLoadMore} disabled={loading}>
+                    {loading ? 'Đang tải...' : 'Xem thêm'}
+                  </Button>
+                )}
+                {!hasMore && <></>}
               </Col>
             </Row>
           </div>
         </div>
-      </Loading>
+      </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProductTypePage;
+export default ProductTypePage

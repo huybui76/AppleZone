@@ -1,40 +1,50 @@
-import React, { useState } from "react";
-import "./ProductItem.css";
-import Link from "antd/es/typography/Link";
-import { NavLink } from "react-router-dom";
+import './ProductItem.css'
+import { NavLink } from 'react-router-dom'
+import { Progress } from 'antd'
+
 function ProductItem({ product }) {
-  // const iphone15 = '../SalesMenu/images/black__efg76fuz5hm6_large.jpg';
+  // Check if product is undefined
+  if (!product) {
+    return null // or return a loading indicator or placeholder
+  }
+
   return (
     <div className="product-container">
-      <NavLink
-        // to=`/products/${}`
-        to={`/products/${product._id}`}
-        target="_blank"
-      >
+      <NavLink to={`/product/${product._id}`} className="sale1-container" style={{ textDecoration: 'none' }}>
         <div className="img-container">
-          <div className="sales-percentage">-{product.discount}%</div>
+
           <div className="product-img">
             <img src={product.image[0]} alt={product.name} />
           </div>
         </div>
-        <div className="product-name">{product.name} </div>
+        <div className="product-name">{product.name}</div>
         <div className="product-price">
-          <div className="sales-price">
+          <strong className="sales-price">
             {product?.price
               ? (
-                  product.price -
-                  (product?.discount * product?.price) / 100
-                ).toLocaleString("vi-VN")
-              : ""}{" "}
-            Đ
-          </div>
-          <div className="original-price">
-            {(product?.price).toLocaleString("vi-VN")} Đ
+                product.price -
+                (product?.discount * product?.price) / 100
+              ).toLocaleString('vi-VN')
+              : ''}
+            đ
+          </strong>
+          <div className="sale-container">
+
+            <div className="original-price">
+              {product?.price ? (product.price).toLocaleString('vi-VN') + 'đ' : ''}
+            </div>
+
+            <div className="sales-percentage1">
+              <div className="sales-percentage"><strong>-{product.discount}</strong>%</div>
+            </div>
+          </div >
+          <div className="sale-status">
+            <Progress percent={`${(product?.sold / product?.countInStock) * 100}`} size={[220, 16]} strokeColor='#f36907' format={() => ''} />
           </div>
         </div>
       </NavLink>
     </div>
-  );
+  )
 }
 
-export default ProductItem;
+export default ProductItem

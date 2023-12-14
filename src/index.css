@@ -1,6 +1,6 @@
-/* Cái này là chuyển dộng qua lại của các quảng cáo */
+/* Cái này là chuyển dộng qua lại của các quảng cáo
 @import "~slick-carousel/slick/slick.css";
-@import "~slick-carousel/slick/slick-theme.css";
+@import "~slick-carousel/slick/slick-theme.css"; */
 
 :root {
   --color-grey-primary: #f0f0f0;
