@@ -36,7 +36,7 @@ export const deleteUser = async (id, data) => {
 }
 
 export const getAllUser = async () => {
-  const res = await axiosJWT.get(`${import.meta.env.VITE_BASE_URL_API}/user`
+  const res = await axiosJWT.get(`${import.meta.env.VITE_BASE_URL_API}/users`
     // , {
     //     headers: {
     //         token: `Bearer ${access_token}`,
@@ -49,7 +49,7 @@ export const getAllUser = async () => {
 
 export const refreshToken = async (refreshToken) => {
 
-  const res = await axios.post(`${import.meta.env.VITE_BASE_URL_API}/user/refreshToken`, {}
+  const res = await axios.post(`${import.meta.env.VITE_BASE_URL_API}/users/refreshToken`, {}
     // , {
     //     headers: {
     //         token: `Bearer ${refreshToken}`,
@@ -60,12 +60,12 @@ export const refreshToken = async (refreshToken) => {
 }
 
 export const logoutUser = async () => {
-  const res = await axios.post(`${import.meta.env.VITE_BASE_URL_API}/user/logout`)
+  const res = await axios.post(`${import.meta.env.VITE_BASE_URL_API}/users/logout`)
   return res.data
 }
 
 export const updateUser = async (id, data) => {
-  const res = await axiosJWT.put(`${import.meta.env.VITE_BASE_URL_API}/user/${id}`, data
+  const res = await axiosJWT.put(`${import.meta.env.VITE_BASE_URL_API}/users/${id}`, data
     // , {
     //     headers: {
     //         token: `Bearer ${access_token}`,
@@ -76,7 +76,7 @@ export const updateUser = async (id, data) => {
 }
 
 export const deleteManyUser = async (data) => {
-  const res = await axiosJWT.post(`${import.meta.env.VITE_BASE_URL_API}/user`, data
+  const res = await axiosJWT.post(`${import.meta.env.VITE_BASE_URL_API}/users`, data
     // , {
     //     headers: {
     //         token: `Bearer ${access_token}`,
