@@ -85,7 +85,7 @@ const Product = () => {
   }
 
   const handleDeleteConfirmed = async () => {
-    await axiosClient.delete(`product/${deletingProductId}`, {
+    await ProductService.deleteProduct(`${deletingProductId}`, {
       _id: deletingProductId
     })
 

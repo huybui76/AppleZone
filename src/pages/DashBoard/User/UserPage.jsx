@@ -67,7 +67,7 @@ const User = () => {
   }
 
   const handleDeleteConfirmed = async () => {
-    await axiosClient.delete(`user/deleteUser/${deletingUserId}`, { _id: deletingUserId })
+    await UserService.deleteUser(`${deletingUserId}`, { _id: deletingUserId })
 
     queryUsers.refetch()
     setIsDeleteModalVisible(false)

@@ -69,8 +69,8 @@ const ProductType = () => {
   }
 
   const handleDeleteConfirmed = async () => {
-    await axiosClient.delete(
-      `productType/${deletingCategoryId}`,
+    await ProductTypeService.deleteProductType(
+      `${deletingCategoryId}`,
       { _id: deletingCategoryId }
     )
 
